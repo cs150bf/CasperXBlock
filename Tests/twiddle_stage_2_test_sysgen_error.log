@@ -1,0 +1,24 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 11.4.2254              /tools/xilinx/11.4/DSP_Tools/lin64/sysgen
+AccelDSP 11.4.2254                      /tools/xilinx/11.4/DSP_Tools/lin64/AccelDSP
+Matlab 7.9.0.529 (R2009b)               /tools/commercial/mathworks/matlab2009b
+ISE 11.4.i                              /tools/xilinx/11.4/ISE
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: Illegal type on port: b
+     Block: 'twiddle_stage_2_test/twiddle/DSP48E'
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'twiddle_stage_2_test/twiddle/DSP48E'
+
+Details:
+The b port has data type Fix_5_0.
+The b port must be a Fix_18_0 signal.
+
+Error occurred during "Rate and Type Error Checking".
+
+--------------------------------------------------------------------------------

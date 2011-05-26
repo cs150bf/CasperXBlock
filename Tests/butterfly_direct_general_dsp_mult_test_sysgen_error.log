@@ -1,0 +1,24 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 11.4.2254              /tools/xilinx/11.4/DSP_Tools/lin64/sysgen
+AccelDSP 11.4.2254                      /tools/xilinx/11.4/DSP_Tools/lin64/AccelDSP
+Matlab 7.9.0.529 (R2009b)               /tools/commercial/mathworks/matlab2009b
+ISE 11.4.i                              /tools/xilinx/11.4/ISE
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: Failed to run "/usr/bin/gcc".
+
+     Block: 'butterfly_direct_general_dsp_mult_test/butterfly1_0/cadd/Reinterpret_A'
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'butterfly_direct_general_dsp_mult_test/butterfly1_0/cadd/Reinterpret_A'
+
+Details:
+Failed to run "/usr/bin/gcc".
+
+Error occurred during "Simulation Initialization".
+
+--------------------------------------------------------------------------------
