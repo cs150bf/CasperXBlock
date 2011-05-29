@@ -168,10 +168,18 @@ else
 
 end                  
 
-% delay shift signal by 2 cycles---legacy 
-shift_del = xSignal;
-xBlock( struct('source', 'Delay', 'name', 'shift_del'), struct('latency', 2), {shift}, {shift_del});
 
+if strcmp(hardcode_shifts,'off')
+    % delay shift signal by 2 cycles---legacy 
+    shift_del = xSignal;
+    xBlock( struct('source', 'Delay', 'name', 'shift_del'), struct('latency', 2), {shift}, {shift_del});
+else
+    xBlock( struct('source','built-in/terminator','name','Terminator'),...
+            struct('Position', [400 20 420 40], ...
+                    'ShowName', 'off'),...
+                    {shift}, {});
+                    
+end
 
 of_sigs = {};
 conv_sigs = {};

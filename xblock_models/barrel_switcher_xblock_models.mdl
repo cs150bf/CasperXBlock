@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.4"
+    ComputedModelVersion    "1.6"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,9 +25,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "chenhong"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed May 25 18:53:25 2011"
-  RTWModifiedTimeStamp	  228250399
-  ModelVersionFormat	  "1.%<AutoIncrement:4>"
+  LastModifiedDate	  "Fri May 27 14:50:50 2011"
+  RTWModifiedTimeStamp	  228408649
+  ModelVersionFormat	  "1.%<AutoIncrement:6>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -724,7 +724,7 @@ Model {
       Name		      "barrel_switcher"
       SID		      52
       Ports		      [4, 3]
-      Position		      [290, 85, 395, 245]
+      Position		      [290, 89, 395, 251]
       BackgroundColor	      "lightBlue"
       AttributesFormatString  "n_inputs=2"
       UserDataPersistent      on
@@ -747,8 +747,8 @@ Model {
       MaskVisibilityString    "on"
       MaskToolTipString	      "on"
       MaskVariables	      "n_inputs=@1;"
-      MaskInitialization      "config.source=str2func('barrel_switcher_init_xblock');\nconfig.toplevel=gcb;\nxBlock(co"
-      "nfig, ...\n    {n_inputs});"
+      MaskInitialization      "config.source=str2func('barrel_switcher_init_xblock');\nconfig.toplevel=gcb;\nconfig.de"
+      "pend = {'barrel_switcher_init_xblock'};\nargs = {n_inputs};\nxBlock(config, args);"
       MaskSelfModifiable      on
       MaskIconFrame	      on
       MaskIconOpaque	      on
@@ -758,7 +758,7 @@ Model {
       MaskValueString	      "1"
       System {
 	Name			"barrel_switcher"
-	Location		[595, 77, 1138, 706]
+	Location		[590, 53, 1133, 682]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -771,7 +771,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	48
+	SIDHighWatermark	76
 	Block {
 	  BlockType		  Inport
 	  Name			  "sel"
@@ -814,7 +814,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Delay_sync"
-	  SID			  45
+	  SID			  73
 	  Ports			  [1, 1]
 	  Position		  [75, 32, 135, 88]
 	  LibraryVersion	  "1.2"
@@ -842,7 +842,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Mux11"
-	  SID			  47
+	  SID			  75
 	  Ports			  [3, 1]
 	  Position		  [165, 128, 210, 232]
 	  LibraryVersion	  "1.2"
@@ -877,7 +877,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Mux21"
-	  SID			  48
+	  SID			  76
 	  Ports			  [3, 1]
 	  Position		  [165, 263, 210, 367]
 	  LibraryVersion	  "1.2"
@@ -912,7 +912,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Slice1"
-	  SID			  46
+	  SID			  74
 	  Ports			  [1, 1]
 	  Position		  [75, 159, 135, 191]
 	  LibraryVersion	  "1.2"
@@ -3054,16 +3054,21 @@ Model {
 	}
       }
     }
+    Annotation {
+      Name		      "depend done"
+      Position		      [443, 147]
+    }
   }
 }
 MatData {
   NumRecords		  1
   DataRecord {
     Tag			    DataTag0
-    Data		    "  %)30     .    4 $   8    (     @         %    \"     $    !     0         %  0 \"P    $    6    <W1A="
-    "&4       !P87)A;65T97)S    #@   #     &    \"     T         !0    @    !     0    $         !@ $ /1W?P8.    P     "
-    "8    (     @         %    \"     $    !     0         %  0 \"0    $    2    9&5F875L=', ;E]I;G!U=',         #@   \""
-    "@    &    \"     $         !0    @               $         #@   #@    &    \"     8         !0    @    !     0    "
-    "$         \"0    @             0 "
+    Data		    "  %)30     .    N $   8    (     @         %    \"     $    !     0         %  0 \"P    $    A    <W1A="
+    "&4       !P87)A;65T97)S &AA<VA?8V]D90            X    P    !@    @    -          4    (     0    $    !          8"
+    " ! #T=W\\&#@   ,     &    \"     (         !0    @    !     0    $         !0 $  D    !    $@   &1E9F%U;'1S &Y?:6Y"
+    "P=71S          X    H    !@    @    !          4    (               !          X    X    !@    @    &          4  "
+    "  (     0    $    !          D    (             $ .    4     8    (    !          %    \"     $    @     0        "
+    " 0    (    # V9C)E931C,S R9&,R,61A,#@U8S0X,C8T9F,S.# S"
   }
 }

@@ -1,4 +1,4 @@
-cfunction fft_direct_init_xblock(varargin)
+function fft_direct_init_xblock(varargin)
 
 % Set default vararg values.
 defaults = { ...
@@ -49,7 +49,10 @@ dsp48_adders = get_var('dsp48_adders', 'defaults', defaults, varargin{:});
 biplex = get_var('biplex', 'defaults', defaults, varargin{:});
 
 if (strcmp(specify_mult, 'on') && (length(mult_spec) ~= FFTSize)),
+    disp('fft_direct_init.m: Multiplier use specification for stages does not match FFT size');
     error('fft_direct_init.m: Multiplier use specification for stages does not match FFT size');
+else
+    disp('yelp');
 end
 
 %% Declare Ports
@@ -230,6 +233,8 @@ if (FFTSize ~= 1),
 			'logical_function', 'OR', ...
 			'inputs', FFTSize, ...
 			'latency', 0}, stage_of_out, {of});
+else
+    of.bind(of_out);
 end
 
 % Connect sync_out

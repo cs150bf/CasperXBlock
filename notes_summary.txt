@@ -1,0 +1,33 @@
+1. in fft_direct_init_xblock.m ,  of signal is not connected, need an else statement (line 236)
+
+
+2.in fft_twiddle_init_xblock.m, mainly about the redundant delays right after the inputs in some cases, use if statement to avoid that situation
+
+
+
+3.in fft_twiddle_general_init_xblock.m,    twiddle_coeff_0 case:   b_re_out not defined, should be bw_re_out;  same for bw_im_out;
+
+
+
+4. in fft_twiddle_general_init_xblock.m:  changed name for the draw files (doesn't exist)
+
+
+5. about the Coeffs:  in coef_gen_init_xblock.m:  The Coeffs is supposed to be complex
+					These complex Coeffs are generated in butterfly_direct_init.m for old style,
+					but not in fft_butterfly_init_xblock.m, so I add the code in fft_butterfly_init_xblock.m,
+					and add a parameter called ActualCoeffs in varargin
+					Those will be passed down to twiddle_general_4mult*##*(@& and 3mult&$*^(
+					I'm trying to see if this works.... OK, it looks fine? 
+					(and fixed a tiny bug in fft_biplex_init_xblock.m, the parameters don't need 'FFTSize' and so on, just pass the value)
+
+
+6. 	fft_butterfly_init_xblock.m  (add StepPeriod & FFTSize as extra parameters to get_twiddle_type.m)
+	get_twiddle_type.m (add StepPeriod & FFTSize as extra parameters to get_twiddle_type.m)
+	fft_twiddle_init_xblock.m (add StepPeriod & FFTSize as extra parameters to get_twiddle_type.m)
+
+
+
+
+7. another adder_tree_init_xblock.m,   just to be the same as the current one in library
+
+8. all fft-related blocks xblocked...... most fft-related xblocks masked....  and small changes here and there 

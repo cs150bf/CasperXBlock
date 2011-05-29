@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.7"
+    ComputedModelVersion    "1.9"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,9 +25,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "chenhong"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri May 20 07:50:28 2011"
-  RTWModifiedTimeStamp	  227759894
-  ModelVersionFormat	  "1.%<AutoIncrement:7>"
+  LastModifiedDate	  "Fri May 27 17:49:52 2011"
+  RTWModifiedTimeStamp	  228415205
+  ModelVersionFormat	  "1.%<AutoIncrement:9>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -652,7 +652,7 @@ Model {
   }
   System {
     Name		    "fft_stage_n_xblock_models"
-    Location		    [571, 118, 1275, 657]
+    Location		    [563, 118, 1267, 657]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -767,10 +767,10 @@ Model {
       MaskIconRotate	      "none"
       MaskPortRotate	      "default"
       MaskIconUnits	      "autoscale"
-      MaskValueString	      "4|1|18|18|off|off|Round  (unbiased: +/- Inf)|Wrap|1|2|2|1|Virtex5|logic|off|off|off"
+      MaskValueString	      "2|3|18|18|off|off|Round  (unbiased: +/- Inf)|Wrap|1|2|2|1|Virtex5|logic|off|off|off"
       System {
 	Name			"fft_stage_n"
-	Location		[378, 211, 1209, 672]
+	Location		[373, 187, 1204, 648]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -783,7 +783,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	904
+	SIDHighWatermark	1780
 	Block {
 	  BlockType		  Inport
 	  Name			  "in1"
@@ -836,7 +836,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Counter"
-	  SID			  686
+	  SID			  1562
 	  Ports			  [1, 1]
 	  Position		  [75, 95, 135, 155]
 	  LibraryVersion	  "1.2"
@@ -878,7 +878,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Delay"
-	  SID			  687
+	  SID			  1563
 	  Ports			  [1, 1]
 	  Position		  [75, 272, 135, 328]
 	  LibraryVersion	  "1.2"
@@ -906,7 +906,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Logical1"
-	  SID			  688
+	  SID			  1564
 	  Ports			  [2, 1]
 	  Position		  [505, 280, 560, 340]
 	  LibraryVersion	  "1.2"
@@ -940,7 +940,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Mux"
-	  SID			  689
+	  SID			  1565
 	  Ports			  [3, 1]
 	  Position		  [255, 163, 300, 267]
 	  LibraryVersion	  "1.2"
@@ -975,7 +975,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Mux1"
-	  SID			  690
+	  SID			  1566
 	  Ports			  [3, 1]
 	  Position		  [255, 33, 300, 137]
 	  LibraryVersion	  "1.2"
@@ -1010,7 +1010,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Slice"
-	  SID			  691
+	  SID			  1567
 	  Ports			  [1, 1]
 	  Position		  [335, 345, 395, 375]
 	  LibraryVersion	  "1.2"
@@ -1042,7 +1042,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "Slice1"
-	  SID			  692
+	  SID			  1568
 	  Ports			  [1, 1]
 	  Position		  [165, 85, 225, 115]
 	  LibraryVersion	  "1.2"
@@ -1074,7 +1074,7 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "butterfly_direct"
-	  SID			  693
+	  SID			  1569
 	  Ports			  [4, 4]
 	  Position		  [425, 212, 475, 298]
 	  MinAlgLoopOccurrences	  off
@@ -1102,14 +1102,14 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "a"
-	      SID		      694
+	      SID		      1570
 	      Position		      [15, 385, 35, 405]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Inport
 	      Name		      "b"
-	      SID		      695
+	      SID		      1571
 	      Position		      [15, 435, 35, 455]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -1117,7 +1117,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "sync"
-	      SID		      696
+	      SID		      1572
 	      Position		      [15, 485, 35, 505]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -1125,7 +1125,7 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "shift"
-	      SID		      697
+	      SID		      1573
 	      Position		      [160, 335, 180, 355]
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -1133,7 +1133,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Logical"
-	      SID		      873
+	      SID		      1749
 	      Ports		      [4, 1]
 	      Position		      [485, 296, 535, 359]
 	      LibraryVersion	      "1.2"
@@ -1166,7 +1166,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "cadd"
-	      SID		      742
+	      SID		      1618
 	      Ports		      [4, 2]
 	      Position		      [145, 207, 195, 293]
 	      MinAlgLoopOccurrences   off
@@ -1194,14 +1194,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "a_re"
-		  SID			  743
+		  SID			  1619
 		  Position		  [70, 35, 90, 55]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "a_im"
-		  SID			  744
+		  SID			  1620
 		  Position		  [70, 100, 90, 120]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -1209,7 +1209,7 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "b_re"
-		  SID			  745
+		  SID			  1621
 		  Position		  [15, 165, 35, 185]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
@@ -1217,7 +1217,7 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "b_im"
-		  SID			  746
+		  SID			  1622
 		  Position		  [15, 230, 35, 250]
 		  Port			  "4"
 		  IconDisplay		  "Port number"
@@ -1225,7 +1225,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "DSP48E"
-		  SID			  749
+		  SID			  1625
 		  Ports			  [7, 1]
 		  Position		  [485, 197, 560, 333]
 		  LibraryVersion	  "1.2"
@@ -1310,7 +1310,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Reinterpret_A"
-		  SID			  750
+		  SID			  1626
 		  Ports			  [1, 1]
 		  Position		  [400, 69, 450, 101]
 		  LibraryVersion	  "1.2"
@@ -1340,7 +1340,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Reinterpret_B"
-		  SID			  751
+		  SID			  1627
 		  Ports			  [1, 1]
 		  Position		  [400, 194, 450, 226]
 		  LibraryVersion	  "1.2"
@@ -1370,7 +1370,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Reinterpret_C"
-		  SID			  752
+		  SID			  1628
 		  Ports			  [1, 1]
 		  Position		  [400, 129, 450, 161]
 		  LibraryVersion	  "1.2"
@@ -1400,7 +1400,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Slice_A"
-		  SID			  753
+		  SID			  1629
 		  Ports			  [1, 1]
 		  Position		  [305, 134, 365, 166]
 		  LibraryVersion	  "1.2"
@@ -1432,7 +1432,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Slice_B"
-		  SID			  754
+		  SID			  1630
 		  Ports			  [1, 1]
 		  Position		  [305, 194, 365, 226]
 		  LibraryVersion	  "1.2"
@@ -1464,7 +1464,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "alumode"
-		  SID			  755
+		  SID			  1631
 		  Ports			  [0, 1]
 		  Position		  [400, 307, 455, 333]
 		  LibraryVersion	  "1.2"
@@ -1500,7 +1500,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "carryin"
-		  SID			  756
+		  SID			  1632
 		  Ports			  [0, 1]
 		  Position		  [400, 362, 455, 388]
 		  LibraryVersion	  "1.2"
@@ -1536,7 +1536,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "carryinsel"
-		  SID			  757
+		  SID			  1633
 		  Ports			  [0, 1]
 		  Position		  [400, 417, 455, 443]
 		  LibraryVersion	  "1.2"
@@ -1572,7 +1572,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "cast_c_im"
-		  SID			  758
+		  SID			  1634
 		  Ports			  [1, 1]
 		  Position		  [765, 219, 810, 251]
 		  LibraryVersion	  "1.2"
@@ -1604,7 +1604,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "cast_c_re"
-		  SID			  759
+		  SID			  1635
 		  Ports			  [1, 1]
 		  Position		  [765, 279, 810, 311]
 		  LibraryVersion	  "1.2"
@@ -1636,7 +1636,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "concat_a"
-		  SID			  760
+		  SID			  1636
 		  Ports			  [2, 1]
 		  Position		  [305, 45, 365, 105]
 		  LibraryVersion	  "1.2"
@@ -1661,7 +1661,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "concat_b"
-		  SID			  761
+		  SID			  1637
 		  Ports			  [2, 1]
 		  Position		  [215, 170, 275, 230]
 		  LibraryVersion	  "1.2"
@@ -1686,7 +1686,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "opmode"
-		  SID			  762
+		  SID			  1638
 		  Ports			  [0, 1]
 		  Position		  [400, 252, 455, 278]
 		  LibraryVersion	  "1.2"
@@ -1722,7 +1722,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_a_im"
-		  SID			  763
+		  SID			  1639
 		  Ports			  [1, 1]
 		  Position		  [140, 94, 185, 126]
 		  LibraryVersion	  "1.2"
@@ -1754,7 +1754,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_a_re"
-		  SID			  764
+		  SID			  1640
 		  Ports			  [1, 1]
 		  Position		  [140, 30, 185, 60]
 		  LibraryVersion	  "1.2"
@@ -1786,7 +1786,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_b_im"
-		  SID			  765
+		  SID			  1641
 		  Ports			  [1, 1]
 		  Position		  [60, 225, 105, 255]
 		  LibraryVersion	  "1.2"
@@ -1818,7 +1818,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_b_re"
-		  SID			  766
+		  SID			  1642
 		  Ports			  [1, 1]
 		  Position		  [60, 159, 105, 191]
 		  LibraryVersion	  "1.2"
@@ -1850,7 +1850,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_a_im"
-		  SID			  767
+		  SID			  1643
 		  Ports			  [1, 1]
 		  Position		  [220, 94, 270, 126]
 		  LibraryVersion	  "1.2"
@@ -1880,7 +1880,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_a_re"
-		  SID			  768
+		  SID			  1644
 		  Ports			  [1, 1]
 		  Position		  [220, 29, 270, 61]
 		  LibraryVersion	  "1.2"
@@ -1910,7 +1910,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_b_im"
-		  SID			  769
+		  SID			  1645
 		  Ports			  [1, 1]
 		  Position		  [135, 224, 185, 256]
 		  LibraryVersion	  "1.2"
@@ -1940,7 +1940,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_b_re"
-		  SID			  770
+		  SID			  1646
 		  Ports			  [1, 1]
 		  Position		  [135, 159, 185, 191]
 		  LibraryVersion	  "1.2"
@@ -1970,7 +1970,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_c_im"
-		  SID			  771
+		  SID			  1647
 		  Ports			  [1, 1]
 		  Position		  [685, 219, 730, 251]
 		  LibraryVersion	  "1.2"
@@ -2000,7 +2000,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_c_re"
-		  SID			  772
+		  SID			  1648
 		  Ports			  [1, 1]
 		  Position		  [685, 279, 730, 311]
 		  LibraryVersion	  "1.2"
@@ -2030,7 +2030,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_c_im"
-		  SID			  773
+		  SID			  1649
 		  Ports			  [1, 1]
 		  Position		  [590, 220, 650, 250]
 		  LibraryVersion	  "1.2"
@@ -2062,7 +2062,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_c_re"
-		  SID			  774
+		  SID			  1650
 		  Ports			  [1, 1]
 		  Position		  [590, 279, 650, 311]
 		  LibraryVersion	  "1.2"
@@ -2094,14 +2094,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "c_re"
-		  SID			  747
+		  SID			  1623
 		  Position		  [840, 285, 860, 305]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "c_im"
-		  SID			  748
+		  SID			  1624
 		  Position		  [840, 225, 860, 245]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -2321,7 +2321,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "conv_of_1"
-	      SID		      811
+	      SID		      1687
 	      Ports		      [1, 2]
 	      Position		      [400, 150, 450, 205]
 	      MinAlgLoopOccurrences   off
@@ -2349,14 +2349,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "din"
-		  SID			  812
+		  SID			  1688
 		  Position		  [15, 185, 35, 205]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_0s"
-		  SID			  822
+		  SID			  1698
 		  Ports			  [3, 1]
 		  Position		  [240, 175, 295, 235]
 		  LibraryVersion	  "1.2"
@@ -2390,7 +2390,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_1s"
-		  SID			  823
+		  SID			  1699
 		  Ports			  [3, 1]
 		  Position		  [150, 260, 205, 320]
 		  LibraryVersion	  "1.2"
@@ -2424,7 +2424,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "and"
-		  SID			  824
+		  SID			  1700
 		  Ports			  [2, 1]
 		  Position		  [325, 215, 380, 275]
 		  LibraryVersion	  "1.2"
@@ -2458,7 +2458,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "convert"
-		  SID			  814
+		  SID			  1690
 		  Ports			  [1, 1]
 		  Position		  [65, 59, 115, 91]
 		  LibraryVersion	  "1.2"
@@ -2490,7 +2490,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_1"
-		  SID			  817
+		  SID			  1693
 		  Ports			  [1, 1]
 		  Position		  [150, 80, 205, 140]
 		  LibraryVersion	  "1.2"
@@ -2518,7 +2518,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_2"
-		  SID			  819
+		  SID			  1695
 		  Ports			  [1, 1]
 		  Position		  [150, 171, 205, 229]
 		  LibraryVersion	  "1.2"
@@ -2546,7 +2546,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_3"
-		  SID			  821
+		  SID			  1697
 		  Ports			  [1, 1]
 		  Position		  [150, 350, 205, 410]
 		  LibraryVersion	  "1.2"
@@ -2574,7 +2574,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_1"
-		  SID			  816
+		  SID			  1692
 		  Ports			  [1, 1]
 		  Position		  [60, 149, 120, 181]
 		  LibraryVersion	  "1.2"
@@ -2606,7 +2606,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_2"
-		  SID			  818
+		  SID			  1694
 		  Ports			  [1, 1]
 		  Position		  [60, 209, 120, 241]
 		  LibraryVersion	  "1.2"
@@ -2638,7 +2638,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_3"
-		  SID			  820
+		  SID			  1696
 		  Ports			  [1, 1]
 		  Position		  [60, 294, 120, 326]
 		  LibraryVersion	  "1.2"
@@ -2670,14 +2670,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "dout"
-		  SID			  813
+		  SID			  1689
 		  Position		  [170, 30, 190, 50]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "of"
-		  SID			  815
+		  SID			  1691
 		  Position		  [410, 235, 430, 255]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -2804,7 +2804,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "conv_of_2"
-	      SID		      827
+	      SID		      1703
 	      Ports		      [1, 2]
 	      Position		      [400, 235, 450, 290]
 	      MinAlgLoopOccurrences   off
@@ -2832,14 +2832,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "din"
-		  SID			  828
+		  SID			  1704
 		  Position		  [15, 185, 35, 205]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_0s"
-		  SID			  838
+		  SID			  1714
 		  Ports			  [3, 1]
 		  Position		  [240, 175, 295, 235]
 		  LibraryVersion	  "1.2"
@@ -2873,7 +2873,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_1s"
-		  SID			  839
+		  SID			  1715
 		  Ports			  [3, 1]
 		  Position		  [150, 260, 205, 320]
 		  LibraryVersion	  "1.2"
@@ -2907,7 +2907,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "and"
-		  SID			  840
+		  SID			  1716
 		  Ports			  [2, 1]
 		  Position		  [325, 215, 380, 275]
 		  LibraryVersion	  "1.2"
@@ -2941,7 +2941,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "convert"
-		  SID			  830
+		  SID			  1706
 		  Ports			  [1, 1]
 		  Position		  [65, 59, 115, 91]
 		  LibraryVersion	  "1.2"
@@ -2973,7 +2973,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_1"
-		  SID			  833
+		  SID			  1709
 		  Ports			  [1, 1]
 		  Position		  [150, 80, 205, 140]
 		  LibraryVersion	  "1.2"
@@ -3001,7 +3001,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_2"
-		  SID			  835
+		  SID			  1711
 		  Ports			  [1, 1]
 		  Position		  [150, 171, 205, 229]
 		  LibraryVersion	  "1.2"
@@ -3029,7 +3029,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_3"
-		  SID			  837
+		  SID			  1713
 		  Ports			  [1, 1]
 		  Position		  [150, 350, 205, 410]
 		  LibraryVersion	  "1.2"
@@ -3057,7 +3057,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_1"
-		  SID			  832
+		  SID			  1708
 		  Ports			  [1, 1]
 		  Position		  [60, 149, 120, 181]
 		  LibraryVersion	  "1.2"
@@ -3089,7 +3089,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_2"
-		  SID			  834
+		  SID			  1710
 		  Ports			  [1, 1]
 		  Position		  [60, 209, 120, 241]
 		  LibraryVersion	  "1.2"
@@ -3121,7 +3121,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_3"
-		  SID			  836
+		  SID			  1712
 		  Ports			  [1, 1]
 		  Position		  [60, 294, 120, 326]
 		  LibraryVersion	  "1.2"
@@ -3153,14 +3153,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "dout"
-		  SID			  829
+		  SID			  1705
 		  Position		  [170, 30, 190, 50]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "of"
-		  SID			  831
+		  SID			  1707
 		  Position		  [410, 235, 430, 255]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -3287,7 +3287,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "conv_of_3"
-	      SID		      843
+	      SID		      1719
 	      Ports		      [1, 2]
 	      Position		      [400, 350, 450, 405]
 	      MinAlgLoopOccurrences   off
@@ -3315,14 +3315,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "din"
-		  SID			  844
+		  SID			  1720
 		  Position		  [15, 185, 35, 205]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_0s"
-		  SID			  854
+		  SID			  1730
 		  Ports			  [3, 1]
 		  Position		  [240, 175, 295, 235]
 		  LibraryVersion	  "1.2"
@@ -3356,7 +3356,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_1s"
-		  SID			  855
+		  SID			  1731
 		  Ports			  [3, 1]
 		  Position		  [150, 260, 205, 320]
 		  LibraryVersion	  "1.2"
@@ -3390,7 +3390,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "and"
-		  SID			  856
+		  SID			  1732
 		  Ports			  [2, 1]
 		  Position		  [325, 215, 380, 275]
 		  LibraryVersion	  "1.2"
@@ -3424,7 +3424,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "convert"
-		  SID			  846
+		  SID			  1722
 		  Ports			  [1, 1]
 		  Position		  [65, 59, 115, 91]
 		  LibraryVersion	  "1.2"
@@ -3456,7 +3456,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_1"
-		  SID			  849
+		  SID			  1725
 		  Ports			  [1, 1]
 		  Position		  [150, 80, 205, 140]
 		  LibraryVersion	  "1.2"
@@ -3484,7 +3484,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_2"
-		  SID			  851
+		  SID			  1727
 		  Ports			  [1, 1]
 		  Position		  [150, 171, 205, 229]
 		  LibraryVersion	  "1.2"
@@ -3512,7 +3512,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_3"
-		  SID			  853
+		  SID			  1729
 		  Ports			  [1, 1]
 		  Position		  [150, 350, 205, 410]
 		  LibraryVersion	  "1.2"
@@ -3540,7 +3540,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_1"
-		  SID			  848
+		  SID			  1724
 		  Ports			  [1, 1]
 		  Position		  [60, 149, 120, 181]
 		  LibraryVersion	  "1.2"
@@ -3572,7 +3572,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_2"
-		  SID			  850
+		  SID			  1726
 		  Ports			  [1, 1]
 		  Position		  [60, 209, 120, 241]
 		  LibraryVersion	  "1.2"
@@ -3604,7 +3604,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_3"
-		  SID			  852
+		  SID			  1728
 		  Ports			  [1, 1]
 		  Position		  [60, 294, 120, 326]
 		  LibraryVersion	  "1.2"
@@ -3636,14 +3636,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "dout"
-		  SID			  845
+		  SID			  1721
 		  Position		  [170, 30, 190, 50]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "of"
-		  SID			  847
+		  SID			  1723
 		  Position		  [410, 235, 430, 255]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -3770,7 +3770,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "conv_of_4"
-	      SID		      859
+	      SID		      1735
 	      Ports		      [1, 2]
 	      Position		      [400, 435, 450, 490]
 	      MinAlgLoopOccurrences   off
@@ -3798,14 +3798,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "din"
-		  SID			  860
+		  SID			  1736
 		  Position		  [15, 185, 35, 205]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_0s"
-		  SID			  870
+		  SID			  1746
 		  Ports			  [3, 1]
 		  Position		  [240, 175, 295, 235]
 		  LibraryVersion	  "1.2"
@@ -3839,7 +3839,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "all_1s"
-		  SID			  871
+		  SID			  1747
 		  Ports			  [3, 1]
 		  Position		  [150, 260, 205, 320]
 		  LibraryVersion	  "1.2"
@@ -3873,7 +3873,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "and"
-		  SID			  872
+		  SID			  1748
 		  Ports			  [2, 1]
 		  Position		  [325, 215, 380, 275]
 		  LibraryVersion	  "1.2"
@@ -3907,7 +3907,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "convert"
-		  SID			  862
+		  SID			  1738
 		  Ports			  [1, 1]
 		  Position		  [65, 59, 115, 91]
 		  LibraryVersion	  "1.2"
@@ -3939,7 +3939,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_1"
-		  SID			  865
+		  SID			  1741
 		  Ports			  [1, 1]
 		  Position		  [150, 80, 205, 140]
 		  LibraryVersion	  "1.2"
@@ -3967,7 +3967,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_2"
-		  SID			  867
+		  SID			  1743
 		  Ports			  [1, 1]
 		  Position		  [150, 171, 205, 229]
 		  LibraryVersion	  "1.2"
@@ -3995,7 +3995,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "inv_3"
-		  SID			  869
+		  SID			  1745
 		  Ports			  [1, 1]
 		  Position		  [150, 350, 205, 410]
 		  LibraryVersion	  "1.2"
@@ -4023,7 +4023,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_1"
-		  SID			  864
+		  SID			  1740
 		  Ports			  [1, 1]
 		  Position		  [60, 149, 120, 181]
 		  LibraryVersion	  "1.2"
@@ -4055,7 +4055,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_2"
-		  SID			  866
+		  SID			  1742
 		  Ports			  [1, 1]
 		  Position		  [60, 209, 120, 241]
 		  LibraryVersion	  "1.2"
@@ -4087,7 +4087,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_3"
-		  SID			  868
+		  SID			  1744
 		  Ports			  [1, 1]
 		  Position		  [60, 294, 120, 326]
 		  LibraryVersion	  "1.2"
@@ -4119,14 +4119,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "dout"
-		  SID			  861
+		  SID			  1737
 		  Position		  [170, 30, 190, 50]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "of"
-		  SID			  863
+		  SID			  1739
 		  Position		  [410, 235, 430, 255]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -4253,7 +4253,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "csub"
-	      SID		      775
+	      SID		      1651
 	      Ports		      [4, 2]
 	      Position		      [145, 397, 195, 483]
 	      MinAlgLoopOccurrences   off
@@ -4281,14 +4281,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "a_re"
-		  SID			  776
+		  SID			  1652
 		  Position		  [70, 35, 90, 55]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "a_im"
-		  SID			  777
+		  SID			  1653
 		  Position		  [70, 100, 90, 120]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -4296,7 +4296,7 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "b_re"
-		  SID			  778
+		  SID			  1654
 		  Position		  [15, 165, 35, 185]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
@@ -4304,7 +4304,7 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "b_im"
-		  SID			  779
+		  SID			  1655
 		  Position		  [15, 230, 35, 250]
 		  Port			  "4"
 		  IconDisplay		  "Port number"
@@ -4312,7 +4312,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "DSP48E"
-		  SID			  782
+		  SID			  1658
 		  Ports			  [7, 1]
 		  Position		  [485, 197, 560, 333]
 		  LibraryVersion	  "1.2"
@@ -4397,7 +4397,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Reinterpret_A"
-		  SID			  783
+		  SID			  1659
 		  Ports			  [1, 1]
 		  Position		  [400, 69, 450, 101]
 		  LibraryVersion	  "1.2"
@@ -4427,7 +4427,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Reinterpret_B"
-		  SID			  784
+		  SID			  1660
 		  Ports			  [1, 1]
 		  Position		  [400, 194, 450, 226]
 		  LibraryVersion	  "1.2"
@@ -4457,7 +4457,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Reinterpret_C"
-		  SID			  785
+		  SID			  1661
 		  Ports			  [1, 1]
 		  Position		  [400, 129, 450, 161]
 		  LibraryVersion	  "1.2"
@@ -4487,7 +4487,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Slice_A"
-		  SID			  786
+		  SID			  1662
 		  Ports			  [1, 1]
 		  Position		  [305, 134, 365, 166]
 		  LibraryVersion	  "1.2"
@@ -4519,7 +4519,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "Slice_B"
-		  SID			  787
+		  SID			  1663
 		  Ports			  [1, 1]
 		  Position		  [305, 194, 365, 226]
 		  LibraryVersion	  "1.2"
@@ -4551,7 +4551,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "alumode"
-		  SID			  788
+		  SID			  1664
 		  Ports			  [0, 1]
 		  Position		  [400, 307, 455, 333]
 		  LibraryVersion	  "1.2"
@@ -4587,7 +4587,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "carryin"
-		  SID			  789
+		  SID			  1665
 		  Ports			  [0, 1]
 		  Position		  [400, 362, 455, 388]
 		  LibraryVersion	  "1.2"
@@ -4623,7 +4623,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "carryinsel"
-		  SID			  790
+		  SID			  1666
 		  Ports			  [0, 1]
 		  Position		  [400, 417, 455, 443]
 		  LibraryVersion	  "1.2"
@@ -4659,7 +4659,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "cast_c_im"
-		  SID			  791
+		  SID			  1667
 		  Ports			  [1, 1]
 		  Position		  [765, 219, 810, 251]
 		  LibraryVersion	  "1.2"
@@ -4691,7 +4691,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "cast_c_re"
-		  SID			  792
+		  SID			  1668
 		  Ports			  [1, 1]
 		  Position		  [765, 279, 810, 311]
 		  LibraryVersion	  "1.2"
@@ -4723,7 +4723,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "concat_a"
-		  SID			  793
+		  SID			  1669
 		  Ports			  [2, 1]
 		  Position		  [305, 45, 365, 105]
 		  LibraryVersion	  "1.2"
@@ -4748,7 +4748,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "concat_b"
-		  SID			  794
+		  SID			  1670
 		  Ports			  [2, 1]
 		  Position		  [215, 170, 275, 230]
 		  LibraryVersion	  "1.2"
@@ -4773,7 +4773,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "opmode"
-		  SID			  795
+		  SID			  1671
 		  Ports			  [0, 1]
 		  Position		  [400, 252, 455, 278]
 		  LibraryVersion	  "1.2"
@@ -4809,7 +4809,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_a_im"
-		  SID			  796
+		  SID			  1672
 		  Ports			  [1, 1]
 		  Position		  [140, 94, 185, 126]
 		  LibraryVersion	  "1.2"
@@ -4841,7 +4841,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_a_re"
-		  SID			  797
+		  SID			  1673
 		  Ports			  [1, 1]
 		  Position		  [140, 30, 185, 60]
 		  LibraryVersion	  "1.2"
@@ -4873,7 +4873,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_b_im"
-		  SID			  798
+		  SID			  1674
 		  Ports			  [1, 1]
 		  Position		  [60, 225, 105, 255]
 		  LibraryVersion	  "1.2"
@@ -4905,7 +4905,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "realign_b_re"
-		  SID			  799
+		  SID			  1675
 		  Ports			  [1, 1]
 		  Position		  [60, 159, 105, 191]
 		  LibraryVersion	  "1.2"
@@ -4937,7 +4937,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_a_im"
-		  SID			  800
+		  SID			  1676
 		  Ports			  [1, 1]
 		  Position		  [220, 94, 270, 126]
 		  LibraryVersion	  "1.2"
@@ -4967,7 +4967,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_a_re"
-		  SID			  801
+		  SID			  1677
 		  Ports			  [1, 1]
 		  Position		  [220, 29, 270, 61]
 		  LibraryVersion	  "1.2"
@@ -4997,7 +4997,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_b_im"
-		  SID			  802
+		  SID			  1678
 		  Ports			  [1, 1]
 		  Position		  [135, 224, 185, 256]
 		  LibraryVersion	  "1.2"
@@ -5027,7 +5027,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_b_re"
-		  SID			  803
+		  SID			  1679
 		  Ports			  [1, 1]
 		  Position		  [135, 159, 185, 191]
 		  LibraryVersion	  "1.2"
@@ -5057,7 +5057,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_c_im"
-		  SID			  804
+		  SID			  1680
 		  Ports			  [1, 1]
 		  Position		  [685, 219, 730, 251]
 		  LibraryVersion	  "1.2"
@@ -5087,7 +5087,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "reinterp_c_re"
-		  SID			  805
+		  SID			  1681
 		  Ports			  [1, 1]
 		  Position		  [685, 279, 730, 311]
 		  LibraryVersion	  "1.2"
@@ -5117,7 +5117,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_c_im"
-		  SID			  806
+		  SID			  1682
 		  Ports			  [1, 1]
 		  Position		  [590, 220, 650, 250]
 		  LibraryVersion	  "1.2"
@@ -5149,7 +5149,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "slice_c_re"
-		  SID			  807
+		  SID			  1683
 		  Ports			  [1, 1]
 		  Position		  [590, 279, 650, 311]
 		  LibraryVersion	  "1.2"
@@ -5181,14 +5181,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "c_re"
-		  SID			  780
+		  SID			  1656
 		  Position		  [840, 285, 860, 305]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "c_im"
-		  SID			  781
+		  SID			  1657
 		  Position		  [840, 225, 860, 245]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -5408,7 +5408,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "mux_1"
-	      SID		      810
+	      SID		      1686
 	      Ports		      [3, 1]
 	      Position		      [325, 33, 370, 137]
 	      LibraryVersion	      "1.2"
@@ -5444,7 +5444,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "mux_2"
-	      SID		      826
+	      SID		      1702
 	      Ports		      [3, 1]
 	      Position		      [325, 203, 370, 307]
 	      LibraryVersion	      "1.2"
@@ -5480,7 +5480,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "mux_3"
-	      SID		      842
+	      SID		      1718
 	      Ports		      [3, 1]
 	      Position		      [325, 358, 370, 462]
 	      LibraryVersion	      "1.2"
@@ -5516,7 +5516,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "mux_4"
-	      SID		      858
+	      SID		      1734
 	      Ports		      [3, 1]
 	      Position		      [325, 508, 370, 612]
 	      LibraryVersion	      "1.2"
@@ -5552,7 +5552,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "ri_to_c01"
-	      SID		      874
+	      SID		      1750
 	      Ports		      [2, 1]
 	      Position		      [485, 195, 535, 250]
 	      MinAlgLoopOccurrences   off
@@ -5580,14 +5580,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "re"
-		  SID			  875
+		  SID			  1751
 		  Position		  [15, 35, 35, 55]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "im"
-		  SID			  876
+		  SID			  1752
 		  Position		  [15, 100, 35, 120]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -5595,7 +5595,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "concat"
-		  SID			  878
+		  SID			  1754
 		  Ports			  [2, 1]
 		  Position		  [140, 45, 200, 105]
 		  LibraryVersion	  "1.2"
@@ -5620,7 +5620,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "force_im"
-		  SID			  879
+		  SID			  1755
 		  Ports			  [1, 1]
 		  Position		  [60, 94, 110, 126]
 		  LibraryVersion	  "1.2"
@@ -5650,7 +5650,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "force_re"
-		  SID			  880
+		  SID			  1756
 		  Ports			  [1, 1]
 		  Position		  [60, 29, 110, 61]
 		  LibraryVersion	  "1.2"
@@ -5680,7 +5680,7 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "c"
-		  SID			  877
+		  SID			  1753
 		  Position		  [230, 65, 250, 85]
 		  IconDisplay		  "Port number"
 		}
@@ -5721,7 +5721,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "ri_to_c23"
-	      SID		      881
+	      SID		      1757
 	      Ports		      [2, 1]
 	      Position		      [485, 400, 535, 455]
 	      MinAlgLoopOccurrences   off
@@ -5749,14 +5749,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "re"
-		  SID			  882
+		  SID			  1758
 		  Position		  [15, 35, 35, 55]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "im"
-		  SID			  883
+		  SID			  1759
 		  Position		  [15, 100, 35, 120]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -5764,7 +5764,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "concat"
-		  SID			  885
+		  SID			  1761
 		  Ports			  [2, 1]
 		  Position		  [140, 45, 200, 105]
 		  LibraryVersion	  "1.2"
@@ -5789,7 +5789,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "force_im"
-		  SID			  886
+		  SID			  1762
 		  Ports			  [1, 1]
 		  Position		  [60, 94, 110, 126]
 		  LibraryVersion	  "1.2"
@@ -5819,7 +5819,7 @@ Model {
 		Block {
 		  BlockType		  Reference
 		  Name			  "force_re"
-		  SID			  887
+		  SID			  1763
 		  Ports			  [1, 1]
 		  Position		  [60, 29, 110, 61]
 		  LibraryVersion	  "1.2"
@@ -5849,7 +5849,7 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "c"
-		  SID			  884
+		  SID			  1760
 		  Position		  [230, 65, 250, 85]
 		  IconDisplay		  "Port number"
 		}
@@ -5890,7 +5890,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "scale_1"
-	      SID		      809
+	      SID		      1685
 	      Ports		      [1, 1]
 	      Position		      [235, 77, 290, 133]
 	      LibraryVersion	      "1.2"
@@ -5916,7 +5916,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "scale_2"
-	      SID		      825
+	      SID		      1701
 	      Ports		      [1, 1]
 	      Position		      [235, 227, 290, 283]
 	      LibraryVersion	      "1.2"
@@ -5942,7 +5942,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "scale_3"
-	      SID		      841
+	      SID		      1717
 	      Ports		      [1, 1]
 	      Position		      [235, 462, 290, 518]
 	      LibraryVersion	      "1.2"
@@ -5968,7 +5968,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "scale_4"
-	      SID		      857
+	      SID		      1733
 	      Ports		      [1, 1]
 	      Position		      [235, 612, 290, 668]
 	      LibraryVersion	      "1.2"
@@ -5994,7 +5994,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "shift_del"
-	      SID		      808
+	      SID		      1684
 	      Ports		      [1, 1]
 	      Position		      [235, 317, 295, 373]
 	      LibraryVersion	      "1.2"
@@ -6024,7 +6024,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "sync_delay"
-	      SID		      888
+	      SID		      1764
 	      Ports		      [1, 1]
 	      Position		      [140, 597, 200, 653]
 	      LibraryVersion	      "1.2"
@@ -6054,7 +6054,7 @@ Model {
 	    Block {
 	      BlockType		      SubSystem
 	      Name		      "twiddle"
-	      SID		      702
+	      SID		      1578
 	      Ports		      [3, 5]
 	      Position		      [60, 395, 110, 495]
 	      MinAlgLoopOccurrences   off
@@ -6082,14 +6082,14 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "a"
-		  SID			  703
+		  SID			  1579
 		  Position		  [15, 275, 35, 295]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Inport
 		  Name			  "b"
-		  SID			  704
+		  SID			  1580
 		  Position		  [15, 135, 35, 155]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -6097,7 +6097,7 @@ Model {
 		Block {
 		  BlockType		  Inport
 		  Name			  "sync"
-		  SID			  705
+		  SID			  1581
 		  Position		  [15, 40, 35, 60]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
@@ -6105,7 +6105,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "c_to_ri_a"
-		  SID			  711
+		  SID			  1587
 		  Ports			  [1, 2]
 		  Position		  [60, 255, 110, 310]
 		  MinAlgLoopOccurrences	  off
@@ -6133,14 +6133,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "c"
-		    SID			    712
+		    SID			    1588
 		    Position		    [15, 70, 35, 90]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Reference
 		    Name		    "force_im"
-		    SID			    715
+		    SID			    1591
 		    Ports		    [1, 1]
 		    Position		    [150, 29, 200, 61]
 		    LibraryVersion	    "1.2"
@@ -6170,7 +6170,7 @@ Model {
 		    Block {
 		    BlockType		    Reference
 		    Name		    "force_re"
-		    SID			    716
+		    SID			    1592
 		    Ports		    [1, 1]
 		    Position		    [150, 94, 200, 126]
 		    LibraryVersion	    "1.2"
@@ -6200,7 +6200,7 @@ Model {
 		    Block {
 		    BlockType		    Reference
 		    Name		    "slice_im"
-		    SID			    717
+		    SID			    1593
 		    Ports		    [1, 1]
 		    Position		    [60, 34, 120, 66]
 		    LibraryVersion	    "1.2"
@@ -6232,7 +6232,7 @@ Model {
 		    Block {
 		    BlockType		    Reference
 		    Name		    "slice_re"
-		    SID			    718
+		    SID			    1594
 		    Ports		    [1, 1]
 		    Position		    [60, 94, 120, 126]
 		    LibraryVersion	    "1.2"
@@ -6264,14 +6264,14 @@ Model {
 		    Block {
 		    BlockType		    Outport
 		    Name		    "re"
-		    SID			    713
+		    SID			    1589
 		    Position		    [230, 100, 250, 120]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "im"
-		    SID			    714
+		    SID			    1590
 		    Position		    [230, 35, 250, 55]
 		    Port		    "2"
 		    IconDisplay		    "Port number"
@@ -6321,7 +6321,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "c_to_ri_b"
-		  SID			  719
+		  SID			  1595
 		  Ports			  [1, 2]
 		  Position		  [60, 120, 110, 175]
 		  MinAlgLoopOccurrences	  off
@@ -6349,14 +6349,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "c"
-		    SID			    720
+		    SID			    1596
 		    Position		    [15, 70, 35, 90]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Reference
 		    Name		    "force_im"
-		    SID			    723
+		    SID			    1599
 		    Ports		    [1, 1]
 		    Position		    [150, 29, 200, 61]
 		    LibraryVersion	    "1.2"
@@ -6386,7 +6386,7 @@ Model {
 		    Block {
 		    BlockType		    Reference
 		    Name		    "force_re"
-		    SID			    724
+		    SID			    1600
 		    Ports		    [1, 1]
 		    Position		    [150, 94, 200, 126]
 		    LibraryVersion	    "1.2"
@@ -6416,7 +6416,7 @@ Model {
 		    Block {
 		    BlockType		    Reference
 		    Name		    "slice_im"
-		    SID			    725
+		    SID			    1601
 		    Ports		    [1, 1]
 		    Position		    [60, 34, 120, 66]
 		    LibraryVersion	    "1.2"
@@ -6448,7 +6448,7 @@ Model {
 		    Block {
 		    BlockType		    Reference
 		    Name		    "slice_re"
-		    SID			    726
+		    SID			    1602
 		    Ports		    [1, 1]
 		    Position		    [60, 94, 120, 126]
 		    LibraryVersion	    "1.2"
@@ -6480,14 +6480,14 @@ Model {
 		    Block {
 		    BlockType		    Outport
 		    Name		    "re"
-		    SID			    721
+		    SID			    1597
 		    Position		    [230, 100, 250, 120]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "im"
-		    SID			    722
+		    SID			    1598
 		    Position		    [230, 35, 250, 55]
 		    Port		    "2"
 		    IconDisplay		    "Port number"
@@ -6537,7 +6537,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "pipe_a_im"
-		  SID			  730
+		  SID			  1606
 		  Ports			  [1, 1]
 		  Position		  [140, 300, 190, 340]
 		  MinAlgLoopOccurrences	  off
@@ -6565,14 +6565,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "d"
-		    SID			    731
+		    SID			    1607
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "q"
-		    SID			    732
+		    SID			    1608
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
@@ -6587,7 +6587,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "pipe_a_re"
-		  SID			  727
+		  SID			  1603
 		  Ports			  [1, 1]
 		  Position		  [140, 230, 190, 270]
 		  MinAlgLoopOccurrences	  off
@@ -6615,14 +6615,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "d"
-		    SID			    728
+		    SID			    1604
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "q"
-		    SID			    729
+		    SID			    1605
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
@@ -6637,7 +6637,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "pipe_b_im"
-		  SID			  736
+		  SID			  1612
 		  Ports			  [1, 1]
 		  Position		  [140, 160, 190, 200]
 		  MinAlgLoopOccurrences	  off
@@ -6665,14 +6665,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "d"
-		    SID			    737
+		    SID			    1613
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "q"
-		    SID			    738
+		    SID			    1614
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
@@ -6687,7 +6687,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "pipe_b_re"
-		  SID			  733
+		  SID			  1609
 		  Ports			  [1, 1]
 		  Position		  [140, 90, 190, 130]
 		  MinAlgLoopOccurrences	  off
@@ -6715,14 +6715,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "d"
-		    SID			    734
+		    SID			    1610
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "q"
-		    SID			    735
+		    SID			    1611
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
@@ -6737,7 +6737,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "pipe_sync"
-		  SID			  739
+		  SID			  1615
 		  Ports			  [1, 1]
 		  Position		  [60, 30, 110, 70]
 		  MinAlgLoopOccurrences	  off
@@ -6765,14 +6765,14 @@ Model {
 		    Block {
 		    BlockType		    Inport
 		    Name		    "d"
-		    SID			    740
+		    SID			    1616
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
 		    Block {
 		    BlockType		    Outport
 		    Name		    "q"
-		    SID			    741
+		    SID			    1617
 		    Position		    [15, 15, 35, 35]
 		    IconDisplay		    "Port number"
 		    }
@@ -6787,14 +6787,14 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "a_re"
-		  SID			  706
+		  SID			  1582
 		  Position		  [220, 240, 240, 260]
 		  IconDisplay		  "Port number"
 		}
 		Block {
 		  BlockType		  Outport
 		  Name			  "a_im"
-		  SID			  707
+		  SID			  1583
 		  Position		  [220, 310, 240, 330]
 		  Port			  "2"
 		  IconDisplay		  "Port number"
@@ -6802,7 +6802,7 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "bw_re"
-		  SID			  708
+		  SID			  1584
 		  Position		  [220, 100, 240, 120]
 		  Port			  "3"
 		  IconDisplay		  "Port number"
@@ -6810,7 +6810,7 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "bw_im"
-		  SID			  709
+		  SID			  1585
 		  Position		  [220, 170, 240, 190]
 		  Port			  "4"
 		  IconDisplay		  "Port number"
@@ -6818,7 +6818,7 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "sync_out"
-		  SID			  710
+		  SID			  1586
 		  Position		  [155, 40, 175, 60]
 		  Port			  "5"
 		  IconDisplay		  "Port number"
@@ -6906,14 +6906,14 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "a+bw"
-	      SID		      698
+	      SID		      1574
 	      Position		      [570, 215, 590, 235]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Outport
 	      Name		      "a-bw"
-	      SID		      699
+	      SID		      1575
 	      Position		      [570, 420, 590, 440]
 	      Port		      "2"
 	      IconDisplay	      "Port number"
@@ -6921,7 +6921,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "of"
-	      SID		      700
+	      SID		      1576
 	      Position		      [570, 315, 590, 335]
 	      Port		      "3"
 	      IconDisplay	      "Port number"
@@ -6929,7 +6929,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "sync_out"
-	      SID		      701
+	      SID		      1577
 	      Position		      [255, 700, 275, 720]
 	      Port		      "4"
 	      IconDisplay	      "Port number"
@@ -7257,7 +7257,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "delay_b"
-	  SID			  903
+	  SID			  1779
 	  Ports			  [1, 1]
 	  Position		  [335, 87, 395, 143]
 	  LibraryVersion	  "1.2"
@@ -7285,7 +7285,7 @@ Model {
 	Block {
 	  BlockType		  Reference
 	  Name			  "delay_f"
-	  SID			  904
+	  SID			  1780
 	  Ports			  [1, 1]
 	  Position		  [165, 187, 225, 243]
 	  LibraryVersion	  "1.2"
@@ -7313,7 +7313,7 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "sync_delay"
-	  SID			  889
+	  SID			  1765
 	  Ports			  [1, 1]
 	  Position		  [340, 270, 390, 310]
 	  MinAlgLoopOccurrences	  off
@@ -7341,14 +7341,14 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "In"
-	      SID		      890
+	      SID		      1766
 	      Position		      [30, 275, 50, 295]
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Constant"
-	      SID		      892
+	      SID		      1768
 	      Ports		      [0, 1]
 	      Position		      [100, 187, 155, 213]
 	      LibraryVersion	      "1.2"
@@ -7384,7 +7384,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Constant1"
-	      SID		      893
+	      SID		      1769
 	      Ports		      [0, 1]
 	      Position		      [100, 422, 155, 448]
 	      LibraryVersion	      "1.2"
@@ -7420,7 +7420,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Constant2"
-	      SID		      894
+	      SID		      1770
 	      Ports		      [0, 1]
 	      Position		      [15, 347, 70, 373]
 	      LibraryVersion	      "1.2"
@@ -7456,7 +7456,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Constant3"
-	      SID		      895
+	      SID		      1771
 	      Ports		      [0, 1]
 	      Position		      [185, 67, 240, 93]
 	      LibraryVersion	      "1.2"
@@ -7492,7 +7492,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Counter"
-	      SID		      896
+	      SID		      1772
 	      Ports		      [3, 1]
 	      Position		      [95, 330, 155, 390]
 	      LibraryVersion	      "1.2"
@@ -7535,7 +7535,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Logical"
-	      SID		      897
+	      SID		      1773
 	      Ports		      [2, 1]
 	      Position		      [275, 320, 330, 380]
 	      LibraryVersion	      "1.2"
@@ -7569,7 +7569,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Mux"
-	      SID		      898
+	      SID		      1774
 	      Ports		      [3, 1]
 	      Position		      [280, 83, 325, 187]
 	      LibraryVersion	      "1.2"
@@ -7604,7 +7604,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Relational"
-	      SID		      899
+	      SID		      1775
 	      Ports		      [2, 1]
 	      Position		      [185, 182, 240, 238]
 	      LibraryVersion	      "1.2"
@@ -7633,7 +7633,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "Relational1"
-	      SID		      900
+	      SID		      1776
 	      Ports		      [2, 1]
 	      Position		      [185, 397, 240, 453]
 	      LibraryVersion	      "1.2"
@@ -7662,7 +7662,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "warn period Logical0"
-	      SID		      901
+	      SID		      1777
 	      Ports		      []
 	      Position		      [15, 15, 41, 40]
 	      ShowName		      off
@@ -7682,7 +7682,7 @@ Model {
 	    Block {
 	      BlockType		      Reference
 	      Name		      "warn period Relational10"
-	      SID		      902
+	      SID		      1778
 	      Ports		      []
 	      Position		      [66, 15, 92, 40]
 	      ShowName		      off
@@ -7702,7 +7702,7 @@ Model {
 	    Block {
 	      BlockType		      Outport
 	      Name		      "Out"
-	      SID		      891
+	      SID		      1767
 	      Position		      [360, 125, 380, 145]
 	      IconDisplay	      "Port number"
 	    }
@@ -8087,15 +8087,15 @@ Model {
 	  arith_type		  "Unsigned"
 	  n_bits		  "3"
 	  bin_pt		  "0"
-	  load_pin		  off
-	  rst			  on
-	  en			  off
+	  load_pin		  "off"
+	  rst			  "on"
+	  en			  "off"
 	  explicit_period	  "off"
 	  period		  "1"
-	  dbl_ovrd		  off
-	  use_behavioral_HDL	  off
+	  dbl_ovrd		  "off"
+	  use_behavioral_HDL	  "off"
 	  implementation	  "Fabric"
-	  xl_use_area		  off
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  use_rpm		  "off"
 	  has_advanced_control	  "0"
@@ -8120,11 +8120,11 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/Delay"
 	  SourceType		  "Xilinx Delay Block"
 	  infoedit		  "Hardware notes: A delay line is a chain, each link of which is an SRL16 followed by a flip-flop."
-	  en			  off
+	  en			  "off"
 	  latency		  "1"
-	  dbl_ovrd		  off
-	  reg_retiming		  off
-	  xl_use_area		  off
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
@@ -8149,15 +8149,15 @@ Model {
 	  SourceType		  "Xilinx Logical Block Block"
 	  logical_function	  "OR"
 	  inputs		  "2"
-	  en			  off
+	  en			  "off"
 	  latency		  "1"
 	  precision		  "Full"
 	  arith_type		  "Unsigned"
 	  n_bits		  "8"
 	  bin_pt		  "2"
-	  align_bp		  on
-	  dbl_ovrd		  off
-	  xl_use_area		  off
+	  align_bp		  "on"
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
@@ -8181,7 +8181,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/Mux"
 	  SourceType		  "Xilinx Bus Multiplexer Block"
 	  inputs		  "2"
-	  en			  off
+	  en			  "off"
 	  latency		  "1"
 	  precision		  "Full"
 	  arith_type		  "Signed  (2's comp)"
@@ -8189,8 +8189,8 @@ Model {
 	  bin_pt		  "2"
 	  quantization		  "Truncate"
 	  overflow		  "Wrap"
-	  dbl_ovrd		  off
-	  xl_use_area		  off
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
@@ -8215,7 +8215,7 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/Mux"
 	  SourceType		  "Xilinx Bus Multiplexer Block"
 	  inputs		  "2"
-	  en			  off
+	  en			  "off"
 	  latency		  "1"
 	  precision		  "Full"
 	  arith_type		  "Signed  (2's comp)"
@@ -8223,8 +8223,8 @@ Model {
 	  bin_pt		  "2"
 	  quantization		  "Truncate"
 	  overflow		  "Wrap"
-	  dbl_ovrd		  off
-	  xl_use_area		  off
+	  dbl_ovrd		  "off"
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
@@ -8252,13 +8252,13 @@ Model {
 	  "is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardwar"
 	  "e notes: In hardware this block costs nothing."
 	  nbits			  "1"
-	  boolean_output	  on
+	  boolean_output	  "on"
 	  mode			  "Lower Bit Location + Width"
 	  bit1			  "-0"
 	  base1			  "MSB of Input"
 	  bit0			  "0"
 	  base0			  "LSB of Input"
-	  dbl_ovrd		  off
+	  dbl_ovrd		  "off"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
 	  block_type		  "slice"
@@ -8284,13 +8284,13 @@ Model {
 	  "is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardwar"
 	  "e notes: In hardware this block costs nothing."
 	  nbits			  "1"
-	  boolean_output	  off
+	  boolean_output	  "off"
 	  mode			  "Upper Bit Location + Width"
 	  bit1			  "0"
 	  base1			  "MSB of Input"
 	  bit0			  "0"
 	  base0			  "LSB of Input"
-	  dbl_ovrd		  off
+	  dbl_ovrd		  "off"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
 	  block_type		  "slice"
@@ -8373,15 +8373,15 @@ Model {
 	      SourceType	      "Xilinx Logical Block Block"
 	      logical_function	      "OR"
 	      inputs		      "4"
-	      en		      off
+	      en		      "off"
 	      latency		      "0"
 	      precision		      "Full"
 	      arith_type	      "Unsigned"
 	      n_bits		      "16"
 	      bin_pt		      "0"
-	      align_bp		      on
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      align_bp		      "on"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -8466,63 +8466,63 @@ Model {
 		  SourceType		  "Xilinx DSP48E Block"
 		  use_a			  "Direct from A Port"
 		  use_b			  "Direct from B Port"
-		  pattern_from_creg	  off
+		  pattern_from_creg	  "off"
 		  pattern		  "'000000000000'"
-		  mask_from_creg	  off
+		  mask_from_creg	  "off"
 		  pattern_mask		  "'3FFFFFFFFFFF'"
-		  reset_preg		  off
+		  reset_preg		  "off"
 		  sel_rounding_mask	  "Select mask"
-		  use_op		  off
-		  use_creg		  on
-		  rst_all		  off
-		  en_all		  off
-		  use_pcin		  off
-		  use_carrycascin	  off
-		  use_multsignin	  off
-		  use_carryout		  off
-		  use_patterndetect	  off
-		  use_patternbdetect	  off
-		  use_overflow		  off
-		  use_underflow		  off
-		  use_acout		  off
-		  use_bcout		  off
-		  use_pcout		  off
-		  use_multsignout	  off
-		  use_carrycascout	  off
+		  use_op		  "off"
+		  use_creg		  "on"
+		  rst_all		  "off"
+		  en_all		  "off"
+		  use_pcin		  "off"
+		  use_carrycascin	  "off"
+		  use_multsignin	  "off"
+		  use_carryout		  "off"
+		  use_patterndetect	  "off"
+		  use_patternbdetect	  "off"
+		  use_overflow		  "off"
+		  use_underflow		  "off"
+		  use_acout		  "off"
+		  use_bcout		  "off"
+		  use_pcout		  "off"
+		  use_multsignout	  "off"
+		  use_carrycascout	  "off"
 		  pipeline_a		  "1"
 		  pipeline_b		  "1"
 		  pipeline_acout	  "1"
 		  pipeline_bcout	  "1"
-		  pipeline_c		  on
-		  pipeline_p		  on
-		  pipeline_mult		  on
-		  pipeline_opmode	  on
-		  pipeline_alumode	  on
-		  pipeline_carryin	  on
-		  pipeline_carryinsel	  on
-		  rst_a			  off
-		  rst_b			  off
-		  rst_c			  off
-		  rst_mult		  off
-		  rst_p			  off
-		  rst_carry_in		  off
-		  rst_alumode		  off
-		  rst_ctrl		  off
-		  en_a1			  off
-		  en_a2			  off
-		  en_b1			  off
-		  en_b2			  off
-		  en_c			  off
-		  en_mult		  off
-		  en_p			  off
-		  en_carry_in		  off
-		  en_alumode		  off
-		  en_multcarryin	  off
-		  en_ctrl		  off
-		  use_synth_model	  off
+		  pipeline_c		  "on"
+		  pipeline_p		  "on"
+		  pipeline_mult		  "on"
+		  pipeline_opmode	  "on"
+		  pipeline_alumode	  "on"
+		  pipeline_carryin	  "on"
+		  pipeline_carryinsel	  "on"
+		  rst_a			  "off"
+		  rst_b			  "off"
+		  rst_c			  "off"
+		  rst_mult		  "off"
+		  rst_p			  "off"
+		  rst_carry_in		  "off"
+		  rst_alumode		  "off"
+		  rst_ctrl		  "off"
+		  en_a1			  "off"
+		  en_a2			  "off"
+		  en_b1			  "off"
+		  en_b2			  "off"
+		  en_c			  "off"
+		  en_mult		  "off"
+		  en_p			  "off"
+		  en_carry_in		  "off"
+		  en_alumode		  "off"
+		  en_multcarryin	  "off"
+		  en_ctrl		  "off"
+		  use_synth_model	  "off"
 		  addsub_mode		  "TWO24"
-		  xl_useadderonly	  off
-		  xl_use_area		  off
+		  xl_useadderonly	  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -8554,9 +8554,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -8584,9 +8584,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -8614,9 +8614,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -8643,13 +8643,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "30"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -8675,13 +8675,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "18"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Lower Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -8707,7 +8707,7 @@ Model {
 		  const			  "0"
 		  n_bits		  "4"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -8716,7 +8716,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -8743,7 +8743,7 @@ Model {
 		  const			  "0"
 		  n_bits		  "1"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -8752,7 +8752,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -8779,7 +8779,7 @@ Model {
 		  const			  "0"
 		  n_bits		  "3"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -8788,7 +8788,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -8818,9 +8818,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -8850,9 +8850,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -8878,7 +8878,7 @@ Model {
 		  infoedit		  "Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at z"
 		  "ero."
 		  num_inputs		  "2"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "concat"
@@ -8903,7 +8903,7 @@ Model {
 		  infoedit		  "Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at z"
 		  "ero."
 		  num_inputs		  "2"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "concat"
@@ -8929,7 +8929,7 @@ Model {
 		  const			  "51"
 		  n_bits		  "7"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -8938,7 +8938,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -8968,9 +8968,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9000,9 +9000,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9032,9 +9032,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9064,9 +9064,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9094,9 +9094,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9124,9 +9124,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9154,9 +9154,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9184,9 +9184,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9214,9 +9214,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "19"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9244,9 +9244,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "19"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9273,13 +9273,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "24"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Lower Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -9305,13 +9305,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "24"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Lower Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "24"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -9597,15 +9597,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9631,15 +9631,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9665,15 +9665,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "AND"
 		  inputs		  "2"
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9704,9 +9704,9 @@ Model {
 		  quantization		  "Round  (unbiased: +/- Inf)"
 		  overflow		  "Saturate"
 		  latency		  "1"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9730,10 +9730,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9758,10 +9758,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9786,10 +9786,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -9817,13 +9817,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -9849,13 +9849,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-1"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -9881,13 +9881,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-2"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -10080,15 +10080,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10114,15 +10114,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10148,15 +10148,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "AND"
 		  inputs		  "2"
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10187,9 +10187,9 @@ Model {
 		  quantization		  "Round  (unbiased: +/- Inf)"
 		  overflow		  "Saturate"
 		  latency		  "1"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10213,10 +10213,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10241,10 +10241,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10269,10 +10269,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10300,13 +10300,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -10332,13 +10332,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-1"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -10364,13 +10364,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-2"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -10563,15 +10563,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10597,15 +10597,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10631,15 +10631,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "AND"
 		  inputs		  "2"
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10670,9 +10670,9 @@ Model {
 		  quantization		  "Round  (unbiased: +/- Inf)"
 		  overflow		  "Saturate"
 		  latency		  "1"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10696,10 +10696,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10724,10 +10724,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10752,10 +10752,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -10783,13 +10783,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -10815,13 +10815,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-1"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -10847,13 +10847,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-2"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -11046,15 +11046,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11080,15 +11080,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "NAND"
 		  inputs		  "3"
-		  en			  off
+		  en			  "off"
 		  latency		  "1"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11114,15 +11114,15 @@ Model {
 		  SourceType		  "Xilinx Logical Block Block"
 		  logical_function	  "AND"
 		  inputs		  "2"
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
 		  precision		  "Full"
 		  arith_type		  "Unsigned"
 		  n_bits		  "16"
 		  bin_pt		  "0"
-		  align_bp		  on
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  align_bp		  "on"
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11153,9 +11153,9 @@ Model {
 		  quantization		  "Round  (unbiased: +/- Inf)"
 		  overflow		  "Saturate"
 		  latency		  "1"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11179,10 +11179,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11207,10 +11207,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11235,10 +11235,10 @@ Model {
 		  SourceBlock		  "xbsIndex_r4/Inverter"
 		  SourceType		  "Xilinx Inverter Block"
 		  infoedit		  "Bitwise logical negation (one's complement) operator."
-		  en			  off
+		  en			  "off"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11266,13 +11266,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -11298,13 +11298,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-1"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -11330,13 +11330,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "1"
-		  boolean_output	  on
+		  boolean_output	  "on"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "-2"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -11553,63 +11553,63 @@ Model {
 		  SourceType		  "Xilinx DSP48E Block"
 		  use_a			  "Direct from A Port"
 		  use_b			  "Direct from B Port"
-		  pattern_from_creg	  off
+		  pattern_from_creg	  "off"
 		  pattern		  "'000000000000'"
-		  mask_from_creg	  off
+		  mask_from_creg	  "off"
 		  pattern_mask		  "'3FFFFFFFFFFF'"
-		  reset_preg		  off
+		  reset_preg		  "off"
 		  sel_rounding_mask	  "Select mask"
-		  use_op		  off
-		  use_creg		  on
-		  rst_all		  off
-		  en_all		  off
-		  use_pcin		  off
-		  use_carrycascin	  off
-		  use_multsignin	  off
-		  use_carryout		  off
-		  use_patterndetect	  off
-		  use_patternbdetect	  off
-		  use_overflow		  off
-		  use_underflow		  off
-		  use_acout		  off
-		  use_bcout		  off
-		  use_pcout		  off
-		  use_multsignout	  off
-		  use_carrycascout	  off
+		  use_op		  "off"
+		  use_creg		  "on"
+		  rst_all		  "off"
+		  en_all		  "off"
+		  use_pcin		  "off"
+		  use_carrycascin	  "off"
+		  use_multsignin	  "off"
+		  use_carryout		  "off"
+		  use_patterndetect	  "off"
+		  use_patternbdetect	  "off"
+		  use_overflow		  "off"
+		  use_underflow		  "off"
+		  use_acout		  "off"
+		  use_bcout		  "off"
+		  use_pcout		  "off"
+		  use_multsignout	  "off"
+		  use_carrycascout	  "off"
 		  pipeline_a		  "1"
 		  pipeline_b		  "1"
 		  pipeline_acout	  "1"
 		  pipeline_bcout	  "1"
-		  pipeline_c		  on
-		  pipeline_p		  on
-		  pipeline_mult		  on
-		  pipeline_opmode	  on
-		  pipeline_alumode	  on
-		  pipeline_carryin	  on
-		  pipeline_carryinsel	  on
-		  rst_a			  off
-		  rst_b			  off
-		  rst_c			  off
-		  rst_mult		  off
-		  rst_p			  off
-		  rst_carry_in		  off
-		  rst_alumode		  off
-		  rst_ctrl		  off
-		  en_a1			  off
-		  en_a2			  off
-		  en_b1			  off
-		  en_b2			  off
-		  en_c			  off
-		  en_mult		  off
-		  en_p			  off
-		  en_carry_in		  off
-		  en_alumode		  off
-		  en_multcarryin	  off
-		  en_ctrl		  off
-		  use_synth_model	  off
+		  pipeline_c		  "on"
+		  pipeline_p		  "on"
+		  pipeline_mult		  "on"
+		  pipeline_opmode	  "on"
+		  pipeline_alumode	  "on"
+		  pipeline_carryin	  "on"
+		  pipeline_carryinsel	  "on"
+		  rst_a			  "off"
+		  rst_b			  "off"
+		  rst_c			  "off"
+		  rst_mult		  "off"
+		  rst_p			  "off"
+		  rst_carry_in		  "off"
+		  rst_alumode		  "off"
+		  rst_ctrl		  "off"
+		  en_a1			  "off"
+		  en_a2			  "off"
+		  en_b1			  "off"
+		  en_b2			  "off"
+		  en_c			  "off"
+		  en_mult		  "off"
+		  en_p			  "off"
+		  en_carry_in		  "off"
+		  en_alumode		  "off"
+		  en_multcarryin	  "off"
+		  en_ctrl		  "off"
+		  use_synth_model	  "off"
 		  addsub_mode		  "TWO24"
-		  xl_useadderonly	  off
-		  xl_use_area		  off
+		  xl_useadderonly	  "off"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11641,9 +11641,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11671,9 +11671,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11701,9 +11701,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11730,13 +11730,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "30"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Upper Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -11762,13 +11762,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "18"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Lower Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -11794,7 +11794,7 @@ Model {
 		  const			  "3"
 		  n_bits		  "4"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -11803,7 +11803,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -11830,7 +11830,7 @@ Model {
 		  const			  "0"
 		  n_bits		  "1"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -11839,7 +11839,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -11866,7 +11866,7 @@ Model {
 		  const			  "0"
 		  n_bits		  "3"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -11875,7 +11875,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -11905,9 +11905,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11937,9 +11937,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -11965,7 +11965,7 @@ Model {
 		  infoedit		  "Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at z"
 		  "ero."
 		  num_inputs		  "2"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "concat"
@@ -11990,7 +11990,7 @@ Model {
 		  infoedit		  "Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at z"
 		  "ero."
 		  num_inputs		  "2"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "concat"
@@ -12016,7 +12016,7 @@ Model {
 		  const			  "51"
 		  n_bits		  "7"
 		  bin_pt		  "0"
-		  explicit_period	  off
+		  explicit_period	  "off"
 		  period		  "1"
 		  dsp48_infoedit	  "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 		  equ			  "P=C"
@@ -12025,7 +12025,7 @@ Model {
 		  opr			  "+"
 		  inp1			  "P"
 		  carry			  "CIN"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "constant"
@@ -12055,9 +12055,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12087,9 +12087,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12119,9 +12119,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12151,9 +12151,9 @@ Model {
 		  quantization		  "Truncate"
 		  overflow		  "Wrap"
 		  latency		  "0"
-		  dbl_ovrd		  off
-		  pipeline		  on
-		  xl_use_area		  off
+		  dbl_ovrd		  "off"
+		  pipeline		  "on"
+		  xl_use_area		  "off"
 		  xl_area		  "[0,0,0,0,0,0,0]"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12181,9 +12181,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12211,9 +12211,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12241,9 +12241,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12271,9 +12271,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12301,9 +12301,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "19"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12331,9 +12331,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Signed  (2's comp)"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "19"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12360,13 +12360,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "24"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Lower Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "0"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -12392,13 +12392,13 @@ Model {
 		  " is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br>Hardw"
 		  "are notes: In hardware this block costs nothing."
 		  nbits			  "24"
-		  boolean_output	  off
+		  boolean_output	  "off"
 		  mode			  "Lower Bit Location + Width"
 		  bit1			  "0"
 		  base1			  "MSB of Input"
 		  bit0			  "24"
 		  base0			  "LSB of Input"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "slice"
@@ -12648,7 +12648,7 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Mux"
 	      SourceType	      "Xilinx Bus Multiplexer Block"
 	      inputs		      "2"
-	      en		      off
+	      en		      "off"
 	      latency		      "1"
 	      precision		      "Full"
 	      arith_type	      "Unsigned"
@@ -12656,8 +12656,8 @@ Model {
 	      bin_pt		      "14"
 	      quantization	      "Truncate"
 	      overflow		      "Wrap"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -12684,7 +12684,7 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Mux"
 	      SourceType	      "Xilinx Bus Multiplexer Block"
 	      inputs		      "2"
-	      en		      off
+	      en		      "off"
 	      latency		      "1"
 	      precision		      "Full"
 	      arith_type	      "Unsigned"
@@ -12692,8 +12692,8 @@ Model {
 	      bin_pt		      "14"
 	      quantization	      "Truncate"
 	      overflow		      "Wrap"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -12720,7 +12720,7 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Mux"
 	      SourceType	      "Xilinx Bus Multiplexer Block"
 	      inputs		      "2"
-	      en		      off
+	      en		      "off"
 	      latency		      "1"
 	      precision		      "Full"
 	      arith_type	      "Unsigned"
@@ -12728,8 +12728,8 @@ Model {
 	      bin_pt		      "14"
 	      quantization	      "Truncate"
 	      overflow		      "Wrap"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -12756,7 +12756,7 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Mux"
 	      SourceType	      "Xilinx Bus Multiplexer Block"
 	      inputs		      "2"
-	      en		      off
+	      en		      "off"
 	      latency		      "1"
 	      precision		      "Full"
 	      arith_type	      "Unsigned"
@@ -12764,8 +12764,8 @@ Model {
 	      bin_pt		      "14"
 	      quantization	      "Truncate"
 	      overflow		      "Wrap"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -12837,7 +12837,7 @@ Model {
 		  infoedit		  "Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at z"
 		  "ero."
 		  num_inputs		  "2"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "concat"
@@ -12864,9 +12864,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -12894,9 +12894,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -13006,7 +13006,7 @@ Model {
 		  infoedit		  "Concatenates two or more inputs.  Output will be cast to an unsigned value with the binary point at z"
 		  "ero."
 		  num_inputs		  "2"
-		  dbl_ovrd		  off
+		  dbl_ovrd		  "off"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
 		  block_type		  "concat"
@@ -13033,9 +13033,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -13063,9 +13063,9 @@ Model {
 		  "r><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced to unsi"
 		  "gned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output of 56 (11"
 		  "1000 in binary)."
-		  force_arith_type	  on
+		  force_arith_type	  "on"
 		  arith_type		  "Unsigned"
-		  force_bin_pt		  on
+		  force_bin_pt		  "on"
 		  bin_pt		  "0"
 		  has_advanced_control	  "0"
 		  sggui_pos		  "-1,-1,-1,-1"
@@ -13132,7 +13132,7 @@ Model {
 	      infoedit		      "Scales input by a power of two by adjusting the binary point position.<br><br>Hardware notes: "
 	      "In hardware this block costs nothing."
 	      scale_factor	      "-1"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "scale"
@@ -13158,7 +13158,7 @@ Model {
 	      infoedit		      "Scales input by a power of two by adjusting the binary point position.<br><br>Hardware notes: "
 	      "In hardware this block costs nothing."
 	      scale_factor	      "-1"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "scale"
@@ -13184,7 +13184,7 @@ Model {
 	      infoedit		      "Scales input by a power of two by adjusting the binary point position.<br><br>Hardware notes: "
 	      "In hardware this block costs nothing."
 	      scale_factor	      "-1"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "scale"
@@ -13210,7 +13210,7 @@ Model {
 	      infoedit		      "Scales input by a power of two by adjusting the binary point position.<br><br>Hardware notes: "
 	      "In hardware this block costs nothing."
 	      scale_factor	      "-1"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "scale"
@@ -13235,11 +13235,11 @@ Model {
 	      SourceType	      "Xilinx Delay Block"
 	      infoedit		      "Hardware notes: A delay line is a chain, each link of which is an SRL16 followed by a flip-flo"
 	      "p."
-	      en		      off
+	      en		      "off"
 	      latency		      "2"
-	      dbl_ovrd		      off
-	      reg_retiming	      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -13265,11 +13265,11 @@ Model {
 	      SourceType	      "Xilinx Delay Block"
 	      infoedit		      "Hardware notes: A delay line is a chain, each link of which is an SRL16 followed by a flip-flo"
 	      "p."
-	      en		      off
+	      en		      "off"
 	      latency		      "4"
-	      dbl_ovrd		      off
-	      reg_retiming	      on
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      reg_retiming	      "on"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -13384,9 +13384,9 @@ Model {
 		    "ing.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced"
 		    " to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output"
 		    " of 56 (111000 in binary)."
-		    force_arith_type	    on
+		    force_arith_type	    "on"
 		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    on
+		    force_bin_pt	    "on"
 		    bin_pt		    "17"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
@@ -13414,9 +13414,9 @@ Model {
 		    "ing.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced"
 		    " to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output"
 		    " of 56 (111000 in binary)."
-		    force_arith_type	    on
+		    force_arith_type	    "on"
 		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    on
+		    force_bin_pt	    "on"
 		    bin_pt		    "17"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
@@ -13443,13 +13443,13 @@ Model {
 		    "type is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br"
 		    ">Hardware notes: In hardware this block costs nothing."
 		    nbits		    "18"
-		    boolean_output	    off
+		    boolean_output	    "off"
 		    mode		    "Lower Bit Location + Width"
 		    bit1		    "0"
 		    base1		    "MSB of Input"
 		    bit0		    "0"
 		    base0		    "LSB of Input"
-		    dbl_ovrd		    off
+		    dbl_ovrd		    "off"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
 		    block_type		    "slice"
@@ -13475,13 +13475,13 @@ Model {
 		    "type is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br"
 		    ">Hardware notes: In hardware this block costs nothing."
 		    nbits		    "18"
-		    boolean_output	    off
+		    boolean_output	    "off"
 		    mode		    "Upper Bit Location + Width"
 		    bit1		    "0"
 		    base1		    "MSB of Input"
 		    bit0		    "0"
 		    base0		    "LSB of Input"
-		    dbl_ovrd		    off
+		    dbl_ovrd		    "off"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
 		    block_type		    "slice"
@@ -13599,9 +13599,9 @@ Model {
 		    "ing.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced"
 		    " to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output"
 		    " of 56 (111000 in binary)."
-		    force_arith_type	    on
+		    force_arith_type	    "on"
 		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    on
+		    force_bin_pt	    "on"
 		    bin_pt		    "17"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
@@ -13629,9 +13629,9 @@ Model {
 		    "ing.<br><br>Example:  Suppose the input is 6 bits wide, signed, with 2 fractional bits, and the output is forced"
 		    " to unsigned with 0 fractional bits.  Then an input of -2.0 (1110.00 in binary 2's complement) becomes an output"
 		    " of 56 (111000 in binary)."
-		    force_arith_type	    on
+		    force_arith_type	    "on"
 		    arith_type		    "Signed  (2's comp)"
-		    force_bin_pt	    on
+		    force_bin_pt	    "on"
 		    bin_pt		    "17"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
@@ -13658,13 +13658,13 @@ Model {
 		    "type is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br"
 		    ">Hardware notes: In hardware this block costs nothing."
 		    nbits		    "18"
-		    boolean_output	    off
+		    boolean_output	    "off"
 		    mode		    "Lower Bit Location + Width"
 		    bit1		    "0"
 		    base1		    "MSB of Input"
 		    bit0		    "0"
 		    base0		    "LSB of Input"
-		    dbl_ovrd		    off
+		    dbl_ovrd		    "off"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
 		    block_type		    "slice"
@@ -13690,13 +13690,13 @@ Model {
 		    "type is ordinarily unsigned with binary point at zero, but can be Boolean when the slice is one bit wide.<br><br"
 		    ">Hardware notes: In hardware this block costs nothing."
 		    nbits		    "18"
-		    boolean_output	    off
+		    boolean_output	    "off"
 		    mode		    "Upper Bit Location + Width"
 		    bit1		    "0"
 		    base1		    "MSB of Input"
 		    bit0		    "0"
 		    base0		    "LSB of Input"
-		    dbl_ovrd		    off
+		    dbl_ovrd		    "off"
 		    has_advanced_control    "0"
 		    sggui_pos		    "-1,-1,-1,-1"
 		    block_type		    "slice"
@@ -14495,11 +14495,11 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/Delay"
 	  SourceType		  "Xilinx Delay Block"
 	  infoedit		  "Hardware notes: A delay line is a chain, each link of which is an SRL16 followed by a flip-flop."
-	  en			  off
+	  en			  "off"
 	  latency		  "4"
-	  dbl_ovrd		  off
-	  reg_retiming		  off
-	  xl_use_area		  off
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
@@ -14523,11 +14523,11 @@ Model {
 	  SourceBlock		  "xbsIndex_r4/Delay"
 	  SourceType		  "Xilinx Delay Block"
 	  infoedit		  "Hardware notes: A delay line is a chain, each link of which is an SRL16 followed by a flip-flop."
-	  en			  off
+	  en			  "off"
 	  latency		  "4"
-	  dbl_ovrd		  off
-	  reg_retiming		  off
-	  xl_use_area		  off
+	  dbl_ovrd		  "off"
+	  reg_retiming		  "off"
+	  xl_use_area		  "off"
 	  xl_area		  "[0,0,0,0,0,0,0]"
 	  has_advanced_control	  "0"
 	  sggui_pos		  "-1,-1,-1,-1"
@@ -14589,7 +14589,7 @@ Model {
 	      const		      "1"
 	      n_bits		      "3"
 	      bin_pt		      "0"
-	      explicit_period	      on
+	      explicit_period	      "on"
 	      period		      "1"
 	      dsp48_infoedit	      "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 	      equ		      "P=C"
@@ -14598,7 +14598,7 @@ Model {
 	      opr		      "+"
 	      inp1		      "P"
 	      carry		      "CIN"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "constant"
@@ -14625,7 +14625,7 @@ Model {
 	      const		      "0"
 	      n_bits		      "3"
 	      bin_pt		      "0"
-	      explicit_period	      on
+	      explicit_period	      "on"
 	      period		      "1"
 	      dsp48_infoedit	      "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 	      equ		      "P=C"
@@ -14634,7 +14634,7 @@ Model {
 	      opr		      "+"
 	      inp1		      "P"
 	      carry		      "CIN"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "constant"
@@ -14661,7 +14661,7 @@ Model {
 	      const		      "4"
 	      n_bits		      "3"
 	      bin_pt		      "0"
-	      explicit_period	      on
+	      explicit_period	      "on"
 	      period		      "1"
 	      dsp48_infoedit	      "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 	      equ		      "P=C"
@@ -14670,7 +14670,7 @@ Model {
 	      opr		      "+"
 	      inp1		      "P"
 	      carry		      "CIN"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "constant"
@@ -14697,7 +14697,7 @@ Model {
 	      const		      "1"
 	      n_bits		      "1"
 	      bin_pt		      "0"
-	      explicit_period	      on
+	      explicit_period	      "on"
 	      period		      "1"
 	      dsp48_infoedit	      "The use of this block for DSP48 instructions is deprecated.  Please use the Opmode block."
 	      equ		      "P=C"
@@ -14706,7 +14706,7 @@ Model {
 	      opr		      "+"
 	      inp1		      "P"
 	      carry		      "CIN"
-	      dbl_ovrd		      off
+	      dbl_ovrd		      "off"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
 	      block_type	      "constant"
@@ -14739,15 +14739,15 @@ Model {
 	      arith_type	      "Unsigned"
 	      n_bits		      "3"
 	      bin_pt		      "0"
-	      load_pin		      on
-	      rst		      off
-	      en		      on
+	      load_pin		      "on"
+	      rst		      "off"
+	      en		      "on"
 	      explicit_period	      "on"
 	      period		      "1"
-	      dbl_ovrd		      off
-	      use_behavioral_HDL      off
+	      dbl_ovrd		      "off"
+	      use_behavioral_HDL      "off"
 	      implementation	      "Fabric"
-	      xl_use_area	      off
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      use_rpm		      "on"
 	      has_advanced_control    "0"
@@ -14774,15 +14774,15 @@ Model {
 	      SourceType	      "Xilinx Logical Block Block"
 	      logical_function	      "OR"
 	      inputs		      "2"
-	      en		      off
+	      en		      "off"
 	      latency		      "0"
 	      precision		      "Full"
 	      arith_type	      "Unsigned"
 	      n_bits		      "8"
 	      bin_pt		      "2"
-	      align_bp		      on
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      align_bp		      "on"
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -14807,7 +14807,7 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Mux"
 	      SourceType	      "Xilinx Bus Multiplexer Block"
 	      inputs		      "2"
-	      en		      off
+	      en		      "off"
 	      latency		      "0"
 	      precision		      "Full"
 	      arith_type	      "Signed  (2's comp)"
@@ -14815,8 +14815,8 @@ Model {
 	      bin_pt		      "2"
 	      quantization	      "Truncate"
 	      overflow		      "Wrap"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -14842,10 +14842,10 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Relational"
 	      SourceType	      "Xilinx Arithmetic Relational Operator Block"
 	      mode		      "a=b"
-	      en		      off
+	      en		      "off"
 	      latency		      "0"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -14871,10 +14871,10 @@ Model {
 	      SourceBlock	      "xbsIndex_r4/Relational"
 	      SourceType	      "Xilinx Arithmetic Relational Operator Block"
 	      mode		      "a!=b"
-	      en		      off
+	      en		      "off"
 	      latency		      "0"
-	      dbl_ovrd		      off
-	      xl_use_area	      off
+	      dbl_ovrd		      "off"
+	      xl_use_area	      "off"
 	      xl_area		      "[0,0,0,0,0,0,0]"
 	      has_advanced_control    "0"
 	      sggui_pos		      "-1,-1,-1,-1"
@@ -14899,10 +14899,10 @@ Model {
 	      ShowName		      off
 	      LibraryVersion	      "1.213"
 	      SourceBlock	      "xbsReplacements_r4/Warning"
-	      SourceType	      ""
+	      SourceType	      "Unknown"
 	      ShowPortLabels	      "FromPortIcon"
 	      SystemSampleTime	      "-1"
-	      FunctionWithSeparateData off
+	      FunctionWithSeparateData "off"
 	      RTWMemSecFuncInitTerm   "Inherit from model"
 	      RTWMemSecFuncExecute    "Inherit from model"
 	      RTWMemSecDataConstants  "Inherit from model"
@@ -14919,10 +14919,10 @@ Model {
 	      ShowName		      off
 	      LibraryVersion	      "1.213"
 	      SourceBlock	      "xbsReplacements_r4/Warning"
-	      SourceType	      ""
+	      SourceType	      "Unknown"
 	      ShowPortLabels	      "FromPortIcon"
 	      SystemSampleTime	      "-1"
-	      FunctionWithSeparateData off
+	      FunctionWithSeparateData "off"
 	      RTWMemSecFuncInitTerm   "Inherit from model"
 	      RTWMemSecFuncExecute    "Inherit from model"
 	      RTWMemSecDataConstants  "Inherit from model"

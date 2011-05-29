@@ -33,6 +33,9 @@ if length(Coeffs) == 1,
     %constant blocks
     real_coeff = round(real(Coeffs(1)) * 2^(coeff_bit_width-2)) / 2^(coeff_bit_width-2);
     imag_coeff = round(imag(Coeffs(1)) * 2^(coeff_bit_width-2)) / 2^(coeff_bit_width-2);
+    Coeffs
+    real_coeff
+    imag_coeff
     
     % block: untitled/coeff_gen/Constant
     Constant_out1 = xSignal;

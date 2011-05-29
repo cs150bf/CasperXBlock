@@ -3,6 +3,7 @@ function square_transposer_init_xblock(n_inputs)
 
 if n_inputs < 1,
     error('Number of inputs must be 2^1 or greater.');
+    return;
 end
 
 %% inports

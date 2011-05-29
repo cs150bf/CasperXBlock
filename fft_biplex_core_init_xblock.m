@@ -9,9 +9,9 @@ function fft_biplex_core_init_xblock(varargin)
 % mult_latency = The latency of multipliers in the system.
 % bram_latency = The latency of BRAM in the system.
 
+'hello'
 % Set default vararg values.
-defaults = { ...
-    'FFTSize', 2, ...
+defaults = {'FFTSize', 2, ...
     'input_bit_width', 18, ...
     'coeff_bit_width', 18, ...
     'quantization', 'Round  (unbiased: +/- Inf)', ...
@@ -28,8 +28,7 @@ defaults = { ...
     'mult_spec', [2 2], ...
     'hardcode_shifts', 'off', ...
     'shift_schedule', [1 1], ...
-    'dsp48_adders', 'off', ...
-};
+    'dsp48_adders', 'off'};
 
 % Retrieve values from mask fields.
 FFTSize = get_var('FFTSize', 'defaults', defaults, varargin{:});
@@ -57,6 +56,7 @@ if FFTSize < 2,
 end
 
 if( strcmp(specify_mult, 'on') && (length(mult_spec) ~= FFTSize)),
+    disp('biplex_core_init.m: Multiplier use specification for stages does not match FFT size');
     error('biplex_core_init.m: Multiplier use specification for stages does not match FFT size');
     return
 end
@@ -70,6 +70,7 @@ sync_out = xOutport('sync_out');
 out1 = xOutport('out1');
 out2 = xOutport('out2');
 of = xOutport('of');
+
 
 
 of_in = xSignal;

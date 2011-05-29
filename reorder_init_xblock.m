@@ -66,6 +66,7 @@ valid = xOutport('valid');
 
 din_ports = cell(1,n_inputs);
 dout_ports = cell(1,n_inputs);
+
 % add dynamic ports
 for i=1:n_inputs,
 	% Ports
@@ -74,11 +75,14 @@ for i=1:n_inputs,
 end
 
 
+
 sync_delay_out = xSignal;
 sync_delay_en_out = xSignal;
 delay_we_out = xSignal;
 pre_sync_delay_out = xSignal;
 sync_delay_en_out = xSignal;
+
+
 
 
 
@@ -273,7 +277,3 @@ else
     end
 
 end
-
-
-fmtstr = sprintf('order=%d', order);
-set_param(blk, 'AttributesFormatString', fmtstr);
