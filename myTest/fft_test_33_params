@@ -1,0 +1,29 @@
+params = 
+
+  Columns 1 through 6
+
+    'FFTSize'    [10]    'n_inputs'    [0]    'input_bit_width'    [18]
+
+  Columns 7 through 12
+
+    'coeff_bit_width'    [18]    'unscramble'    'on'    'add_latency'    [1]
+
+  Columns 13 through 18
+
+    'mult_latency'    [2]    'bram_latency'    [2]    'conv_latency'    [1]
+
+  Columns 19 through 24
+
+    'quantization'    [1x26 char]    'overflow'    'Saturate'    'arch'    'Virtex5'
+
+  Columns 25 through 30
+
+    'opt_target'    'logic'    'coeffs_bit_limit'    [8]    'delays_bit_limit'    [8]
+
+  Columns 31 through 36
+
+    'specify_mult'    'off'    'mult_spec'     []    'hardcode_shifts'    'off'
+
+  Columns 37 through 40
+
+    'shift_schedule'     []    'dsp48_adders'    'off'

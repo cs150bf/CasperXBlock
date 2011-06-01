@@ -55,14 +55,39 @@ downshift = strcmp(get_var('downshift', 'defaults', defaults, varargin{:}), 'on'
 bit_growth = get_var('bit_growth', 'defaults', defaults, varargin{:});
 bit_growth
 
-if dsp48_adders
-	add_latency = 2;
+
+
+
+% Validate input fields.
+
+if ~strcmp(arch, 'Virtex5') && strcmp(dsp48_adders, 'on'),
+    fprintf('butterfly_direct_init: Cannot use dsp48e adders on a non-Virtex5 chip.\n');
+    clog(['butterfly_direct_init: Cannot use dsp48e adders on a non-Virtex5 chip.\n'], 'error');
 end
+
+if strcmp(coeffs_bram, 'on'),
+    coeff_type = 'BRAM';
+else
+    coeff_type = 'slices';
+end
+
+if strcmp(hardcode_shifts, 'on'),
+    mux_latency = 0;
+else
+    mux_latency = 1;
+end
+
+if dsp48_adders,
+    add_latency = 2;
+end
+
 
 % Compute the complex, bit-reversed values of the twiddle factors
 br_indices = bit_rev(Coeffs, FFTSize-1);
 br_indices = -2*pi*1j*br_indices/2^FFTSize;
 ActualCoeffs = exp(br_indices);
+
+
 
 
 %% inports
@@ -104,6 +129,42 @@ twiddle_type = get_twiddle_type(Coeffs, biplex, opt_target, use_embedded,StepPer
 gen_twiddles = {'twiddle_general_dsp48e', 'twiddle_general_4mult', 'twiddle_general_3mult'};
 using_gen_twiddle = strcmp(twiddle_type, gen_twiddles);
 five_dsp_butterfly = sum(dsp48_adders & use_embedded & using_gen_twiddle);
+
+% Compute bit widths into addsub and convert blocks.
+bw = input_bit_width + 7;
+bd = input_bit_width + 2;
+if strcmp(twiddle_type, 'twiddle_general_3mult'),
+    bw = input_bit_width + 7;
+    bd = input_bit_width + 2;
+elseif strcmp(twiddle_type, 'twiddle_general_4mult') || strcmp(twiddle_type, 'twiddle_general_dsp48e'),
+    bw = input_bit_width + 6;
+    bd = input_bit_width + 2;
+elseif strcmp(twiddle_type, 'twiddle_stage_2') ...
+    || strcmp(twiddle_type, 'twiddle_coeff_0') ...
+    || strcmp(twiddle_type, 'twiddle_coeff_1') ...
+    || strcmp(twiddle_type, 'twiddle_pass_through'),
+    bw = input_bit_width + 2;
+    bd = input_bit_width;
+else
+    fprintf('butterfly_direct_init: Unknown twiddle %s\n', twiddle_type);
+    clog(['butterfly_direct_init: Unknown twiddle ', twiddle_type', '\n'], 'error');
+end
+
+addsub_b_bitwidth = bw - 2;
+addsub_b_binpoint = bd - 1;
+
+if strcmp(hardcode_shifts, 'on'),
+    if strcmp(downshift, 'on'),
+        convert_in_bitwidth = bw - 1;
+        convert_in_binpoint = bd;
+    else
+        convert_in_bitwidth = bw - 1;
+        convert_in_binpoint = bd - 1;
+    end
+else
+    convert_in_bitwidth = bw;
+    convert_in_binpoint = bd;
+end
 
 if five_dsp_butterfly
 	arith = xBlock( struct('source', str2func('butterfly_arith_dsp48e_init_xblock'), 'name', 'arith'), ...
@@ -201,9 +262,9 @@ for k = 1:4
 					 struct('latency', 1), {shift_del, sig, sig_ds}, {sig_var_ds});
 
 		% determine bit widths going into convert block
-		conv_input_bit_width = input_bit_width + 6;
-		conv_input_bin_pt = input_bit_width + 3;					 
-					 
+		%conv_input_bit_width = input_bit_width + 6;
+		%conv_input_bin_pt = input_bit_width + 3;					 
+		% (doesn't seem to be right)			 
     else
 
         xBlock( struct('source', 'Scale', 'name', ['scale_', num2str(k)]), ...
@@ -211,8 +272,9 @@ for k = 1:4
         sig_var_ds = sig_ds;
         
         % determine bit widths going into convert block
-        conv_input_bit_width = input_bit_width + 5;
-        conv_input_bin_pt = input_bit_width + 2;        
+        %conv_input_bit_width = input_bit_width + 5;
+        %conv_input_bin_pt = input_bit_width + 2; 
+        % (doesn't seem to be right)
 	end
 	
 	% convert signals to specified output type
@@ -226,10 +288,13 @@ for k = 1:4
 	
 
 	
+	%convert_of1_sub = xBlock(struct('source', str2func('convert_of_init_xblock'), 'name', ['conv_of_', num2str(k)]), ...
+	%							{conv_input_bit_width, conv_input_bin_pt, input_bit_width+bit_growth, input_bit_width-1+bit_growth, ...
+	%							convert_of_latency, overflow, quantization}, {sig_var_ds}, {conv_sig, conv_sig_of});
 	convert_of1_sub = xBlock(struct('source', str2func('convert_of_init_xblock'), 'name', ['conv_of_', num2str(k)]), ...
-								{conv_input_bit_width, conv_input_bin_pt, input_bit_width+bit_growth, input_bit_width-1+bit_growth, ...
-								convert_of_latency, overflow, quantization}, {sig_var_ds}, {conv_sig, conv_sig_of});
-	
+								{convert_in_bitwidth, convert_in_binpoint, input_bit_width+bit_growth, input_bit_width-1+bit_growth, ...
+								convert_of_latency, overflow, ...
+								quantization}, {sig_var_ds}, {conv_sig, conv_sig_of});
 	conv_sigs{k} = conv_sig;
 	of_sigs{k} = conv_sig_of;
 end

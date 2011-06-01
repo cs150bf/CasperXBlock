@@ -216,13 +216,17 @@ for stage=1:FFTSize,
     end
 
 	%add overflow logic
-	of_out = xSignal;
-	pos = [300*stage+90 100*(2^FFTSize)+100+(stage*15) 300*stage+120 120+100*(2^FFTSize)+(FFTSize*5)+(stage*15)];
-	xBlock( struct('name', ['of_', num2str(stage)], 'source', 'Logical'), ...
-			{'Position', pos, 'logical_function', 'OR', 'inputs', 2^(FFTSize-1), 'latency', 1}, ...
-			stage_of_outputs, {of_out});
-	stage_of_out{stage} = of_out;
+    %FFTSize == 1 implies 1 input or block which generates an error
+    if (FFTSize ~= 1),
+        of_out = xSignal;
+        pos = [300*stage+90 100*(2^FFTSize)+100+(stage*15) 300*stage+120 120+100*(2^FFTSize)+(FFTSize*5)+(stage*15)];
+        xBlock( struct('name', ['of_', num2str(stage)], 'source', 'Logical'), ...
+                {'Position', pos, 'logical_function', 'OR', 'inputs', 2^(FFTSize-1), 'latency', 1}, ...
+                stage_of_outputs, {of_out});
+        stage_of_out{stage} = of_out;
+    end
 end
+
 
 
 %FFTSize == 1 implies 1 input or block which generates an error

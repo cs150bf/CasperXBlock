@@ -97,7 +97,7 @@ end
 
 switch twiddle_type
     case 'twiddle_pass_through'
-        disp('twiddl_pass_through');
+        disp('twiddle_pass_through');
         % bind ports to outports for pass through
         a_re_out.assign(a_re_del);
         a_im_out.assign(a_im_del);
@@ -157,4 +157,7 @@ switch twiddle_type
     otherwise
         disp('Error! This twiddle type is not supported');
 end
+
+
 end
+
