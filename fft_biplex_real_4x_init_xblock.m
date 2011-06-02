@@ -1,3 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda                                            %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fft_biplex_real_4x_init_xblock(varargin)
 
 defaults = { ...
@@ -85,10 +106,10 @@ end
 pol1_cplx = xSignal;
 pol2_cplx = xSignal;
 
-xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c_pol1'), ...
+xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c_pol1'), ...
 		{}, {pol1, pol2}, {pol1_cplx});
 
-xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c_pol2'), ...
+xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c_pol2'), ...
 		{}, {pol3, pol4}, {pol2_cplx});		
 		
 biplex_core_sync_out = xSignal;		

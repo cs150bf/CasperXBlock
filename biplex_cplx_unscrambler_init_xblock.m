@@ -1,4 +1,27 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Hong Chen                                              %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function biplex_cplx_unscrambler_init_xblock(FFTSize, bram_latency)
+% depend {'reorder_init_xblock','delay_bram_en_plus_init_xblock','dbl_buffer_init_xblock','sync_delay_en_init_xblock'}
+% depend {'barrel_switcher_init_xblock'}
 
 map = bit_reverse(0:2^(FFTSize-1)-1, FFTSize-1);
 
@@ -129,7 +152,7 @@ xlsub2_barrel_switcher_sub = xBlock(xlsub2_barrel_switcher_config, ...
 % block: temp_biplex_cplx_unscrambler/biplex_cplx_unscrambler/reorder
 xlsub2_reorder_config.source = str2func('reorder_init_xblock');
 xlsub2_reorder_config.name = 'reorder';
-xlsub2_reorder_config.depend = {'reorder_init_xblock'};
+xlsub2_reorder_config.depend = {'reorder_init_xblock','delay_bram_en_plus_init_xblock','dbl_buffer_init_xblock','sync_delay_en_init_xblock'};
 xlsub2_reorder_args = {'map',[map,map+2^(FFTSize-1)], ...  % {[map,map+2^(FFTSize-1)], 1, 2, 0, 0, 'off'}, ...
                                 'bram_latency',bram_latency};
 xlsub2_reorder_sub = xBlock(xlsub2_reorder_config, ...
@@ -140,7 +163,7 @@ xlsub2_reorder_sub = xBlock(xlsub2_reorder_config, ...
 % block: temp_biplex_cplx_unscrambler/biplex_cplx_unscrambler/reorder1
 xlsub2_reorder1_config.source = str2func('reorder_init_xblock');
 xlsub2_reorder1_config.name = 'reorder1';
-xlsub2_reorder1_config.depend = {'reorder_init_xblock'};
+xlsub2_reorder1_config.depend = {'reorder_init_xblock','delay_bram_en_plus_init_xblock','dbl_buffer_init_xblock','sync_delay_en_init_xblock'};
 xlsub2_reorder1_args = {'map',[map+2^(FFTSize-1),map], ...  % notice the map for two reroder blocks are different % {[map,map+2^(FFTSize-1)], 1, 2, 0, 0, 'off'}, ...
                         'bram_latency',bram_latency};
 xlsub2_reorder1_sub = xBlock(xlsub2_reorder1_config, ...

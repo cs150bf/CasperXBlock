@@ -1,8 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function twiddle_general_4mult_init_xblock_draw(a_re, a_im, b_re, b_im, sync, ...
 	    	a_re_out, a_im_out, bw_re_out, bw_im_out, sync_out, ...
             Coeffs, StepPeriod, coeffs_bram, coeff_bit_width, input_bit_width, ...
             add_latency, mult_latency, bram_latency, conv_latency, arch, use_hdl, ... 
             use_embedded, quantization, overflow)
+
+
+%depends =
+%{'coeff_gen_init_xblock','cmult_dsp48e_init_xblock','c_to_ri_init_xblock',
+%'tap_multiply_fabric_init_xblock'}
 
 %% diagram
 
@@ -51,7 +77,7 @@ c_to_ri_w = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_
                             {coeff_bit_width, ...
                             coeff_bit_width-2}, ...  % note this is -2
                          {w}, {w_re, w_im});
-
+                     
 mults = xBlock(struct('source', str2func('tap_multiply_fabric_init_xblock'), 'name', 'mults'), ...
 	{input_bit_width, input_bit_width-1, coeff_bit_width, ...
 	coeff_bit_width-1, 'on', 0, 0, quantization, overflow, conv_latency, ...

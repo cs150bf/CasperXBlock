@@ -1,4 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fft_butterfly_init_xblock(varargin)
+%'depend',{'butterfly_arith_dsp48e_init_xblock',...
+%         'fft_twiddle_init_xblock','simd_add_dsp48e_init_xblock',...
+%         'simd_add_dsp48e_init_xblock','convert_of_init_xblock', ...
+%         'convert_of_init_xblock'}
+%
+% {'c_to_ri_init_xblock','cmacc_dsp48e_init_xblock','simd_add_dsp48e_init_xblock','coeff_gen_init_xblock'}
 
 defaults = {'Coeffs', [0 1], ...
     'StepPeriod', 0, ...
@@ -305,9 +332,9 @@ xBlock(struct('source', 'Logical', 'name', 'Logical'), ...
 	
 	
 % combine data signals into complex outputs
-xBlock(struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c01'), ...
+xBlock(struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c01'), ...
 		  {}, { conv_sigs{1}, conv_sigs{2} }, {apbw});
-xBlock(struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c23'), ...
+xBlock(struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c23'), ...
 		  {}, { conv_sigs{3}, conv_sigs{4} }, {ambw});
 
 % delay sync from twiddle

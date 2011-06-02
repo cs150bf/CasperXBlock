@@ -1,3 +1,25 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function reorder_init_xblock(blk,varargin)
 % Valid varnames for this block are:
 % map = The desired output order.
@@ -7,6 +29,8 @@ function reorder_init_xblock(blk,varargin)
 % double_buffer = Whether to use two buffers to reorder data (instead of
 %                 doing it in-place).
 % bram_map = Whether to use BlockRAM for address mapping.
+
+% depend {'delay_bram_en_plus_init_xblock','dbl_buffer_init_xblock','sync_delay_en_init_xblock'}
 
 % Declare any default values for arguments you might like.
 defaults = {'map',[0 1 2 3],'map_latency', 0, 'bram_latency', 2, 'n_inputs', 1, 'double_buffer', 0, 'bram_map', 'off'};

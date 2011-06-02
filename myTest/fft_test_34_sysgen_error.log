@@ -6,15 +6,108 @@ Matlab 7.9.0.529 (R2009b)               /tools/commercial/mathworks/matlab2009b
 ISE 11.4.i                              /tools/xilinx/11.4/ISE
 --------------------------------------------------------------------------------
 Summary of Errors:
-Error 0001: Undriven input port
-     Block: 'fft_test_34/Convert1'
+Error 0001: Design Rule Check Failed
+    Blocks: 'fft_test_34/adc/fft_test_34_adc_user_datai0', et al.
+Error 0002: Design Rule Check Failed
+    Blocks: 'fft_test_34/adc/fft_test_34_adc_user_datai1', et al.
+Error 0003: Design Rule Check Failed
+    Blocks: 'fft_test_34/adc/fft_test_34_adc_user_datai2', et al.
+Error 0004: Design Rule Check Failed
+    Blocks: 'fft_test_34/adc/fft_test_34_adc_user_datai3', et al.
+Error 0005: Design Rule Check Failed
+    Blocks: 'fft_test_34/Gateway In1', et al.
+Error 0006: Design Rule Check Failed
+    Blocks: 'fft_test_34/Gateway In3', et al.
+Error 0007: Design Rule Check Failed
+    Blocks: 'fft_test_34/Gateway In4', et al.
+Error 0008: Design Rule Check Failed
+    Blocks: 'fft_test_34/Gateway In5', et al.
 --------------------------------------------------------------------------------
 
 Error 0001:
 
 Reported by:
-  'fft_test_34/Convert1'
+  'fft_test_34/adc/fft_test_34_adc_user_datai0'
+  'fft_test_34/Gateway In1'
 
 Details:
-The input ports on this block must be driven by other Xilinx blocks
+Gateway In named "fft_test_34/adc/fft_test_34_adc_user_datai0" is
+connected to Gateway In named "fft_test_34/Gateway In1"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/adc/fft_test_34_adc_user_datai1'
+  'fft_test_34/Gateway In5'
+
+Details:
+Gateway In named "fft_test_34/adc/fft_test_34_adc_user_datai1" is
+connected to Gateway In named "fft_test_34/Gateway In5"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/adc/fft_test_34_adc_user_datai2'
+  'fft_test_34/Gateway In4'
+
+Details:
+Gateway In named "fft_test_34/adc/fft_test_34_adc_user_datai2" is
+connected to Gateway In named "fft_test_34/Gateway In4"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/adc/fft_test_34_adc_user_datai3'
+  'fft_test_34/Gateway In3'
+
+Details:
+Gateway In named "fft_test_34/adc/fft_test_34_adc_user_datai3" is
+connected to Gateway In named "fft_test_34/Gateway In3"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/Gateway In1'
+  'fft_test_34/adc/fft_test_34_adc_user_datai0'
+
+Details:
+Gateway In named "fft_test_34/Gateway In1" is connected to Gateway
+In named "fft_test_34/adc/fft_test_34_adc_user_datai0"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/Gateway In3'
+  'fft_test_34/adc/fft_test_34_adc_user_datai3'
+
+Details:
+Gateway In named "fft_test_34/Gateway In3" is connected to Gateway
+In named "fft_test_34/adc/fft_test_34_adc_user_datai3"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/Gateway In4'
+  'fft_test_34/adc/fft_test_34_adc_user_datai2'
+
+Details:
+Gateway In named "fft_test_34/Gateway In4" is connected to Gateway
+In named "fft_test_34/adc/fft_test_34_adc_user_datai2"
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_34/Gateway In5'
+  'fft_test_34/adc/fft_test_34_adc_user_datai1'
+
+Details:
+Gateway In named "fft_test_34/Gateway In5" is connected to Gateway
+In named "fft_test_34/adc/fft_test_34_adc_user_datai1"
 --------------------------------------------------------------------------------

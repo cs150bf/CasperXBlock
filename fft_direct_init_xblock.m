@@ -1,3 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fft_direct_init_xblock(varargin)
 
 % Set default vararg values.
@@ -22,6 +43,7 @@ defaults = { ...
     'hardcode_shifts', 'off', ...
     'shift_schedule', [1], ...
     'dsp48_adders', 'on', ...
+    'bit_growth_chart', [0 0], ...
 };
 
 
@@ -47,6 +69,7 @@ hardcode_shifts = get_var('hardcode_shifts', 'defaults', defaults, varargin{:});
 shift_schedule = get_var('shift_schedule', 'defaults', defaults, varargin{:});
 dsp48_adders = get_var('dsp48_adders', 'defaults', defaults, varargin{:});
 biplex = get_var('biplex', 'defaults', defaults, varargin{:});
+bit_growth_chart = get_var('bit_growth_chart', 'defaults', defaults, varargin{:});
 
 if (strcmp(specify_mult, 'on') && (length(mult_spec) ~= FFTSize)),
     disp('fft_direct_init.m: Multiplier use specification for stages does not match FFT size');
@@ -54,6 +77,10 @@ if (strcmp(specify_mult, 'on') && (length(mult_spec) ~= FFTSize)),
 else
     disp('yelp');
 end
+
+% for bit growth FFT
+bit_growth_chart =[reshape(bit_growth_chart, 1, []) zeros(1,FFTSize)];
+bit_growth_chart
 
 %% Declare Ports
 sync = xInport('sync');
@@ -189,7 +216,7 @@ for stage=1:FFTSize,
         	of_out, bf_syncs{stage+1, i+1} };        
 
 		coeffs
-        xBlock( struct('source', str2func('fft_butterfly_init_xblock'), 'name', bf_name), ...
+        xBlock( struct('source', str2func('fft_butterfly_init_xblock'), 'name', bf_name,'depend',{{'fft_butterfly_init_xblock'}}), ...
             {'Position', bf_pos, 'biplex', 'off', ...
             'FFTSize', actual_fft_size, ...
             'Coeffs', coeffs, ...
@@ -209,11 +236,17 @@ for stage=1:FFTSize,
             'use_hdl', use_hdl, ...
             'use_embedded', use_embedded, ...
             'hardcode_shifts', hardcode_shifts, ...
-            'dsp48_adders', dsp48_adders}, ...
+            'dsp48_adders', dsp48_adders, ...
+            'bit_growth', bit_growth_chart(stage)}, ...
             bf_inputs, bf_outputs );
-		
+
+        
+        
 		stage_of_outputs{i+1} = of_out;
     end
+	coeff_bit_width = coeff_bit_width + bit_growth_chart(stage);
+	input_bit_width = input_bit_width + bit_growth_chart(stage);
+
 
 	%add overflow logic
     %FFTSize == 1 implies 1 input or block which generates an error

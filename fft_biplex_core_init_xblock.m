@@ -1,3 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fft_biplex_core_init_xblock(varargin)
 % Valid varnames:
 % FFTSize = Size of the FFT (2^FFTSize points).
@@ -8,6 +29,16 @@ function fft_biplex_core_init_xblock(varargin)
 % add_latency = The latency of adders in the system.
 % mult_latency = The latency of multipliers in the system.
 % bram_latency = The latency of BRAM in the system.
+
+%   depend: {'fft_stage_n_init_xblock'}
+%
+%                     'depend',{'fft_butterfly_init_xblock',...
+%                                 'butterfly_arith_dsp48e_init_xblock',...
+%                                 'fft_twiddle_init_xblock','simd_add_dsp48e_init_xblock',...
+%                                 'simd_add_dsp48e_init_xblock','convert_of_init_xblock',...
+%                                 'convert_of_init_xblock','c_to_ri_init_xblock','cmacc_dsp48e_init_xblock',...
+%                                 'simd_add_dsp48e_init_xblock','coeff_gen_init_xblock'}
+% {'barrel_switcher_init_xblock'}
 
 'hello, welcome to fft_biplex_core(xblock)'
 % Set default vararg values.
@@ -66,6 +97,7 @@ end
 % for bit growth FFT
 bit_growth_chart =[reshape(bit_growth_chart, 1, []) zeros(1,FFTSize)];
 bit_growth_chart
+
 input_b_w = input_bit_width;
 coeff_b_w = coeff_bit_width;
 
@@ -134,7 +166,13 @@ for a=1:FFTSize,
 	
 	stage_outports = {stage_out1, stage_out2, stage_of, stage_sync_out};
 
-	xBlock( struct('name', stage_name, 'source', str2func('fft_stage_n_init_xblock')), ...
+	xBlock( struct('name', stage_name, 'source', str2func('fft_stage_n_init_xblock'),...
+                    'depend',{{'fft_stage_n_init_xblock','fft_butterfly_init_xblock'...
+                                'butterfly_arith_dsp48e_init_xblock',...
+                                'fft_twiddle_init_xblock','simd_add_dsp48e_init_xblock',...
+                                'simd_add_dsp48e_init_xblock','convert_of_init_xblock', ...
+                                'convert_of_init_xblock','c_to_ri_init_xblock','cmacc_dsp48e_init_xblock',...
+                                'simd_add_dsp48e_init_xblock','coeff_gen_init_xblock'}}), ...
 		{'Position', [120*a, 32, 120*a+95, 148], ...
 			'FFTSize', FFTSize, ...
 			'FFTStage', a, ...

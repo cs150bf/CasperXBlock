@@ -1,5 +1,28 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fft_wideband_real_init_xblock(varargin)
-
+%depends  =
+%{'pipeline_init_xblock','fft_biplex_real_4x_init_xblock','fft_direct_init_xblock','fft_unscrambler_init_xblock'}   
+% todo 
 
 % Set default vararg values.
 defaults = { ...
@@ -106,7 +129,6 @@ for k = 1:n_biplexes
 	
 	sync_del = xSignal;
 
-		
 	% delay input ports & sync by 'input_latency'
 	xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', ['in_del_sync_4x', num2str(k-1)]), ...
 			{input_latency}, {sync}, {sync_del} );
@@ -177,7 +199,7 @@ direct_outports = {direct_sync_out};
 for m = 1:2^(n_inputs)+1
 	direct_outports{m+1} = xSignal;
 end
-   
+
 xBlock( struct('name', 'fft_direct', 'source', str2func('fft_direct_init_xblock') ), ...
 		{'FFTSize', n_inputs, ...
 		'input_bit_width', input_bit_width, ...
