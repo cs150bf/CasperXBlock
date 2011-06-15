@@ -136,14 +136,9 @@ if strcmp(polyphase,'off')
     for i=new_start1:2:n_inputs-m
         mat{i,1} = x_i_n{i};
         for j=2:m+1
-            [i,j]
-            [i-j+1,j-1]
             mat{i,j} = mult_i_n{i-j+1}{j-1};
         end
     end
-    mat
-    mult_i_n
-    'hello world'
     if mod(n_inputs-m,2) == 1
         new_start2 = n_inputs - m +2;
     end
@@ -156,17 +151,9 @@ if strcmp(polyphase,'off')
             new_end = i-(n_inputs-m+1)+2;
         end
         for j= 2: new_end
-            mat
-            mult_i_n
-            [i,j]
-            [i-j+1,j-1]
             mat{i,j} = mult_i_n{i-j+1}{j-1};
         end
     end
-    'hello world again'
-    mat
-    mult_i_n
-    
     
     % add up and output
     xlsub3_addertree = cell(1,n_inputs);
