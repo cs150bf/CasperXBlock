@@ -46,7 +46,7 @@ for i = 1:n_inputs,
 end
 sync = xInport('sync');
 outports = cell(1,n_inputs);
-for i=1:n_inputs,
+for i=1:2:n_inputs,
     outports{i} = xOutport(['outport',num2str(i)]);
 end
 sync_out = xOutport('sync_out');
@@ -68,7 +68,7 @@ if strcmp(polyphase,'off')
                           {dx_m{i}});
         dmult_m{i} = cell(1,m);
         xlsub3_dmult{i} = cell(1,m);
-        for j = i:m
+        for j = i:2:m
             dmult_m{i}{j} = xSignal(['multiplied_m_minus_',num2str(i-1),'_',num2str(j)]);
             xlsub3_dmult{i}{j} = xBlock(struct('source', 'Mult', 'name', ['dmult_m_minus_',num2str(i-1),'_',num2str(j)]), ...
                                     struct('latency',2), ...
@@ -87,7 +87,8 @@ if strcmp(polyphase,'off')
         x_i_n{i} = inports{i};
         mult_i_n{i} = cell(1,m);
         xlsub3_mult{i} = cell(1,m);
-        for j = 1:m
+        oddeven = mod(i,2)+1;
+        for j = oddeven:2:m
             mult_i_n{i}{j} = xSignal(['multplied_x_i_n',num2str(i),'_',num2str(j)]);
             xlsub3_mult{i}{j} = xBlock(struct('source', 'Mult', 'name', ['mult',num2str(i),'_',num2str(j)]), ...
                                     struct('latency',2), ...
@@ -96,33 +97,43 @@ if strcmp(polyphase,'off')
         end
     end
     % compensating the delayed cases
+    oddeven =  mod((n_inputs - m), 2);
     for i = n_inputs-m+1:n_inputs
         x_i_n{i} = inports{i};
         mult_i_n{i} = cell(1,(n_inputs-i));
         xlsub3_mult{i} = cell(1,(n_inputs-i));
-        for j = 1: (n_inputs-i)
+        for j = oddeven:2:(n_inputs-i)
             mult_i_n{i}{j} = xSignal(['multplied_x_i_n',num2str(i),'_',num2str(j)]);
             xlsub3_mult{i}{j} = xBlock(struct('source', 'Mult', 'name', ['mult',num2str(i),'_',num2str(j)]), ...
                                     struct('latency',2), ...
                                     {x_i_n{i}, coeff_const{j+1}}, ...
                                     {mult_i_n{i}{j}});
         end
+        if oddeven ==1
+            oddeven = 2;
+        else
+            oddeven = 1;
+        end
     end
     
     % reorginize by making a matrix
     mat = cell(n_inputs,1+m);
     % the delay cases
-    for i = 1:m
+    for i = 1:2:m
         for j = i+1:m+1
             mat{i,j} = dmult_m{j-i}{j-1};
         end
         mat{i,1} = x_i_n{i};
+        % non-delay cases squeezing
         for j = 2:i
             mat{i,j} = mult_i_n{i-j+1}{j-1};
         end
     end
+    if mod(m,2) == 1
+        new_start1 = m+2;
+    end
     % for non-delay cases
-    for i=m+1:n_inputs-m
+    for i=new_start1:2:n_inputs-m
         mat{i,1} = x_i_n{i};
         for j=2:m+1
             [i,j]
@@ -133,10 +144,18 @@ if strcmp(polyphase,'off')
     mat
     mult_i_n
     'hello world'
+    if mod(n_inputs-m,2) == 1
+        new_start2 = n_inputs - m +2;
+    end
     % compensating the delay cases
-    for i = n_inputs-m+1 : n_inputs
+    for i = new_start2 :2: n_inputs
         mat{i,1} = x_i_n{i};
-        for j= 2: (i - (n_inputs - m +1) + 2)
+        if i>m
+            new_end = m+1;
+        else
+            new_end = i-(n_inputs-m+1)+2;
+        end
+        for j= 2: new_end
             mat
             mult_i_n
             [i,j]
@@ -144,12 +163,14 @@ if strcmp(polyphase,'off')
             mat{i,j} = mult_i_n{i-j+1}{j-1};
         end
     end
-    
+    'hello world again'
+    mat
+    mult_i_n
     
     
     % add up and output
     xlsub3_addertree = cell(1,n_inputs);
-    for i = 1:n_inputs
+    for i = 1:2:n_inputs
         if i == 1
             xlsub3_addertree{i} = xBlock(struct('source', str2func('adder_tree_init_xblock'),'name', ['adder_tree',num2str(i)]), ...
                      {m+1, add_latency, 'Round  (unbiased: +/- Inf)', 'Saturate', 'Behavioral'}, ...
