@@ -20,8 +20,10 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function cic_filter_init_xblock(varargin)
+% rate change = 2^dec_rate
+
 defaults = { ...
-    'n_inputs', 2, ...
+    'n_inputs', 4, ...
     'input_bit_width', 18, ...
     'add_latency', 1, ...
     'mult_latency', 2, ...
@@ -31,8 +33,8 @@ defaults = { ...
     'overflow', 'Saturate', ...
     'arch', 'Virtex5', ...
     'opt_target', 'logic', ...
-    'recursive', 'on', ...
-    'n_stages', 3, ...
+    'recursive', 'off', ...
+    'order', 3, ...
     'hardcode_dec_rate', 'on', ...
     'dec_rate', 2, ...
     'diff_delay', 1, ...
@@ -50,7 +52,7 @@ overflow = get_var('overflow', 'defaults', defaults, varargin{:});
 arch = get_var('arch', 'defaults', defaults, varargin{:});
 opt_target = get_var('opt_target', 'defaults', defaults, varargin{:});
 recursive = get_var('recursive', 'defaults', defaults, varargin{:});
-n_stages = get_var('n_stages', 'defaults', defaults, varargin{:});
+order = get_var('order', 'defaults', defaults, varargin{:});
 hardcode_dec_rate = get_var('n_stages', 'defaults', defaults, varargin{:});
 dec_rate = get_var('dec_rate', 'defaults', defaults, varargin{:});
 diff_delay = get_var('diff_delay', 'defaults', defaults, varargin{:});
@@ -67,30 +69,72 @@ cic_out = cell(1, n_inputs);
 for i = 1:n_inputs,
     cic_out{i} = xOutport(['cic_out',num2str(i)]);
 end
-cic_rdy = xOutport('cic_rdy');                          
+sync_out = xOutport('sync_out');
+%cic_rdy = xOutport('cic_rdy');                          
 
 % traditional recursive structure
 if strcmp(recursive, 'on') 
     % integrators
-    integrator = cell(1,n_stages);
-    integrator_in = cell(1,n_stages);
+    integrator = cell(1,order);
+    integrator_in = cell(1,order);
     integrator_in{1} = cic_in;
-    for i = 2:n_stages + 1,
+    for i = 2:order + 1,
         integrator_in{i}=cell(1,n_inputs);
         for j= 1:n_inputs
             integrator_in{i}{j} = xSignal(['integrator_port',num2str(i),'_',num2str(j)]);
         end
     end
-    for i = 1:n_stages,
+    for i = 1:order,
         integrator{i} = xBlock(struct('source',str2func(parallel_integrator_init_xblock),'name',['integrator',num2str(i)]), ...
-                                {n_inputs,ceil(n_stages*log2(dec_rate*diff_delay) + input_bitwidth)}, ...
+                                {n_inputs,ceil(order*log2(dec_rate*diff_delay) + input_bitwidth)}, ...
                                 integrator_in{i}, ...
                                 integrator_in{i+1});                            
     end
-elseif strcmp(polyphase,'off')
-    
 else
+% non-recursive structure
+% this case only supports fixed dec_rate
+    terminator1 = xBlock(struct('source','Terminator','name','terminator1'), ...
+                        {}, ...
+                        {dec_rate_Inport}, ...
+                        {});
+    terminator2 = xBlock(struct('source','Terminator','name','terminator2'), ...
+                        {}, ...
+                        {en}, ...
+                        {});
+
+    stages = cell(1,dec_rate);
+    downsampler = cell(1,dec_rate);
+    stages_in = cell(1,dec_rate+1);
+    stages_in{1} = cic_in;
     
+    stages_out = cell(1,dec_rate);
+    syncs_in = cell(1,dec_rate+1);
+    syncs_out = cell(1,dec_rate);
+    syncs_in{1} = sync;
+    for i =1:dec_rate
+        syncs_in{i+1} = xSignal(['syncs_in',num2str(i+1)]);
+        syncs_out{i} = xSignal(['syncs_out',num2str(i)]);
+        stages_in{i+1} = cell(1,n_inputs);
+        for j=1:n_inputs
+            stages_in{i+1}{j} = xSignal(['stage_',num2str(i+1),'in',num2str(j)]);
+        end
+        stages_out{i} = cell(1,n_inputs./2);
+        for j=1:n_inputs./2
+            stages_out{i}{j} = xSignal(['stage_',num2str(i),'out', num2str(j)]);
+        end
+        stages{i} = xBlock(struct('source',str2func('parallel_polynomial_stage_init_xblock'),'name',['stage',num2str(i)]), ...
+                            {order, n_inputs,'off', add_latency}, ...
+                            [stages_in{i},{syncs_in{i}}],...
+                            [stages_out{i},{syncs_out{i}}]);
+        downsampler{i} = xBlock(struct('source', str2func('parallel_downsample_by2_init_xblock'),'name',['downsampler',num2str(i)]), ...
+                                {n_inputs./2}, ...
+                                [stages_out{i},{syncs_out{i}}], ...
+                                [stages_in{i+1},{syncs_in{i+1}}]);
+    end
+    for i =1:n_inputs
+        cic_out{i}.bind(stages_in{dec_rate+1}{i});
+    end
+    sync_out.bind(syncs_in{dec_rate+1});
 end
 
 
