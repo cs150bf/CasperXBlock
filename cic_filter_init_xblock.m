@@ -74,21 +74,30 @@ sync_out = xOutport('sync_out');
 
 % traditional recursive structure
 if strcmp(recursive, 'on') 
-    % integrators
-    integrator = cell(1,order);
-    integrator_in = cell(1,order);
-    integrator_in{1} = cic_in;
-    for i = 2:order + 1,
-        integrator_in{i}=cell(1,n_inputs);
-        for j= 1:n_inputs
-            integrator_in{i}{j} = xSignal(['integrator_port',num2str(i),'_',num2str(j)]);
+    % very basic one, use Down Sample
+    if strcmp(hardcode_dec_rate, 'on')
+        % integrators
+        integrator = cell(1,order);
+        integrator_in = cell(1,order);
+        integrator_in{1} = cic_in;
+        for i = 2:order + 1,
+            integrator_in{i}=cell(1,n_inputs);
+            for j= 1:n_inputs
+                integrator_in{i}{j} = xSignal(['integrator_port',num2str(i),'_',num2str(j)]);
+            end
         end
-    end
-    for i = 1:order,
-        integrator{i} = xBlock(struct('source',str2func(parallel_integrator_init_xblock),'name',['integrator',num2str(i)]), ...
-                                {n_inputs,ceil(order*log2(dec_rate*diff_delay) + input_bitwidth)}, ...
-                                integrator_in{i}, ...
-                                integrator_in{i+1});                            
+        for i = 1:order,
+            integrator{i} = xBlock(struct('source',str2func(parallel_integrator_init_xblock),'name',['integrator',num2str(i)]), ...
+                                    {n_inputs,ceil(order*log2(dec_rate*diff_delay) + input_bitwidth)}, ...
+                                    integrator_in{i}, ...
+                                    integrator_in{i+1});                            
+        end
+    else
+    % use variable dec_rate input
+    
+    
+    
+    
     end
 else
 % non-recursive structure
@@ -122,8 +131,8 @@ else
         for j=1:n_inputs./2
             stages_out{i}{j} = xSignal(['stage_',num2str(i),'out', num2str(j)]);
         end
-        stages{i} = xBlock(struct('source',str2func('parallel_polynomial_stage_init_xblock'),'name',['stage',num2str(i)]), ...
-                            {order, n_inputs,'off', add_latency}, ...
+        stages{i} = xBlock(struct('source',str2func('parallel_polynomial_stage_init_xblock_new'),'name',['stage',num2str(i)]), ...
+                            {order, n_inputs,'off', add_latency,0}, ...
                             [stages_in{i},{syncs_in{i}}],...
                             [stages_out{i},{syncs_out{i}}]);
         downsampler{i} = xBlock(struct('source', str2func('parallel_downsample_by2_init_xblock'),'name',['downsampler',num2str(i)]), ...
