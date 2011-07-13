@@ -1,24 +1,24 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                                                             %
-%   Center for Astronomy Signal Processing and Electronics Research           %
-%   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011    Hong Chen                                           %
-%                                                                             %
-%   This program is free software; you can redistribute it and/or modify      %
-%   it under the terms of the GNU General Public License as published by      %
-%   the Free Software Foundation; either version 2 of the License, or         %
-%   (at your option) any later version.                                       %
-%                                                                             %
-%   This program is distributed in the hope that it will be useful,           %
-%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
-%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
-%   GNU General Public License for more details.                              %
-%                                                                             %
-%   You should have received a copy of the GNU General Public License along   %
-%   with this program; if not, write to the Free Software Foundation, Inc.,   %
-%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
-%                                                                             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                                                            %
+  Center for Astronomy Signal Processing and Electronics Research           %
+  http://casper.berkeley.edu                                                %      
+  Copyright (C) 2011    Hong Chen                                           %
+                                                                            %
+  This program is free software; you can redistribute it and/or modify      %
+  it under the terms of the GNU General Public License as published by      %
+  the Free Software Foundation; either version 2 of the License, or         %
+  (at your option) any later version.                                       %
+                                                                            %
+  This program is distributed in the hope that it will be useful,           %
+  but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+  GNU General Public License for more details.                              %
+                                                                            %
+  You should have received a copy of the GNU General Public License along   %
+  with this program; if not, write to the Free Software Foundation, Inc.,   %
+  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+                                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function parallel_polynomial_stage_init_xblock_new(m,n_inputs,polyphase,add_latency,oddeven)
 
 coeffs = cell(1,m+1);
@@ -78,7 +78,7 @@ if n_inputs==1 % only one input
                              {sync_out,outport});
 
 elseif n_inputs == 2
-        % polyphase structure
+        polyphase structure
     
     inport1  = xInport('in1');
     inport2 = xInport('in2');
@@ -113,7 +113,7 @@ elseif n_inputs == 2
                           {delays2_in{i+1}}); 
     end
     
-    % slightly messed up here
+    slightly messed up here
     multipliers = cell(1,m+1);
     mult_out = cell(1,m+1);
     for i = 1:2:m+1
@@ -129,7 +129,7 @@ elseif n_inputs == 2
                                         {mult_out{i+1}}); 
     end
     
-    % take care of sync
+    take care of sync
     sync_adder =xSignal('sync_adder');
     sync_adder_out = xSignal('sync_adder_out');
     sync_delay1 = xBlock(struct('source','Delay','name', 'sync_delay1'), ...
@@ -155,13 +155,13 @@ elseif n_inputs == 2
                                         {adder_out1,adder_out2}, ...
                                         {outport});
     
-    % take care of sync 2
+    take care of sync 2
      sync_delay2 = xBlock(struct('source','Delay','name', 'sync_delay2'), ...
                       struct('latency', add_latency), ...
                       {sync_adder_out}, ...
                       {sync_out});                  
 elseif n_inputs > m
-    % assuming n_inputs > m
+    assuming n_inputs > m
     inports = cell(1,n_inputs);
     for i = 1:n_inputs,
         inports{i} = xInport(['inport',num2str(i)]);
@@ -177,8 +177,8 @@ elseif n_inputs > m
 
 
     if strcmp(polyphase,'off')
-        % take care of the delay cases
-        % need optimization (coefficient symmetric)
+        take care of the delay cases
+        need optimization (coefficient symmetric)
         delayed_x_minus_p1 = cell(1,m);
         xlsub3_delay = cell(1,m);
         dmult_minus_p1 = cell(1,m);
@@ -200,9 +200,9 @@ elseif n_inputs > m
             end
         end
 
-        % take care of the non-delayed cases
-        % need optimization (coefficient symmetric)
-        % and there're redundants here
+        take care of the non-delayed cases
+        need optimization (coefficient symmetric)
+        and there're redundants here
         x_i_n = cell(1,n_inputs);
         mult_i_n = cell(1,n_inputs);
         xlsub3_mult = cell(1,n_inputs);
@@ -222,7 +222,7 @@ elseif n_inputs > m
                                         {mult_i_n{i}{j}});
             end
         end
-        % compensating the delayed cases
+        compensating the delayed cases
         for i = n_inputs-m+1:n_inputs
             x_i_n{i} = inports{i};
             mult_i_n{i} = cell(1,(n_inputs-i)+1);
@@ -243,10 +243,10 @@ elseif n_inputs > m
         
 
 
-        % reorginize by making a matrix
+        reorginize by making a matrix
         mat = cell(n_inputs,1+m);
-        % the delay cases
-        % top triangle
+        the delay cases
+        top triangle
         first_row = 1;
         if oddeven == 0
             first_row = 2;
@@ -255,13 +255,13 @@ elseif n_inputs > m
             for j = i+1:m+1
                 mat{i,j} = dmult_minus_p1{j-i}{j};
             end
-            % non-delay cases compensating the top triangle
+            non-delay cases compensating the top triangle
             for j = 1:i
                 mat{i,j} = mult_i_n{i-j+1}{j};
             end
         end
-        % compensating the delay cases
-        % bottom triangle
+        compensating the delay cases
+        bottom triangle
         new_start = m+1;
         if mod(m,2) == oddeven
             new_start = m+2;
@@ -273,7 +273,7 @@ elseif n_inputs > m
         end
 
 
-        % take care of sync
+        take care of sync
         sync_adder =xSignal('sync_adder');
         sync_delay1 = xBlock(struct('source','Delay','name', 'sync_delay1'), ...
                               struct('latency', 2), ...
@@ -281,7 +281,7 @@ elseif n_inputs > m
                               {sync_adder});
 
 
-        % add up and output
+        add up and output
         xlsub3_addertree = cell(1,n_inputs);
         check_sync_out = 0;
         for i = 1+mod(oddeven+1,2):2:n_inputs

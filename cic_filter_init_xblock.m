@@ -36,8 +36,9 @@ defaults = { ...
     'recursive', 'off', ...
     'order', 3, ...
     'hardcode_dec_rate', 'on', ...
-    'dec_rate', 3, ...
-    'diff_delay', 1, ...
+    'dec_rate', 2, ...
+    'n_bits', 8, ...
+    'bin_pt', 3, ...
 };
 
 
@@ -55,7 +56,8 @@ recursive = get_var('recursive', 'defaults', defaults, varargin{:});
 order = get_var('order', 'defaults', defaults, varargin{:});
 hardcode_dec_rate = get_var('n_stages', 'defaults', defaults, varargin{:});
 dec_rate = get_var('dec_rate', 'defaults', defaults, varargin{:});
-diff_delay = get_var('diff_delay', 'defaults', defaults, varargin{:});
+n_bits = get_var('n_bits', 'defaults', defaults, varargin{:});
+bin_pt = get_var('bin_pt', 'defaults', defaults, varargin{:});
 
 cic_in = cell(1,n_inputs);
 for i = 1:n_inputs,
@@ -123,6 +125,8 @@ else
     syncs_out = cell(1,dec_rate);
     syncs_in{1} = sync;
     ninputs = n_inputs;
+    n_bits_this = n_bits;
+    
     for i =1:dec_rate
         syncs_out{i} = xSignal(['syncs_out',num2str(i)]);
         n_inputs_this = ninputs;
@@ -133,12 +137,14 @@ else
         for j=1:ninputs
             stages_out{i}{j} = xSignal(['stage_',num2str(i),'out', num2str(j)]);
         end
-        stages{i} = xBlock(struct('source',str2func('parallel_polynomial_stage_init_xblock_new'),'name',['stage',num2str(i)]), ...
-                            {order, n_inputs_this,'off', add_latency,0}, ...
+        %m,n_inputs,polyphase,add_latency,oddeven, n_bits, bin_pt
+        stages{i} = xBlock(struct('source',str2func('parallel_polynomial_dec2_stage_init_xblock'),'name',['stage',num2str(i)]), ...
+                            {order, n_inputs_this,'on', add_latency,0,n_bits_this,bin_pt}, ...
                             [stages_in{i},{syncs_in{i}}],...
                             [stages_out{i},{syncs_out{i}}]);
         stages_in{i+1} = stages_out{i};
         syncs_in{i+1} = syncs_out{i};
+        n_bits_this = n_bits_this + order +1 +1; % need to figure this out
     end
     
     

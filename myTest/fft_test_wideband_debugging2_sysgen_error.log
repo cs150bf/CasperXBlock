@@ -1,0 +1,37 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 11.4.2254              /tools/xilinx/11.4/DSP_Tools/lin64/sysgen
+AccelDSP 11.4.2254                      /tools/xilinx/11.4/DSP_Tools/lin64/AccelDSP
+Matlab 7.9.0.529 (R2009b)               /tools/commercial/mathworks/matlab2009b
+ISE 11.4.i                              /tools/xilinx/11.4/ISE
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: Illegal parameterization: Width of slice (number of bits)
+     Block: 'fft_test_wideband_debugging2/c_to_ri1/slice_re'
+Error 0002: Incorrect slice end point
+     Block: 'fft_test_wideband_debugging2/c_to_ri1/slice_re'
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_wideband_debugging2/c_to_ri1/slice_re'
+
+Details:
+Width of slice (number of bits) is set to a value of 18, but the
+value must be less than or equal to 1.  The input signal
+bit-width, 1, determines the upper bound for the width of the slice.
+Error occurred during "Rate and Type Error Checking".
+
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'fft_test_wideband_debugging2/c_to_ri1/slice_re'
+
+Details:
+Slice endpoints must lie between the LSB and MSB
+Error occurred during "Rate and Type Error Checking".
+
+--------------------------------------------------------------------------------
