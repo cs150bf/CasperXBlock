@@ -20,9 +20,10 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function delay_general_init_xblock(delaytype, varargin)
+function delay_general_init_xblock(delaytype, blk, varargin)
 
 
+sub_blk = strcat(blk,'/',delaytype);
 
 switch delaytype
 	case 'delay_bram'
@@ -34,7 +35,7 @@ switch delaytype
 		use_dsp48 = get_var('use_dsp48', 'defaults', defaults, varargin{:});
 		delay_bram_config.source=str2func('delay_bram_init_xblock');
 		delay_bram_config.name = 'delay_bram';
-		delay_bram_sub = xBlock(delay_bram_config,{DelayLen,bram_latency,use_dsp48});
+		delay_bram_sub = xBlock(delay_bram_config,{sub_blk,DelayLen,bram_latency,use_dsp48});
 		delay_bram_sub.bindPort({In1},{Out1});
 	case 'delay_slr'
 		In1 = xInport('In1');
@@ -92,12 +93,16 @@ switch delaytype
 		DelayLen = get_var('DelayLen', 'defaults', defaults, varargin{:});
 		pipeline_config.source=str2func('pipeline_init_xblock');
 		pipeline_config.name = 'pipeline';
-		pipeline_sub = xBlock(pipeline_config,{DelayLen});
+		pipeline_sub = xBlock(pipeline_config,{sub_blk, DelayLen});
 		pipeline_sub.bindPort({In1},{Out1});
 	otherwise
 		disp('error! such delay block is not supported!');
 		disp(delaytype);
 end
+
+annotation = strcat(delaytype,'\n');
+annotation = strcat(annotation, get_param(sub_blk, 'AttributesFormatString'));
+set_param(blk,'AttributesFormatString',annotation);
 
 end
 		

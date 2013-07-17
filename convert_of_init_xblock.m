@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function convert_of_init_xblock(bit_width_i, binary_point_i, bit_width_o, binary_point_o, latency, ...
+function convert_of_init_xblock(blk, bit_width_i, binary_point_i, bit_width_o, binary_point_o, latency, ...
 	overflow, quantization)
 
 %% convert din to dout 
@@ -77,6 +77,11 @@ else
 
 end
 
+
+clean_blocks(blk);
+
+fmtstr = sprintf('[%d,%d]->[%d,%d]', bit_width_i, binary_point_i, bit_width_o, binary_point_o);
+set_param(blk, 'AttributesFormatString', fmtstr);
 
 end
 

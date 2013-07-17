@@ -299,5 +299,13 @@ else
                               {delay_sel_out , delay_d0_out, map_out, delay_din_out1{i},delay_we_out},...
                               {dout_ports{i}});
     end
+    
+    
+
+end
+
+
+fmtstr = sprintf('order=%d', order);
+set_param(blk, 'AttributesFormatString', fmtstr);
 
 end

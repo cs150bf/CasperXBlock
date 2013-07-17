@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function pipeline_init_xblock(latency)
+function pipeline_init_xblock(blk, latency)
 
 
 
@@ -64,6 +64,10 @@ end
 %                           {xlsub2_q});
 % 
 
+
+annotation_fmt = 'Latency=%d';
+annotation = sprintf(annotation_fmt, latency);
+set_param(blk, 'AttributesFormatString', annotation);
 
 end
 

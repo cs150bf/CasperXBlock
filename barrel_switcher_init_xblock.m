@@ -20,7 +20,7 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function barrel_switcher_init_xblock(n_inputs)
+function barrel_switcher_init_xblock(blk, n_inputs)
 
 
 
@@ -180,7 +180,10 @@ end
 %                        {xlsub5_sel}, ...
 %                        {xlsub5_Slice1_out1});
 
+clean_blocks(blk);
 
+fmtstr = sprintf('n_inputs=%d', n_inputs);
+set_param(blk, 'AttributesFormatString', fmtstr);
 
 end
 

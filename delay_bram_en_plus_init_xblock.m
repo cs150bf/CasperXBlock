@@ -21,47 +21,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function delay_bram_en_plus_init_xblock(DelayLen, bram_latency)
-% This is a generated function based on subsystem:
-%     more_delays/delay_bram_en_plus
-% Though there are limitations about the generated script, 
-% the main purpose of this utility is to make learning
-% Sysgen Script easier.
-% 
-% To test it, run the following commands from MATLAB console:
-% cfg.source = str2func('delay_bram_en_plus');
-% cfg.toplevel = 'more_delays/delay_bram_en_plus';
-% args = {my_DelayLen, my_bram_latency};
-% xBlock(cfg, args);
-% 
-% You can edit delay_bram_en_plus.m to debug your script.
-% 
-% You can also replace the MaskInitialization code with the 
-% following commands so the subsystem will be generated 
-% according to the values of mask parameters.
-% cfg.source = str2func('delay_bram_en_plus');
-% cfg.toplevel = gcb;
-% args = {DelayLen, bram_latency};
-% xBlock(cfg, args);
-% 
-% To configure the xBlock call in debug mode, in which mode,
-% autolayout will be performed every time a block is added,
-% run the following commands:
-% cfg.source = str2func('delay_bram_en_plus');
-% cfg.toplevel = gcb;
-% cfg.debug = 1;
-% args = {DelayLen, bram_latency};
-% xBlock(cfg, args);
-% 
-% To make the xBlock smart so it won't re-generate the
-% subsystem if neither the arguments nor the scripts are
-% changes, use as the following:
-% cfg.source = str2func('delay_bram_en_plus');
-% cfg.toplevel = gcb;
-% cfg.depend = {'delay_bram_en_plus'};
-% args = {DelayLen, bram_latency};
-% xBlock(cfg, args);
-% 
-% See also xBlock, xInport, xOutport, xSignal, xlsub2script.
 
 % Mask Initialization code
 BitWidth = max(ceil(log2(DelayLen)), 2);
