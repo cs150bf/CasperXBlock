@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function uncram_init_xblock(varargin)
+function uncram_init_xblock(blk, varargin)
 defaults = {...
     'num_slice',8, ...
     'slice_width', 8, ...
@@ -63,5 +63,13 @@ for j = 1:num_slice,
                 {outports{j}});
 end
 
-
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+   clean_blocks(blk);
+    if arith_type,
+        fmtstr = sprintf('Fix_%d_%d', slice_width, bin_pt);
+    else
+        fmtstr = sprintf('UFix_%d_%d', slice_width, bin_pt);
+    end
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end

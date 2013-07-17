@@ -20,7 +20,7 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function delay_bram_en_plus_init_xblock(DelayLen, bram_latency)
+function delay_bram_en_plus_init_xblock(blk, DelayLen, bram_latency)
 % This is a generated function based on subsystem:
 %     more_delays/delay_bram_en_plus
 % Though there are limitations about the generated script, 
@@ -105,6 +105,10 @@ xlsub2_Single_Port_RAM = xBlock(struct('source', 'Single Port RAM', 'name', 'Sin
                                 {xlsub2_dout});
 
 
+                            
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
+end
 
 end
 

@@ -39,7 +39,6 @@ w_im = xSignal;
 b_re_del = xSignal;
 b_im_del = xSignal;
 
-
 % delay sync by total_latency 
 sync_delay = xBlock(struct('source', 'Delay', 'name', 'sync_delay'), ...
                        struct('latency', total_latency), ...
@@ -65,8 +64,9 @@ b_im_delay = xBlock(struct('source', 'Delay', 'name', 'b_im_delay'), ...
 
 % convert 'w' to real/imag 
 c_to_ri_w = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_w'), ...
-                               {coeff_bit_width, coeff_bit_width-1}, {w}, {w_re, w_im});
+                               {[], coeff_bit_width, coeff_bit_width-1}, {w}, {w_re, w_im});
 
+                                        
 % block: twiddles_collections/twiddle_general_dsp48e/cmult
 cmult_sub = xBlock(struct('source', str2func('cmult_dsp48e_init_xblock'), 'name', 'cmult'), ...
                       {input_bit_width, input_bit_width - 1, coeff_bit_width, coeff_bit_width - 2, 'off', ...
@@ -75,11 +75,15 @@ cmult_sub = xBlock(struct('source', str2func('cmult_dsp48e_init_xblock'), 'name'
                       {b_re_del, b_im_del, w_re, w_im}, ...
                       {bw_re_out, bw_im_out});
 
+       
 % instantiate coefficient generator
+FFTSize
+Coeffs
 br_indices = bit_rev( Coeffs, FFTSize-1 );
+disp('hello');  
 br_indices = -2*pi*1j*br_indices/2^FFTSize;
 ActualCoeffs = exp(br_indices);
 coeff_gen_sub = xBlock(struct('source',str2func('coeff_gen_init_xblock'), 'name', 'coeff_gen'), ...
-                          {ActualCoeffs, coeff_bit_width, StepPeriod, bram_latency, coeffs_bram}, {sync}, {w});
-                          
+                          {[], ActualCoeffs, coeff_bit_width, StepPeriod, bram_latency, coeffs_bram}, {sync}, {w});
+                                 
 end

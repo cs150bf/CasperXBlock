@@ -1,9 +1,9 @@
-dec_rate = 3;
+dec_rate = 113;
 
 xCIC_input0 = xCIC_input.signals.values;
 xCIC_result = xCIC.signals.values;
-npCIC_input0 = npCIC_input.signals.values;
-npCIC_result = npCIC.signals.values;
+% npCIC_input0 = npCIC_input.signals.values;
+% npCIC_result = npCIC.signals.values;
 % myCIC_in0 = myCIC_input.signals.values;
 % myCIC_in1 = myCIC_input1.signals.values;
 % myCIC_in2 = myCIC_input2.signals.values;

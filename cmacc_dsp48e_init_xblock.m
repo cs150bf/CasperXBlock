@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda                                            %
+%   Copyright (C) 2011 Suraj Gowda  Hong Chen                                 %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function cmacc_dsp48e_init_xblock(n_bits_a, bin_pt_a, n_bits_b, bin_pt_b, conjugated, ...
+function cmacc_dsp48e_init_xblock(blk, n_bits_a, bin_pt_a, n_bits_b, bin_pt_b, conjugated, ...
 	full_precision, n_bits_c, bin_pt_c, quantization, overflow, cast_latency)
 % cmacc_dsp48e_init_xblock
 % Computes ab+c in 4 DSP48e slices, where a,b,c are complex numbers
@@ -523,6 +523,9 @@ reinterp_d_re = xBlock(struct('source', 'Reinterpret', 'name', 'reinterp_d_re'),
                               {reinterp_d_re_out1});
 
 
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+end
 
 end
 

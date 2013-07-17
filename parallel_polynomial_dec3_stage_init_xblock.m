@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function parallel_polynomial_dec3_stage_init_xblock(m,n_inputs,polyphase,add_latency,skip, n_bits, bin_pt)
+function parallel_polynomial_dec3_stage_init_xblock(m,n_inputs,polyphase,add_latency,skip, n_bits, bin_pt, recursive)
 
 coeffs = cic_coefficient_generator(m,3);
 
@@ -32,10 +32,10 @@ end
 if n_inputs==1 && strcmp(polyphase,'off') % only one input
     
     % non-polyphase structure
-    inport = xInport('in');
-    outport = xOutport('out');
     sync =xInport('sync');
     sync_out=xOutport('sync_out');
+    inport = xInport('in');
+    outport = xOutport('out');
     
     delay_blks = cell(m,2);
     delay_inports = cell(m+1);
@@ -77,10 +77,10 @@ if n_inputs==1 && strcmp(polyphase,'off') % only one input
 
 elseif n_inputs ==1 && strcmp(polyphase,'on')
     % polyphase structure
-    inport = xInport('in');
-    outport = xOutport('out');
     sync =xInport('sync');
     sync_out=xOutport('sync_out');
+    inport = xInport('in');
+    outport = xOutport('out');
     
     first_delay_out = xSignal('delay1');
     first_delay = xBlock(struct('source','Delay','name', 'first_delay'), ...
@@ -114,23 +114,24 @@ elseif n_inputs ==1 && strcmp(polyphase,'on')
                                       'latency', 1), ...
                           {second_delay_out}, ...
                           {ds_out2}); 
-                      
+    
+    delay_max = find_delay_max(coeffs,add_latency);                  
     poly_out0 = xSignal('poly_out0');
     poly_out1 = xSignal('poly_out1');
     poly_out2 = xSignal('poly_out2');
     sync_poly = xSignal('sync_poly');
     polynomial_blk0 = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name','polynomial0'), ...
-                            {coeffs(3:3:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {coeffs(1:3:end), add_latency,n_bits, bin_pt,'off',delay_max}, ...
                             {ds_out0, sync}, ...
                             {poly_out0, sync_poly});      
                         
     polynomial_blk1 = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name','polynomial1'), ...
-                            {coeffs(2:3:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {coeffs(2:3:end), add_latency,n_bits, bin_pt,'off',delay_max}, ...
                             {ds_out1, sync}, ...
                             {poly_out1,[]});    
                         
     polynomial_blk2 = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name','polynomial2'), ...
-                            {coeffs(1:3:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {coeffs(3:3:end), add_latency,n_bits, bin_pt,'off',delay_max}, ...
                             {ds_out2, sync}, ...
                             {poly_out2,[]}); 
                         
@@ -145,7 +146,7 @@ elseif n_inputs ==1 && strcmp(polyphase,'on')
                               {adder_tree_sync_out}, ...
                               {sync_out});
 else
-    disp('To be implemented');
+  
     
     inports= cell(1,n_inputs);
     outports = cell(1,n_inputs);
@@ -186,3 +187,30 @@ end
        
 end
 
+
+
+
+
+
+
+
+
+function delay_max = find_delay_max(coefficients,add_latency)
+len = length(coefficients);
+
+const_bin_array = cell(1,len);
+for i = 1:len
+    const_bin_array{i} = dec2bin(coefficients(i));
+end
+
+delay_max = 0;
+for i=1:len
+    
+    temp_len = length(find(const_bin_array{i} == '1'));
+    temp_delay = ceil(log2(temp_len))*add_latency;
+    if temp_delay > delay_max
+        delay_max = temp_delay;
+    end
+end
+
+end

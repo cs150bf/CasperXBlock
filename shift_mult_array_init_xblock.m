@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function shift_mult_array_init_xblock(const_array, add_latency,n_bits,bin_pt)
+function shift_mult_array_init_xblock(const_array, add_latency,n_bits,bin_pt,delay_max)
 
 len = length(const_array);
 
@@ -160,6 +160,11 @@ for i =1:len
                              {{},adder_trees_out{i}});
 end
 
+
+% consider the input parameter delay_max
+if max_delay < delay_max
+    max_delay = delay_max;
+end
 
 
 % add delay blocks and connect to outports

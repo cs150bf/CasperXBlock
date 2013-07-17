@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function window_delay_init_xblock(delay)
+function window_delay_init_xblock(blk, delay)
 
 
 %% inports
@@ -84,20 +84,23 @@ xlsub2_posedge3 = xBlock(struct('source', 'casper_library_misc/posedge', 'name',
                          {xlsub2_posedge3_out1});
 
 % block: delay_7/window_delay/sync_delay
-xlsub2_sync_delay = xBlock(struct('source', 'casper_library_delays/sync_delay', 'name', 'sync_delay'), ...
-                           struct('DelayLen', delay-1), ...
+xlsub2_sync_delay = xBlock(struct('source', str2func('sync_delay_init_xblock'), 'name', 'sync_delay'), ...
+                           {[blk,'/sync_delay'],'DelayLen', delay-1}, ...
                            {xlsub2_posedge3_out1}, ...
                            {xlsub2_sync_delay_out1});
 
 % block: delay_7/window_delay/sync_delay1
-xlsub2_sync_delay1 = xBlock(struct('source', 'casper_library_delays/sync_delay', 'name', 'sync_delay1'), ...
-                            struct('DelayLen', delay-1), ...
+xlsub2_sync_delay1 = xBlock(struct('source', str2func('sync_delay_init_xblock'), 'name', 'sync_delay1'), ...
+                            {[blk,'/sync_delay1'],'DelayLen', delay-1}, ...
                             {xlsub2_negedge_out1}, ...
                             {xlsub2_sync_delay1_out1});
 
 % extra outport assignment
 xlsub2_out.assign(xlsub2_Register_out1);
 
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
+end
 
 end
 

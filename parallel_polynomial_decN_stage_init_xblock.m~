@@ -1,0 +1,143 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011    Hong Chen                                           %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function parallel_polynomial_decN_stage_init_xblock(m,n,n_inputs,polyphase,add_latency,skip, n_bits, bin_pt)
+
+coeffs = cic_coefficient_generator(m,n);
+
+if skip == 0
+    skip_setting = 'Last Value of Frame  (most efficient)';
+else
+end
+ 
+
+if n_inputs==1 && strcmp(polyphase,'off') % only one input
+    
+    % non-polyphase structure
+    inport = xInport('in');
+    outport = xOutport('out');
+    sync =xInport('sync');
+    sync_out=xOutport('sync_out');
+    
+    delay_blks = cell(m,n-1);
+    delay_inports = cell(m+1);
+    delay_outports = cell(m,n);
+    adder_tree_blks = cell(m,1);
+    adder_tree_sync_in = cell(m+1);
+    delay_inports{1} = inport;
+    adder_tree_sync_in{1} = sync;
+    for i = 1:m
+        adder_tree_sync_in{i+1}= xSignal(['adder_tree_sync_in',num2str(i+1)]);
+        delay_inports{i+1} = xSignal(['delay_in',num2str(i),'_1']);
+        delay_outports{i,1} = delay_inports{i};
+        for j = 1:n-1
+            delay_outports{i,j+1} = xSignal(['delay_out',num2str(i),'_',num2str(j+1)]);
+            delay_blks{i,j} = xBlock(struct('source','Delay','name', ['delay',num2str(i),'_',num2str(j)]), ...
+                              struct('latency', 1), ...   
+                              {delay_outports{i,j}}, ...
+                              {delay_outports{i,j+1}});
+        end
+        adder_tree_blks{i} =  xBlock(struct('source', str2func('adder_tree_init_xblock'),'name', ['adder_tree',num2str(i)]), ...
+                     {n, add_latency, 'Round  (unbiased: +/- Inf)', 'Saturate', 'Behavioral'}, ...
+                     [{adder_tree_sync_in{i}},{delay_outports{i,:}}], ...
+                     {adder_tree_sync_in{i+1},delay_inports{i+1}});
+    end
+    
+    downsampler = xBlock(struct('source', 'xbsBasic_r4/Down Sample', 'name', 'Down_sample1'), ...
+                               struct('sample_ratio',n, ...
+                                      'sample_phase',skip_setting, ...
+                                      'latency', 1), ...
+                          {delay_inports{m+1}}, ...
+                          {outport}); 
+    final_delay = xBlock(struct('source','Delay','name', 'final_delay'), ...
+                              struct('latency', 1), ...   
+                              {adder_tree_sync_in{m+1}}, ...
+                              {sync_out});
+
+
+elseif n_inputs ==1 && strcmp(polyphase,'on')
+    % polyphase structure
+    inport = xInport('in');
+    outport = xOutport('out');
+    sync =xInport('sync');
+    sync_out=xOutport('sync_out');
+    
+    first_delay_out = xSignal('delay1');
+    first_delay = xBlock(struct('source','Delay','name', 'first_delay'), ...
+                              struct('latency', 1), ...
+                              {inport}, ...
+                              {first_delay_out});
+                          
+                          
+    ds_out0 =xSignal('downsample_out0');
+    ds_out1 = xSignal('downsample_out1');
+    downsampling0 = xBlock(struct('source', 'xbsBasic_r4/Down Sample', 'name', 'Down_sample0'), ...
+                               struct('sample_ratio',2, ...
+                                        'sample_phase','Last Value of Frame  (most efficient)', ...
+                                      'latency', 1), ...
+                          {inport}, ...
+                          {ds_out0});  
+    downsampling1 = xBlock(struct('source', 'xbsBasic_r4/Down Sample', 'name', 'Down_sample1'), ...
+                               struct('sample_ratio',2, ...
+                                        'sample_phase','Last Value of Frame  (most efficient)', ...
+                                      'latency', 1), ...
+                          {first_delay_out}, ...
+                          {ds_out1}); 
+                      
+    poly_out0 = xSignal('poly_out0');
+    poly_out1 = xSignal('poly_out1');
+    sync_poly = xSignal('sync_poly');
+    polynomial_blk0 = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name','polynomial0'), ...
+                            {coeffs(1:2:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {ds_out0, sync}, ...
+                            {poly_out0, sync_poly});      
+                        
+    polynomial_blk1 = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name','polynomial1'), ...
+                            {coeffs(2:2:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {ds_out1, sync}, ...
+                            {poly_out1,[]});                              
+
+    final_adder = xBlock(struct('source','AddSub', 'name', 'final_adder'), ...
+                             struct('mode', 'Addition', 'latency', add_latency, 'precision', 'Full', ...
+                                    'use_behavioral_HDL', 'off', 'hw_selection', 'Fabric'), ...
+                                    {poly_out0,poly_out1}, ...
+                                    {outport});  
+    % take care of sync
+    sync_delay = xBlock(struct('source','Delay','name', 'sync_delay'), ...
+                              struct('latency', add_latency + 1), ...   % compensate the downsample delay
+                              {sync_poly}, ...
+                              {sync_out});
+else
+    
+    
+    
+    
+    
+    
+    
+end
+
+       
+end
+
+
+
+

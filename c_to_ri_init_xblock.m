@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function c_to_ri_init_xblock(n_bits, bin_pt)
+function c_to_ri_init_xblock(blk, n_bits, bin_pt)
 %% inports
 c = xInport('c');
 
@@ -63,6 +63,9 @@ slice_re = xBlock(struct('source', 'Slice', 'name', 'slice_re'), ...
                          {slice_re_out1});
 
 
-
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    annotation=sprintf('%d_%d r/i',n_bits,bin_pt);
+    set_param(gcb,'AttributesFormatString',annotation);
+end
 end
 

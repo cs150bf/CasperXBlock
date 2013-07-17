@@ -3,6 +3,7 @@
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
 %   Copyright (C) 2011   Hong Chen                                            %
+%   Copyright (C) 2007 Terry Filiba, Aaron Parsons                            %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +20,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function fft_unscrambler_init_xblock(FFTSize, n_inputs, bram_latency)
+function fft_unscrambler_init_xblock(blk, FFTSize, n_inputs, bram_latency)
 
 
 if n_inputs >= FFTSize - 2,
@@ -77,19 +78,23 @@ end
 % block: untitled/fft_unscrambler/reorder1
 xlsub2_square_transposer1_out1 = xSignal;
 xlsub2_reorder1_sub = xBlock(struct('source', str2func('reorder_init_xblock'), 'name', 'reorder1'), ...
-                         {gcb,'map',map_mat,'n_inputs', 2^n_inputs, 'bram_latency',bram_latency, 'map_latency',1, 'double_buffer',0}, ...
+                         {[blk, '/reorder1'],'map',map_mat,'n_inputs', 2^n_inputs, 'bram_latency',bram_latency, 'map_latency',1, 'double_buffer',0}, ...
                          [{xlsub2_square_transposer1_out1}, {xlsub2_const_out1}, xlsub2_reorder_In], ...
                          [{xlsub2_sync_out}, xlsub2_reorder_Out]);
 
 % block: untitled/fft_unscrambler/square_transposer1
 xlsub2_square_transposer1_sub = xBlock(struct('source', str2func('square_transposer_init_xblock'), 'name', 'square_transposer1'), ...
-                                   {n_inputs}, ...
+                                   {[blk,'/square_transposer1'],n_inputs}, ...
                                    [{xlsub2_sync}, xlsub2_square_transposer_In], ...
                                    [{xlsub2_square_transposer1_out1}, xlsub2_square_transposer_Out]);
 
 
 
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
 
-
+    fmtstr = sprintf('FFTSize=%d, n_inputs=%d', FFTSize, n_inputs);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end
 

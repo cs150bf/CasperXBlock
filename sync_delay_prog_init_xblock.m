@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function sync_delay_prog_init_xblock(MaxDelay)
+function sync_delay_prog_init_xblock(blk, MaxDelay)
 
 
 
@@ -88,6 +88,8 @@ xlsub2_Relational1 = xBlock(struct('source', 'Relational', 'name', 'Relational1'
                             {xlsub2_Relational1_out1});
 
 
-
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
+end
 end
 

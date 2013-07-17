@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function pfb_coeff_gen_init_xblock(PFBSize, CoeffBitWidth, TotalTaps, CoeffDistMem, WindowType, bram_latency, n_inputs, nput, fwidth)
+function pfb_coeff_gen_init_xblock(blk, PFBSize, CoeffBitWidth, TotalTaps, CoeffDistMem, WindowType, bram_latency, n_inputs, nput, fwidth)
 
 alltaps = TotalTaps*2^PFBSize;
 windowval = transpose(window(WindowType, alltaps));
@@ -81,6 +81,9 @@ for k=TotalTaps:-1:1,
     
 end
 
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+end
 
 end
 

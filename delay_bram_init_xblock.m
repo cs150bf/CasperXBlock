@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function delay_bram_init_xblock(DelayLen, bram_latency, use_dsp48)
+function delay_bram_init_xblock(blk, DelayLen, bram_latency, use_dsp48)
 
 
 if (DelayLen <= bram_latency)
@@ -70,7 +70,19 @@ xlsub2_Single_Port_RAM = xBlock(struct('source', 'Single Port RAM', 'name', 'Sin
                                        'use_rpm', 'off'), ...
                                 {xlsub2_Counter_out1, xlsub2_In1, xlsub2_Constant2_out1}, ...
                                 {xlsub2_Out1});
-
+                            
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    annotation_fmt = 'Delay Length=%d\nbram_latency=%d\n%s';
+    if strcmp(use_dsp48,'on')
+        ss='use_dsp48';
+    else
+        ss = '';
+    end
+    annotation = sprintf(annotation_fmt, ...
+        DelayLen, bram_latency, ss);
+    set_param(blk, 'AttributesFormatString', annotation);
+    clean_blks(blk);
+end
 
 
 end

@@ -3,6 +3,7 @@
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
 %   Copyright (C) 2011  Hong Chen                                             %
+%   Copyright (C) 2007 Terry Filiba, Aaron Parsons                            %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +20,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function square_transposer_init_xblock(n_inputs)
+function square_transposer_init_xblock(blk, n_inputs)
 % depends = {'barrel_switcher_init_xblock'}
 
 
@@ -59,11 +60,11 @@ for i=1:2^n_inputs,
     xlsub2_barrel_switcher_In{dport-2} = xSignal(['barrel_switcher_In',num2str(dport-2)]);
     xlsub2_barrel_switcher_Out{i} = xSignal(['barrel_switcher_Out',num2str(i)]);
     Delayf{i} = xBlock(struct('source', 'Delay', 'name', ['Delayf',num2str(i)]), ...
-                        struct('latency', i-1), ...
+                        {[blk,'/',['Delayf',num2str(i)]], 'latency', i-1}, ...
                         {xlsub2_In{i}}, ...
                         {xlsub2_barrel_switcher_In{dport-2}});
     Delayb{i} = xBlock(struct('source', 'Delay', 'name', ['Delayb',num2str(i)]), ...
-                        struct('latency', 2^n_inputs-i), ...
+                        {[blk, '/','Delayb',num2str(i)], 'latency', 2^n_inputs-i}, ...
                         {xlsub2_barrel_switcher_Out{i}}, ...
                         {xlsub2_Out{i}});
 end
@@ -88,12 +89,16 @@ xlsub2_delay0 = xBlock(struct('source', 'Delay', 'name', 'delay0'), ...
 
 % block: untitled/square_transposer/barrel_switcher
 xlsub2_barrel_switcher_sub = xBlock(struct('source', str2func('barrel_switcher_init_xblock'), 'name', 'barrel_switcher'), ...
-                                {n_inputs}, ...
+                                {[blk, '/barrel_switcher'], n_inputs}, ...
                                 [{xlsub2_counter_out1}, {xlsub2_sync}, xlsub2_barrel_switcher_In], ...
                                 [{xlsub2_barrel_switcher_out1}, xlsub2_barrel_switcher_Out]);
 
 
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
 
-
+    fmtstr = sprintf('n_inputs=%d', n_inputs);
+    set_param(blk, 'AttributesFormatString', fmtstr);
 end
 
+end

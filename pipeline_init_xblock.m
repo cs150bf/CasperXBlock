@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function pipeline_init_xblock(latency)
+function pipeline_init_xblock(blk, latency)
 
 
 
@@ -48,7 +48,9 @@ else
     xlsub2_q.bind(prev);
 end
     
-        
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+end
     
 % % block: delay_7/pipeline/Register0
 % xlsub2_Register0_out1 = xSignal;

@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda                                            %
+%   Copyright (C) 2011 Suraj Gowda, Hong Chen                                 %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,9 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function coeff_gen_init_xblock(Coeffs, coeff_bit_width, StepPeriod, bram_latency, coeffs_bram)
+function coeff_gen_init_xblock(blk,Coeffs, coeff_bit_width, StepPeriod, bram_latency, coeffs_bram)
+
+
 
 %% initialization scripts
 
@@ -81,7 +83,7 @@ if length(Coeffs) == 1,
                               {Constant1_out1});
  
                           % block: twiddles_collections/coeff_gen/ri_to_c
-    ri_to_c = xBlock(struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c'), ...
+    ri_to_c = xBlock(struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c'), ...
                           [], ...
                            {Constant_out1, Constant1_out1}, ...
                            {w});
@@ -144,7 +146,7 @@ else
 
 
     % block: twiddles_collections/coeff_gen/ri_to_c
-    ri_to_c = xBlock(struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c'), ...
+    ri_to_c = xBlock(struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c'), ...
                             [], ...
                             {ROM_out1, ROM1_out1}, ...
                             {w});   
@@ -153,7 +155,11 @@ end
               
         
 
-
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+    fmtstr = sprintf('%d @ (%d,%d)', length(Coeffs), coeff_bit_width, coeff_bit_width-2);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 
 
 end

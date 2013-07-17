@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function pfb_fir_init_xblock(varargin)    
+function pfb_fir_init_xblock(blk, varargin)    
 
 defaults = {'PFBSize', 5, 'TotalTaps', 2, ...
     'WindowType', 'hamming', 'n_inputs', 1, 'MakeBiplex', 0, ...
@@ -51,14 +51,13 @@ adder_tree_impl = get_var('adder_tree_impl', 'defaults', defaults, varargin{:});
 mult_impl = get_var('mult_impl', 'defaults', defaults, varargin{:});
 input_latency = get_var('input_latency', 'defaults', defaults, varargin{:});
 input_type = get_var('input_type', 'defaults', defaults, varargin{:});
-biplex_inputs = get_var('biplex_inputs', 'defaults', defaults, varargin{:});
 
 %% inports & outports
 
 sync_in = xInport('sync');
 sync_out = xOutport('sync_out');
 
-if biplex_inputs
+if MakeBiplex
 	pols = 2;
 else
     pols = 1;
@@ -83,15 +82,24 @@ for p = 1:pols,
         
         
         pfb_row_block = xBlock(pfb_row_k_config, ...
-        	{'nput', k-1, 'PFBSize', PFBSize, 'CoeffBitWidth', CoeffBitWidth, 'TotalTaps', TotalTaps, ...
-            'BitWidthIn', BitWidthIn, 'BitWidthOut', BitWidthOut, 'CoeffDistMem', CoeffDistMem, 'WindowType', WindowType, 'add_latency', add_latency, ...
+        	{[blk,'/',pfb_row_k_config.name], ...
+            'nput', k-1, 'PFBSize', PFBSize, 'CoeffBitWidth', CoeffBitWidth, 'TotalTaps', TotalTaps, ...
+            'BitWidthIn', BitWidthIn, 'BitWidthOut', BitWidthOut, 'CoeffDistMem', CoeffDistMem, ...
+            'WindowType', WindowType, 'add_latency', add_latency, ...
             'mult_latency', mult_latency, 'bram_latency', bram_latency, 'n_inputs', n_inputs, ...
-            'fwidth', fwidth, 'conv_latency', conv_latency, 'adder_tree_impl', adder_tree_impl, 'quantization', quantization, 'mult_impl', mult_impl}, ...
+            'fwidth', fwidth, 'conv_latency', conv_latency, 'adder_tree_impl', adder_tree_impl, ...
+            'quantization', quantization, 'mult_impl', mult_impl}, ...
             {pol1_in_k, sync_in},... % inputs
             {sync_out_conn, pol1_out_k});    % outputs
         
     end
 end
 
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+
+    fmtstr = sprintf('taps=%d, add_latency=%d', TotalTaps, add_latency);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end
 

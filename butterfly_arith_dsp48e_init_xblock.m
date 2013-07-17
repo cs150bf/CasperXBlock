@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda                                            %
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function butterfly_arith_dsp48e_init_xblock(...
+function butterfly_arith_dsp48e_init_xblock(blk, ...
     Coeffs, StepPeriod, coeff_bit_width, input_bit_width, bram_latency,...
     conv_latency, quantization, overflow, arch, coeffs_bram, FFTSize)
 % depend list:
@@ -53,13 +53,13 @@ b_im_del = xSignal;
 a_re = xSignal;
 a_im = xSignal;
 c_to_ri_a = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_a'), ...
-    {input_bit_width, input_bit_width-1}, {a}, {a_re, a_im});
+    {[blk, '/c_to_ri_a'],input_bit_width, input_bit_width-1}, {a}, {a_re, a_im});
 
 % convert 'b' input to real/imag
 b_re = xSignal;
 b_im = xSignal;
 c_to_ri_b = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_b'), ...
-    {input_bit_width, input_bit_width-1}, {b}, {b_re, b_im});
+    {[blk, '/c_to_ri_b'],input_bit_width, input_bit_width-1}, {b}, {b_re, b_im});
 
 a_re_del1 = xSignal;
 a_im_del1 = xSignal;
@@ -106,11 +106,11 @@ b_im_delay = xBlock(struct('source', 'Delay', 'name', 'b_im_delay'), ...
 
 % convert 'w' to real/imag 
 c_to_ri_w = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_w'), ...
-                               {coeff_bit_width, coeff_bit_width-1}, {w}, {w_re, w_im});
+                               {[blk, '/c_to_ri_w'],coeff_bit_width, coeff_bit_width-1}, {w}, {w_re, w_im});
 
 % block: twiddles_collections/twiddle_general_dsp48e/cmult
 cmacc_sub = xBlock(struct('source', str2func('cmacc_dsp48e_init_xblock'), 'name', 'apbw'), ...
-                      {input_bit_width, input_bit_width - 1, coeff_bit_width, coeff_bit_width - 2, 'off', ...
+                      {[blk, '/apbw'],input_bit_width, input_bit_width - 1, coeff_bit_width, coeff_bit_width - 2, 'off', ...
                       	'off', input_bit_width + 5, input_bit_width + 1, quantization, ... 
                       	overflow, conv_latency}, ...
                       {b_re_del, b_im_del, w_re, w_im, a_re_del1, a_im_del1}, ...
@@ -120,7 +120,7 @@ apbw_re_out.bind( apbw_re );
 apbw_im_out.bind( apbw_im );
                       
 csub = xBlock(struct('source', str2func('simd_add_dsp48e_init_xblock'), 'name', 'csub'), ...
-				  {'Subtraction', input_bit_width, input_bit_width-1, input_bit_width + 4, ...
+				  {[blk, '/csub'],'Subtraction', input_bit_width, input_bit_width-1, input_bit_width + 4, ...
 						input_bit_width + 1, 'off', input_bit_width + 5, input_bit_width + 1, 'Truncate', 'Wrap', 0}, ...
 				  {a_re_del_scale, a_im_del_scale, apbw_re, apbw_im}, ...
 				  {ambw_re_out, ambw_im_out});                      
@@ -130,6 +130,11 @@ br_indices = bit_rev( Coeffs, FFTSize-1 );
 br_indices = -2*pi*1j*br_indices/2^FFTSize;
 ActualCoeffs = exp(br_indices);
 coeff_gen_sub = xBlock(struct('source',str2func('coeff_gen_init_xblock'), 'name', 'coeff_gen'), ...
-                          {ActualCoeffs, coeff_bit_width, StepPeriod, bram_latency, coeffs_bram}, {sync}, {w});
-                          
+                          {[blk, '/coeff_gen'],ActualCoeffs, coeff_bit_width, StepPeriod, bram_latency, coeffs_bram}, {sync}, {w});
+
+                      
+                      
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+end                          
 end

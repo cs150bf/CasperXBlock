@@ -32,10 +32,10 @@ end
 if n_inputs==1 && strcmp(polyphase,'off') % only one input
     
     % non-polyphase structure
-    inport = xInport('in');
-    outport = xOutport('out');
     sync =xInport('sync');
     sync_out=xOutport('sync_out');
+    inport = xInport('in');
+    outport = xOutport('out');
     
     delay_blks = cell(m,n-1);
     delay_inports = cell(m+1);
@@ -76,10 +76,10 @@ if n_inputs==1 && strcmp(polyphase,'off') % only one input
 elseif n_inputs ==1 && strcmp(polyphase,'on')
     
      % polyphase structure
-    inport = xInport('in');
-    outport = xOutport('out');
     sync =xInport('sync');
     sync_out=xOutport('sync_out');
+    inport = xInport('in');
+    outport = xOutport('out');
     
     delay_blks = cell(1,n-1);
     delay_ins = cell(1,n);
@@ -109,14 +109,15 @@ elseif n_inputs ==1 && strcmp(polyphase,'on')
     polynomial_blk = cell(1,n);
     sync_poly = xSignal('sync_poly');
     poly_out{1} = xSignal('poly_out1');
+    delay_max = find_delay_max(coeffs,add_latency);
     polynomial_blk{1} = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name','polynomial0'), ...
-                            {coeffs(n:n:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {coeffs(1:n:end), add_latency,n_bits, bin_pt,'off',delay_max}, ...
                             {ds_out{1}, sync}, ...
                             {poly_out{1}, sync_poly});  
     for i =2:n
         poly_out{i}= xSignal(['poly_out',num2str(i)]);
         polynomial_blk{i} = xBlock(struct('source',str2func('polynomial_shift_mult_transpose_init_xblock'),'name',['polynomial',num2str(i)]), ...
-                            {coeffs(n-i+1:n:end), add_latency,n_bits, bin_pt,'off'}, ...
+                            {coeffs(i:n:end), add_latency,n_bits, bin_pt,'off',delay_max}, ...
                             {ds_out{i}, sync}, ...
                             {poly_out{i}, []}); 
     end
@@ -135,8 +136,6 @@ elseif n_inputs ==1 && strcmp(polyphase,'on')
 else
     
     
-    
-       disp('To be implemented');
     
     inports= cell(1,n_inputs);
     outports = cell(1,n_inputs);
@@ -176,9 +175,27 @@ else
     
     
 end
-
-       
+   
 end
 
 
 
+function delay_max = find_delay_max(coefficients,add_latency)
+len = length(coefficients);
+
+const_bin_array = cell(1,len);
+for i = 1:len
+    const_bin_array{i} = dec2bin(coefficients(i));
+end
+
+delay_max = 0;
+for i=1:len
+    
+    temp_len = length(find(const_bin_array{i} == '1'));
+    temp_delay = ceil(log2(temp_len))*add_latency;
+    if temp_delay > delay_max
+        delay_max = temp_delay;
+    end
+end
+
+end

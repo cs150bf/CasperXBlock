@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function pfb_row_init_xblock(varargin)
+function pfb_row_init_xblock(blk, varargin)
 
 defaults = {'nput', 0, ...
 	'PFBSize', 5, ...
@@ -69,7 +69,7 @@ mult_impl = get_var('mult_impl', 'defaults', defaults, varargin{:});
 input_latency = get_var('input_latency', 'defaults', defaults, varargin{:});
 input_type = get_var('input_type', 'defaults', defaults, varargin{:});
 
-biplex_inputs = get_var('biplex_inputs', 'defaults', defaults, varargin{:});
+biplex_inputs = get_var('biplex_inputs', 'defaults', defaults, varargin{:}); % repeat? MakeBiplex
 use_hdl = get_var('use_hdl', 'defaults', defaults, varargin{:});
 use_embedded = get_var('use_embedded', 'defaults', defaults, varargin{:});
 conv_latency = get_var('conv_latency', 'defaults', defaults, varargin{:});
@@ -89,8 +89,8 @@ elseif biplex_inputs
     din1 = xInport('din_pol1');
     din2 = xInport('din_pol2');
     coeff_gen_din = xSignal;
-    xBlock( struct('source', 'gavrt_library/cram', 'name', 'comb_data'), ...
-        struct('num_slice', 2), ...
+    xBlock( struct('source', str2func('cram_init_xblock'), 'name', 'comb_data'), ...
+        struct([blk,'/comb_data'],'num_slice', 2), ...
         {din1, din2}, {coeff_gen_din});
 end
     
@@ -133,7 +133,8 @@ scale_factor = 1 + nextpow2(TotalTaps);
 % Coefficient Generator
 coeff_gen_config.source = str2func('pfb_coeff_gen_init_xblock');
 coeff_gen_config.name = 'pfb_coeff_gen';
-pfb_coeff_gen_sub = xBlock(coeff_gen_config, {PFBSize, CoeffBitWidth, TotalTaps, ...
+pfb_coeff_gen_sub = xBlock(coeff_gen_config, ...
+    {[blk,'/',coeff_gen_config.name],PFBSize, CoeffBitWidth, TotalTaps, ...
     CoeffDistMem, WindowType, bram_latency, n_inputs, ...
     nput, fwidth});
 pfb_coeff_gen_sub.bindPort({coeff_gen_din, sync}, coeff_gen_outports);
@@ -148,7 +149,7 @@ end
 sync_delay_config.source = str2func('sync_delay_init');
 sync_delay_config.name = 'sync_delay';
 sync_delay = xBlock( sync_delay_config, ...
-    {sync_delay_per, 0, 0}, ...
+    {[blk,'/',sync_delay_config.name],sync_delay_per, 0, 0}, ...
     {coeff_gen_sync_out}, ...
     {sync_delay_adder_tree});
 
@@ -161,7 +162,7 @@ for k = 2:TotalTaps,
     delay_k_out = xSignal;
     bram1_config.source = str2func('delay_bram_init');
     bram1_config.name = ['delay_bram', num2str(k)];
-    delay1 = xBlock(bram1_config, {2^(PFBSize-n_inputs)*1, bram_latency, 'on'});
+    delay1 = xBlock(bram1_config, {[blk,'/',bram1_config.name], 2^(PFBSize-n_inputs)*1, bram_latency, 'on'});
     delay1.bindPort({delay_out_sigs{k-1}}, {delay_k_out});
     delay_out_sigs{k} = delay_k_out;
 end
@@ -200,8 +201,9 @@ for k=1:TotalTaps
 		tap_split_k_outports{n} = macc_ports_n{2*k};
 	end
 	
-	xBlock( struct('source', 'gavrt_library/uncram', 'name', ['tap_split_', num2str(k)]), ...
-		struct('num_slice', num_data_slices, 'slice_width', BitWidthIn, 'bin_pt', BitWidthIn-1, 'arith_type', 1), ...
+	xBlock( struct('source', str2func('uncram_init_xblock'), 'name', ['tap_split_', num2str(k)]), ...
+		struct([blk, '/','tap_split_', num2str(k)], 'num_slice', num_data_slices, ...
+                'slice_width', BitWidthIn, 'bin_pt', BitWidthIn-1, 'arith_type', 1), ...
 		{ delay_out_sigs{k} }, tap_split_k_outports );
      
 end
@@ -227,7 +229,8 @@ for k = 1:num_data_slices
 	mult_block_config.source = mult_source_func;
 	mult_block_config.name = ['mult', num2str(k)];
 	mult_block_config.depend = {'macc_dsp48e_init_xblock.m', 'tap_multiply_fabric_init_xblock.m'};
-	mult_block = xBlock(mult_block_config, {CoeffBitWidth, CoeffBitWidth-1, BitWidthIn, ...
+	mult_block = xBlock(mult_block_config,...
+        {[blk,'/',mult_block_config.name], CoeffBitWidth, CoeffBitWidth-1, BitWidthIn, ...
 		BitWidthIn-1, 'on', CoeffBitWidth+BitWidthIn+1, CoeffBitWidth+BitWidthIn-2, 'Truncate', ...
 		'Wrap', 0, TotalTaps, mult_latency});
 		
@@ -237,12 +240,14 @@ for k = 1:num_data_slices
 	adder_tree_config.source = str2func('adder_tree_init_xblock');
 	adder_tree_config.name = ['adder_tree', num2str(k)];
 	adder_tree_config.depend = {'adder_tree_init_xblock.m'};
-	adder_tree_block = xBlock( adder_tree_config, {num_adder_tree_inports, add_latency, quantization, 'Wrap', adder_tree_impl});
+	adder_tree_block = xBlock( adder_tree_config,...
+        {[blk, '/',adder_tree_config.name], num_adder_tree_inports, ...
+        add_latency, quantization, 'Wrap', adder_tree_impl});
 	adder_tree_block.bindPort( adder_tree_inports, {sync_delay_out, add_tree_out} );	
 	
 	scaled_add_tree_out = xSignal;
 	scale_block = xBlock(struct('source', 'Scale', 'name', ['scale_', num2str(k)]), ...
-		struct('scale_factor', -scale_factor), ...
+		{'scale_factor', -scale_factor}, ...
 		{add_tree_out}, ...
 		{scaled_add_tree_out});
 
@@ -267,17 +272,17 @@ end
 
 if complex_inputs && biplex_inputs % combine into complex data type
 	if strcmp(input_type, 'Complex')
-		xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c0'), struct(), ...
+		xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c0'), struct(), ...
 			{adder_tree_outports{1}, adder_tree_outports{2}}, {out1} );
 	end	
 
 	if strcmp(input_type, 'Complex')
-		xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c1'), struct(), ...
+		xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c1'), struct(), ...
 			{adder_tree_outports{3}, adder_tree_outports{4}}, {out2} );
 	end	
 elseif complex_inputs
 	if strcmp(input_type, 'Complex')
-		xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c0'), struct(), ...
+		xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c0'), struct(), ...
 			{adder_tree_outports{1}, adder_tree_outports{2}}, {out} );
 	end	
 else 

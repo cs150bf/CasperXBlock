@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda                                            %
+%   Copyright (C) 2011 Suraj Gowda, Hong Chen                                 %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function mirror_spectrum_init_xblock(FFTSize, input_bitwidth, bram_latency, negate_latency, negate_mode)
+function mirror_spectrum_init_xblock(blk, FFTSize, input_bitwidth, bram_latency, negate_latency, negate_mode)
 
 
 %% inports
@@ -155,23 +155,26 @@ Relational = xBlock(struct('source', 'Relational', 'name', 'Relational'), ...
 
 
 % block: single_pol/fft_wideband_real1/fft_biplex_real_4x0/bi_real_unscr_4x/mirror_spectrum1/complex_conj0
-complex_conj_config.source = str2func('complex_conj_init');
+complex_conj_config.source = str2func('complex_conj_init_xblock');
 complex_conj_config.name = 'complex_conj0';
-complex_conj_config.depend = {'complex_conj_init.m'};
-complex_conj0 = xBlock( complex_conj_config, {input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
+complex_conj0 = xBlock( complex_conj_config, {[blk,'/',complex_conj_config.name],input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
     {reo_in0}, {complex_conj0_out1});
 
 complex_conj_config.name = 'complex_conj1';
-complex_conj1 = xBlock( complex_conj_config, {input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
+complex_conj1 = xBlock( complex_conj_config, {[blk,'/',complex_conj_config.name],input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
     {reo_in1}, {complex_conj1_out1} );
 
 complex_conj_config.name = 'complex_conj2';
-complex_conj2 = xBlock( complex_conj_config, {input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
+complex_conj2 = xBlock( complex_conj_config, {[blk,'/',complex_conj_config.name],input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
     {reo_in2}, {complex_conj2_out1});
 
 complex_conj_config.name = 'complex_conj3';
-complex_conj3 = xBlock( complex_conj_config, {input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
+complex_conj3 = xBlock( complex_conj_config, {[blk,'/',complex_conj_config.name],input_bitwidth, input_bin_pt, negate_latency, negate_mode}, ...
     {reo_in3}, {complex_conj3_out1});
+
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+end
 % complex_conj0_sub = complex_conj0(18, 17, negate_latency, 'logic');
 % complex_conj0_sub.bindPort({reo_in0}, {complex_conj0_out1});
 

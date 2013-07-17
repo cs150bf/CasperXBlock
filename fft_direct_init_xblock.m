@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%   Copyright (C) 2011 Suraj Gowda, Hong Chen, Terry Filiba, Aaron Parsons    %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function fft_direct_init_xblock(varargin)
+function fft_direct_init_xblock(blk, varargin)
 
 % Set default vararg values.
 defaults = { ...
@@ -216,8 +216,8 @@ for stage=1:FFTSize,
         	of_out, bf_syncs{stage+1, i+1} };        
 
 		coeffs
-        xBlock( struct('source', str2func('fft_butterfly_init_xblock'), 'name', bf_name,'depend',{{'fft_butterfly_init_xblock'}}), ...
-            {'Position', bf_pos, 'biplex', 'off', ...
+        xBlock( struct('source', str2func('fft_butterfly_init_xblock'), 'name', bf_name), ...
+            {[blk,'/',bf_name], 'biplex', 'off', ...
             'FFTSize', actual_fft_size, ...
             'Coeffs', coeffs, ...
             'StepPeriod', 0, ...
@@ -276,5 +276,13 @@ end
 
 % Connect sync_out
 sync_out.bind( bf_syncs{FFTSize+1, 1} );
+
+
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+    fmtstr = sprintf('%s\nstages [%s] of %d\n[%d,%d]\n%s\n%s', arch, num2str([StartStage:1:StartStage+FFTSize-1]), ...
+        actual_fft_size,  input_bit_width, coeff_bit_width, quantization, overflow);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 
 end

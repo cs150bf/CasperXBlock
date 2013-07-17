@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%   Copyright (C) 2011 Suraj Gowda    Hong Chen  Terry Filiba  Aaron Parsons  %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function fft_wideband_real_init_xblock(varargin)
+function fft_wideband_real_init_xblock(blk, varargin)
 %depends  =
 %{'pipeline_init_xblock','fft_biplex_real_4x_init_xblock','fft_direct_init_xblock','fft_unscrambler_init_xblock'}   
 % todo 
@@ -131,12 +131,12 @@ for k = 1:n_biplexes
 
 	% delay input ports & sync by 'input_latency'
 	xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', ['in_del_sync_4x', num2str(k-1)]), ...
-			{input_latency}, {sync}, {sync_del} );
+			{[blk,'/in_del_sync_4x', num2str(k-1)],input_latency}, {sync}, {sync_del} );
 
 	biplex_in_ports = {sync_del, shift, xSignal, xSignal, xSignal, xSignal};
 	for m = 1:4
 		xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', ['in_del_4x', num2str(k-1), 'pol', num2str(m)]), ...
-				{input_latency}, {in_ports{m}}, {biplex_in_ports{m+2}} );		
+				{[blk,'/in_del_4x', num2str(k-1), 'pol', num2str(m)],input_latency}, {in_ports{m}}, {biplex_in_ports{m+2}} );		
 	end
 	
 
@@ -148,7 +148,8 @@ for k = 1:n_biplexes
 	biplex_of_out = xSignal;
 	% instantiate biplex core in xBlock form
 	xBlock( struct('source', str2func('fft_biplex_real_4x_init_xblock'), 'name', ['fft_biplex_real_4x', num2str(k-1)]), ...
-			{ 'FFTSize', FFTSize-n_inputs, ...
+			{[blk,'/fft_biplex_real_4x', num2str(k-1) ],...
+            'FFTSize', FFTSize-n_inputs, ...
 			'input_bit_width', input_bit_width, ...
 			'coeff_bit_width', coeff_bit_width, ...
 			'add_latency', add_latency, ...
@@ -178,12 +179,12 @@ for k = 1:n_biplexes
 	% TODO: delay the outports
 	for m = 1:4
 		xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', ['out_del_4x', num2str(k-1), 'pol', num2str(m)]), ...
-			{input_latency}, { biplex_data_outputs{m} }, { biplex_data_outputs_del{m} } );	
+			{[blk,'/out_del_4x', num2str(k-1), 'pol', num2str(m) ], biplex_direct_latency}, { biplex_data_outputs{m} }, { biplex_data_outputs_del{m} } );	
 	end
 	
 	if k == 1
 		xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', ['out_del_sync_4x', num2str(k-1)]), ...
-			{input_latency}, {biplex_sync_out}, {direct_sync_in} );
+			{[blk,'/out_del_sync_4x', num2str(k-1) ], biplex_direct_latency}, {biplex_sync_out}, {direct_sync_in} );
 	end
 	
 	direct_inputs{4*k-3 + 2} = biplex_data_outputs_del{1};
@@ -201,7 +202,8 @@ for m = 1:2^(n_inputs)+1
 end
 
 xBlock( struct('name', 'fft_direct', 'source', str2func('fft_direct_init_xblock') ), ...
-		{'FFTSize', n_inputs, ...
+		{[blk, '/fft_direct'], ...
+        'FFTSize', n_inputs, ...
 		'input_bit_width', input_bit_width, ...
 		'coeff_bit_width', coeff_bit_width, ...
 		'map_tail', 'on', ...
@@ -235,7 +237,7 @@ end
 
 if strcmp(unscramble, 'on'),
     xBlock( struct('name', 'fft_unscrambler', 'source', str2func('fft_unscrambler_init_xblock')), ...
-        {FFTSize-1,n_inputs-1, bram_latency}, ...
+        {[blk,'/fft_unscrambler'], FFTSize-1,n_inputs-1, bram_latency}, ...
         {direct_outports{1:1+2^(n_inputs-1)}}, fft_outports);
 end
 
@@ -246,7 +248,17 @@ xBlock(struct('source', 'Logical', 'name', 'of_det'), ...
 				struct('logical_function', 'OR', 'inputs', n_biplexes+1), of_outputs, {of});
 
 
-%% diagram
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    % Delete all unconnected blocks.
+    clean_blocks(blk);
+
+    %%%%%%%%%%%%%%%%%%%
+    % Finish drawing. %
+    %%%%%%%%%%%%%%%%%%%
+
+    fmtstr = sprintf('%d stages\n(%d,%d)\n%s\n%s', FFTSize, input_bit_width, coeff_bit_width, quantization, overflow);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 
 end
 

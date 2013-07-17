@@ -24,6 +24,8 @@ function twiddle_stage_2_draw(a_re, a_im, b_re, b_im, sync, ...
     FFTSize, input_bit_width, mux_latency, negate_latency, conv_latency, use_dsp48e)
 % no depends
 
+
+
 %% diagram
 
 	if use_dsp48e
@@ -41,7 +43,11 @@ function twiddle_stage_2_draw(a_re, a_im, b_re, b_im, sync, ...
 	b_im_bram_del = xSignal;
 	counter_rst = xSignal;
 	
-
+    
+    if negate_latency<0 || mux_latency <1 
+        disp('Check value of negate_latency and mux_latency');
+    end
+    
 	% delay output sync pulse by negate_latency to generate counter reset
 	counter_rst_del = xBlock(struct('source', 'Delay', 'name', 'counter_rst_del'), ...
 						   struct('latency', negate_latency, 'reg_retiming', 'on'), {sync}, {counter_rst});
@@ -78,6 +84,7 @@ function twiddle_stage_2_draw(a_re, a_im, b_re, b_im, sync, ...
 	b_im_bram_del_sub = xBlock(struct('source', 'Delay', 'name', 'b_im_bram_del'), ...
 						   struct('latency', negate_latency, 'reg_retiming', 'on'), {b_im}, {b_im_bram_del});
 	
+    	                   
 	if use_dsp48e
 		xBlock( struct('source', str2func('negate_mux'), 'name', 'negate_mux'), ...
 				{mux_latency, input_bit_width, input_bit_width-1}, ...
@@ -112,5 +119,5 @@ function twiddle_stage_2_draw(a_re, a_im, b_re, b_im, sync, ...
 	mux0 = xBlock(struct('source', 'Mux', 'name', 'mux0'), ...
 						 struct('latency', mux_latency), {sel, b_re_bram_del, b_im_bram_del}, {bw_re_out});
 						 
-						 
+		 
 end

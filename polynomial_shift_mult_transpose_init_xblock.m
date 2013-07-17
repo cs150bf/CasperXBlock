@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function polynomial_shift_mult_transpose_init_xblock(coeffs, add_latency, n_bits, bin_pt,oddeven)
+function polynomial_shift_mult_transpose_init_xblock(coeffs, add_latency, n_bits, bin_pt,oddeven,delay_max)
 
 if add_latency ~= 1
     disp('only supports add_latency == 1 at this moment');
@@ -42,7 +42,7 @@ if strcmp(oddeven,'off')
 
     % shift multiplication with coefficients
     mult_blk = xBlock(struct('source',str2func('shift_mult_array_init_xblock'), 'name', 'shift_mult_array'), ...
-                      {coeffs(end:-1:1), add_latency, n_bits, bin_pt}, ...
+                      {coeffs(end:-1:1), add_latency, n_bits, bin_pt,delay_max}, ...
                       {inport,sync}, ...
                       [mult_outs,{sync_mult}]); 
 
@@ -61,8 +61,10 @@ if strcmp(oddeven,'off')
                                         {adder_ins{j},mult_outs{j+1}}, ...
                                         {adder_ins{j+1}});                            
     end
+    
 
-    outport.bind(adder_ins{len});
+    
+    outport.bind(adder_ins{len});                       
     % take care of sync
     sync_delay1 = xBlock(struct('source','Delay','name', 'sync_delay1'), ...
                               struct('latency', add_latency), ...
@@ -87,7 +89,7 @@ else
 
     % shift multiplication with coefficients
     mult_blk = xBlock(struct('source',str2func('shift_mult_array_init_xblock'), 'name', 'shift_mult_array'), ...
-                      {coeffs(end:-1:1), add_latency, n_bits, bin_pt}, ...
+                      {coeffs(end:-1:1), add_latency, n_bits, bin_pt,delay_max}, ...
                       {inport,sync}, ...
                       [mult_outs,{sync_mult}]); 
                   
@@ -130,8 +132,10 @@ else
                                         {even_adder_ins{j+1}});                            
     end
 
-    outport_odd.bind(odd_adder_ins{odd_len});    
-    outport_even.bind(even_adder_ins{even_len}); 
+
+    outport_odd.bind(odd_adder_ins{odd_len});
+    outport_even.bind(even_adder_ins{even_len});
+    
     
     % take care of sync
     sync_delay1 = xBlock(struct('source','Delay','name', 'sync_delay1'), ...

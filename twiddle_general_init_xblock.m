@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function twiddle_general_init_xblock(varargin)
+function twiddle_general_init_xblock(blk,varargin)
 % depends = {'pipeline_init_xblock','c_to_ri_init_xblock'}
 % to do
 
@@ -37,7 +37,7 @@ bw_im_out = xOutport('bw_im');
 sync_out = xOutport('sync_out');
 
 %% Get varargin parameters
-defaults = {'Coeffs', [0, 1], ...
+defaults = {'Coeffs', [0 1], ...
     'StepPeriod', 0, ...
     'input_bit_width', 18, ...
     'coeff_bit_width', 18,...
@@ -113,21 +113,19 @@ else
     end
 end
 
-twiddle_type
-Coeffs
 
 %% Module Drawing
 % convert 'a' input to real/imag
 a_re = xSignal;
 a_im = xSignal;
 c_to_ri_a = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_a'), ...
-    {input_bit_width, input_bit_width-1}, {a}, {a_re, a_im});
+    {strcat(blk,'/c_to_ri_a'), input_bit_width, input_bit_width-1}, {a}, {a_re, a_im});
 
 % convert 'b' input to real/imag
 b_re = xSignal;
 b_im = xSignal;
 c_to_ri_b = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_b'), ...
-    {input_bit_width, input_bit_width-1}, {b}, {b_re, b_im});
+    {strcat(blk,'/c_to_ri_b'), input_bit_width, input_bit_width-1}, {b}, {b_re, b_im});
 
 % delay inputs by input_latency length
 a_re_del = xSignal;
@@ -136,15 +134,16 @@ b_re_del = xSignal;
 b_im_del = xSignal;
 sync_del = xSignal;
 pipe_a_re = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_a_re'), ...
-    {input_latency}, {a_re}, {a_re_del});
+    {[blk,'/pipe_a_re'], input_latency}, {a_re}, {a_re_del});
 pipe_a_im = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_a_im'), ...
-    {input_latency}, {a_im}, {a_im_del});
+    {[blk,'/pipe_a_im'],input_latency}, {a_im}, {a_im_del});
 pipe_b_re = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_b_re'), ...
-    {input_latency}, {b_re}, {b_re_del});
+    {[blk,'/pipe_b_re'],input_latency}, {b_re}, {b_re_del});
 pipe_b_im = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_b_im'), ...
-    {input_latency}, {b_im}, {b_im_del});
+    {[blk,'/pipe_b_im'],input_latency}, {b_im}, {b_im_del});
 pipe_sync = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_sync'), ...
-    {input_latency}, {sync}, {sync_del});
+    {[blk,'/pipe_sync'],input_latency}, {sync}, {sync_del});
+
 
 switch twiddle_type
     case 'twiddle_pass_through'
@@ -164,7 +163,7 @@ switch twiddle_type
         twiddle_general_dsp48e_draw(a_re, a_im, b_re, b_im, sync, ...
             a_re_out, a_im_out, bw_re_out, bw_im_out, sync_out, ...
             Coeffs, StepPeriod, coeff_bit_width, input_bit_width, bram_latency,...
-            conv_latency, quantization, overflow, arch, coeffs_bram);
+            conv_latency, quantization, overflow, arch, coeffs_bram, FFTSize);
             
     case 'twiddle_coeff_0'
         total_latency = add_latency + mult_latency + bram_latency + conv_latency;
@@ -180,12 +179,12 @@ switch twiddle_type
                             struct('latency', total_latency), {sync_del}, {sync_out} );
                             
     case 'twiddle_coeff_1'
-        twiddle_stage_2_init_xblock(a_re, a_im, b_re, b_im, sync, ...
+        twiddle_stage_2_draw(a_re, a_im, b_re, b_im, sync, ...
             a_re_out, a_im_out, bw_re_out, bw_im_out, sync_out, ...
             FFTSize, input_bit_width, negate_latency);
             
     case 'twiddle_general_4mult' 
-		twiddle_general_4mult_init_xblock(a_re, a_im, b_re, b_im, sync, ...
+		twiddle_general_4mult_init_xblock_draw(a_re, a_im, b_re, b_im, sync, ...
 			a_re_out, a_im_out, bw_re_out, bw_im_out, sync_out, ...
 			Coeffs, StepPeriod, coeffs_bram, coeff_bit_width, input_bit_width, ...
 			add_latency, mult_latency, bram_latency, conv_latency, arch, use_hdl, ... 
@@ -201,4 +200,41 @@ switch twiddle_type
     otherwise
         disp('Error! This twiddle type is not supported');
 end
+
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    % Delete all unconnected blocks.
+    clean_blocks(blk);
+
+    %%%%%%%%%%%%%%%%%%%
+    % Finish drawing! %
+    %%%%%%%%%%%%%%%%%%%
+
+    % Set attribute format string (block annotation).
+    switch twiddle_type
+        case 'twiddle_general_4mult'
+            fmtstr = sprintf('data=(%d,%d)\ncoeffs=(%d,%d)\n%s\n(%s,%s)', ...
+                input_bit_width, input_bit_width-1, ...
+                coeff_bit_width, coeff_bit_width-2, ...
+                arch, quantization, overflow);
+          
+        case 'twiddle_general_dsp48e'
+            fmtstr = sprintf('data=(%d,%d)\ncoeffs=(%d,%d)\n%s\n(%s,%s)', ...
+                input_bit_width, input_bit_width-1, ...
+                coeff_bit_width, coeff_bit_width-2, ...
+                arch, quantization, overflow);
+            
+        case 'twiddle_general_3mult'
+            fmtstr = sprintf('data=(%d,%d)\ncoeffs=(%d,%d)\n%s\n(%s,%s)', ...
+                      input_bit_width, input_bit_width-1, ...
+                      coeff_bit_width-1, coeff_bit_width-3, ...
+                      arch, quantization, overflow);
+                  
+        otherwise
+            fmtstr = '';
+    end
+    
+    fmtstr = strcat(fmtstr,sprintf('\n%s',twiddle_type));
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
+
 end

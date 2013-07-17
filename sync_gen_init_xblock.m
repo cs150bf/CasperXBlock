@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function sync_gen_init_xblock(sim_acc_len, fft_size, fft_simult_inputs, pfb_fir_taps, reorder_vec, scale, comp_latency)
+function sync_gen_init_xblock(blk, sim_acc_len, fft_size, fft_simult_inputs, pfb_fir_taps, reorder_vec, scale, comp_latency)
 %% inports
 sync_period = xInport('sync_period');
 sw_sync_pulse = xInport('sw_sync_pulse');
@@ -135,6 +135,13 @@ xlsub2_zero = xBlock(struct('source', 'Constant', 'name', 'zero'), ...
                      {xlsub2_zero_out1});
 
 
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    % Remove stray wires and unused blocks
+    clean_blocks(blk);
 
+    % Display the simulation sync period under the block.
+    fmtstr = sprintf('sim_sync_period=%d ',sim_sync_period);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end
 

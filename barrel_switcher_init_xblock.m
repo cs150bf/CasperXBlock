@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011  Hong Chen                                             %
+%   Copyright (C) 2011  Hong Chen, Terry Filiba, Aaron Parsons                %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -20,7 +20,7 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function barrel_switcher_init_xblock(n_inputs)
+function barrel_switcher_init_xblock(blk, n_inputs)
 
 
 
@@ -180,7 +180,10 @@ end
 %                        {xlsub5_sel}, ...
 %                        {xlsub5_Slice1_out1});
 
-
-
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
+    fmtstr = sprintf('n_inputs=%d', n_inputs);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end
 

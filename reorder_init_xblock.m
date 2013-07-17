@@ -115,18 +115,18 @@ if double_buffer == 1,
     order = 2;
 end
 pre_sync_delay = xBlock( struct( 'name', 'pre_sync_delay', 'source', 'Delay'), ...
-	{ 'latency', (order-1)*map_latency}, {sync}, {pre_sync_delay_out});
+	{[blk,'/pre_sync_delay'], 'latency', (order-1)*map_latency}, {sync}, {pre_sync_delay_out});
 sync_delay_en = xBlock( struct( 'name', 'sync_delay_en', 'source', str2func('sync_delay_en_init_xblock')), ...
-	{map_length}, {pre_sync_delay_out, en}, {sync_delay_en_out});    	
+	{[blk,'/sync_delay_en'],map_length}, {pre_sync_delay_out, en}, {sync_delay_en_out});    	
 	
 post_sync_delay = xBlock( struct('name', 'post_sync_delay', 'source', 'Delay'), ...
-    {'latency', (bram_latency+1+double_buffer)}, ...
+    {[blk,'/post_sync_delay'],'latency', (bram_latency+1+double_buffer)}, ...
     {sync_delay_en_out}, {sync_out});
 delay_we = xBlock( struct('name', 'delay_we', 'source', 'Delay'), ...
-    {'latency', ((order-1)*map_latency)}, {en}, {delay_we_out} );
+    {[blk,'/delay_we'], 'latency', ((order-1)*map_latency)}, {en}, {delay_we_out} );
     
 delay_valid = xBlock( struct('name', 'delay_valid', 'source', 'Delay'), ...
-    {'latency', (bram_latency+1+double_buffer)}, {delay_we_out}, {valid} );
+    {[blk, '/delay_valid'], 'latency', (bram_latency+1+double_buffer)}, {delay_we_out}, {valid} );
 
 % Special case for reorder of order 1 (just delay)
 if order == 1,   
@@ -140,7 +140,7 @@ if order == 1,
                       {'latency', 1}, ...
                       { din_ports{i} }, { delay_din_bram_in{i} });
         delay_din_bram{i} = xBlock( struct('source', str2func('delay_bram_en_plus_init_xblock'), 'name', ['delay_din_bram',tostring(i-1)]), ...
-                                {length(map),bram_latency}, ... % DelayLen, bram_latency
+                                {[blk,'/','delay_din_bram',tostring(i-1)],length(map),bram_latency}, ... % DelayLen, bram_latency
                                 {delay_din_bram_in{i}, delay_we_out}, {dout_ports{i}});
     end
 % Case for order != 1, single-buffered
@@ -294,10 +294,20 @@ else
                  {din_ports{i}}, ...
                  {delay_din_out1{i}});
         dblbuffer{i} = xBlock(struct('name', ['dbl_buffer',tostring(i-1)], 'source',str2func('dbl_buffer_init_xblock')), ...
-                             { 2^map_bits, ...
+                             {[blk,'/','dbl_buffer',tostring(i-1)], ...
+                              2^map_bits, ...
                               bram_latency}, ...
                               {delay_sel_out , delay_d0_out, map_out, delay_din_out1{i},delay_we_out},...
                               {dout_ports{i}});
     end
+    
+    
 
+end
+
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blks(blk);
+    fmtstr = sprintf('order=%d', order);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end

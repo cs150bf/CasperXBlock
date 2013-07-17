@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda    Hong Chen                               %
+%   Copyright (C) 2011 Suraj Gowda, Hong Chen, David MacMahon, Aaron Parsons  %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function adder_tree_init_xblock(n_inputs, add_latency, quantization, overflow, mode)
+function adder_tree_init_xblock(blk, n_inputs, add_latency, quantization, overflow, mode)
 
 
 	
@@ -74,9 +74,9 @@ elseif strcmp(mode, 'DSP48e')
 				ports = data_inports{1};
 				penult_stage_out1 = xSignal;
 				penult_stage_out2 = xSignal;                
-				adder_config.source = 'simd_add_dsp48e_init';
+				adder_config.source = 'simd_add_dsp48e_init_xblock';
 				adder_config.name = ['adder_', num2str(n_simd_adders)];
-				adder1 = xBlock( adder_config, {'Addition', 18 + stage_ind, 17, 18 + stage_ind, ...
+				adder1 = xBlock( adder_config, {[blk,'/',adder_config.name], 'Addition', 18 + stage_ind, 17, 18 + stage_ind, ...
 							17, 'on', 18, 17, 'Truncate', ...
 							'Wrap', 0}, ...
 							{ports{3}, ports{1}, ports{4}, ports{2}}, ...
@@ -87,18 +87,18 @@ elseif strcmp(mode, 'DSP48e')
 			% base case, manually instantiate the 2 required adders
 				penult_stage_out1 = xSignal;
 				penult_stage_out2 = xSignal;
-				adder_config.source = 'simd_add_dsp48e_init';
+				adder_config.source = 'simd_add_dsp48e_init_xblock';
 				adder_config.name = ['adder_', num2str(n_simd_adders)];
-				adder1 = xBlock( adder_config, {'Addition', 18 + stage_ind-1, 17, 18 + stage_ind-1, ...
+				adder1 = xBlock( adder_config, {[blk,'/',adder_config.name], 'Addition', 18 + stage_ind-1, 17, 18 + stage_ind-1, ...
 							17, 'on', 18, 17, 'Truncate', ...
 							'Wrap', 0}, ...
 							data_inports{1}, ...
 							{penult_stage_out1, penult_stage_out2});	
 				n_simd_adders = n_simd_adders + 1;
 	
-				adder_config.source = 'simd_add_dsp48e_init';
+				adder_config.source = 'simd_add_dsp48e_init_xblock';
 				adder_config.name = ['adder_', num2str(n_simd_adders)];
-				adder2 = xBlock( adder_config, {'Addition', 18 + stage_ind, 17, 18 + stage_ind, ...
+				adder2 = xBlock( adder_config, {[blk,'/',adder_config.name], 'Addition', 18 + stage_ind, 17, 18 + stage_ind, ...
 							17, 'on', 18, 17, 'Truncate', ...
 							'Wrap', 0}, ...
 							{penult_stage_out1, dummy_input, penult_stage_out2, dummy_input}, ...
@@ -111,9 +111,9 @@ elseif strcmp(mode, 'DSP48e')
 				% instantiate an adder
 				sum1 = xSignal;
 				sum2 = xSignal;
-				adder_config.source = 'simd_add_dsp48e_init';
+				adder_config.source = 'simd_add_dsp48e_init_xblock';
 				adder_config.name = ['adder_', num2str(n_simd_adders)];
-				adder = xBlock( adder_config, {'Addition', 18 + stage_ind-1, 17, 18 + stage_ind-1, ...
+				adder = xBlock( adder_config, {[blk,'/',adder_config.name], 'Addition', 18 + stage_ind-1, 17, 18 + stage_ind-1, ...
 							17, 'on', 18, 17, 'Truncate', ...
 							'Wrap', 0}, ...
 							data_inports{k}, ...
@@ -177,6 +177,11 @@ elseif strcmp(mode, 'Behavioral') || strcmp(mode, 'Fabric')
 		stage_ind = stage_ind + 1;
 	end
 end % endif
+
+
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    clean_blocks(blk);
+end
 
 end 
 

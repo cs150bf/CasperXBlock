@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011 Suraj Gowda                                            %
+%   Copyright (C) 2011 Suraj Gowda, Hong Chen, Terry Filiba, Aaron Parsons    %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function fft_biplex_real_4x_init_xblock(varargin)
+function fft_biplex_real_4x_init_xblock(blk, varargin)
 
 defaults = { ...
     'FFTSize', 2, ...
@@ -106,17 +106,17 @@ end
 pol1_cplx = xSignal;
 pol2_cplx = xSignal;
 
-xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c_pol1'), ...
+xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c_pol1'), ...
 		{}, {pol1, pol2}, {pol1_cplx});
 
-xBlock( struct('source', 'casper_library_misc/ri_to_c', 'name', 'ri_to_c_pol2'), ...
+xBlock( struct('source', str2func('ri_to_c_init_xblock'), 'name', 'ri_to_c_pol2'), ...
 		{}, {pol3, pol4}, {pol2_cplx});		
 		
 biplex_core_sync_out = xSignal;		
 biplex_core_out1 = xSignal;
 biplex_core_out2 = xSignal;
 xBlock( struct('name', 'biplex_core', 'source', str2func('fft_biplex_core_init_xblock')), ...
-    {'Position', [185 30 285 125], ...
+    {[blk,'/biplex_core'], ...
     'FFTSize', (FFTSize), ...
     'input_bit_width', (input_bit_width), ...
     'coeff_bit_width', (coeff_bit_width), ...
@@ -141,12 +141,29 @@ xBlock( struct('name', 'biplex_core', 'source', str2func('fft_biplex_core_init_x
 % Add bi_real_unscr_4x block.
 
 xBlock( struct('name', 'bi_real_unscr_4x', 'source', str2func('fft_bi_real_unscr_4x_init_xblock')), ...
-	{'Position', [385 15 485 151], ...
+	{[blk,'/bi_real_unscr_4x'], ...
     'FFTSize', FFTSize, ...
     'n_bits', input_bit_width, ...
     'dsp48_adders', dsp48_adders, }, ...
     {biplex_core_sync_out, biplex_core_out1, biplex_core_out2}, ...
     {sync_out, pol1_out, pol2_out, pol3_out, pol4_out});
+
+
+
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    % Delete all unconnected blocks.
+    clean_blocks(blk);
+
+    %%%%%%%%%%%%%%%%%%%
+    % Finish drawing! %
+    %%%%%%%%%%%%%%%%%%%
+
+    % Set attribute format string (block annotation).
+    fmtstr = sprintf('%s\n%d stages\n[%d,%d]\n%s\n%s', ...
+        arch, FFTSize, input_bit_width, coeff_bit_width, quantization, overflow);
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
+
 
 end
 

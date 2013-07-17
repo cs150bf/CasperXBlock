@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function delay_slr_init_xblock(DelayLen)
+function delay_slr_init_xblock(blk, DelayLen)
 
 
 
@@ -38,6 +38,9 @@ xlsub2_delay_slr = xBlock(struct('source', 'Delay', 'name', 'delay_slr'), ...
                           {xlsub2_Out1});
 
 
+ if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
+ end
 
 end
 

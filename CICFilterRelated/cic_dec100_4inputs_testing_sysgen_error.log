@@ -1,0 +1,24 @@
+--------------------------------- Version Log ----------------------------------
+Version                                 Path
+System Generator 11.4.2254              /tools/xilinx/11.4/DSP_Tools/lin64/sysgen
+AccelDSP 11.4.2254                      /tools/xilinx/11.4/DSP_Tools/lin64/AccelDSP
+Matlab 7.9.0.529 (R2009b)               /tools/commercial/mathworks/matlab2009b
+ISE 11.4.i                              /tools/xilinx/11.4/ISE
+--------------------------------------------------------------------------------
+Summary of Errors:
+Error 0001: Illegal number of bits
+     Block: 'cic_dec100_4inputs_testing/Parallel_CIC_filter_stage2/Stage2_dec5/p_adder1/adder_tree1/adder_3'
+--------------------------------------------------------------------------------
+
+Error 0001:
+
+Reported by:
+  'cic_dec100_4inputs_testing/Parallel_CIC_filter_stage2/Stage2_dec5/p_adder1/adder_tree1/adder_3'
+
+Details:
+The data width on the s output port of this block grew to over
+4000 bits, and consequently rate and type propagation was aborted.
+
+Check for unstable feedback through this block via the use of
+full precision arithmetic.
+--------------------------------------------------------------------------------

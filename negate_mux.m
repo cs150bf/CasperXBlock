@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function negate_mux(mux_latency, input_bit_width, input_bin_pt)
+function negate_mux( mux_latency, input_bit_width, input_bin_pt)
 
 sel = xInport('sel');
 b_re = xInport('b_re');
@@ -169,7 +169,6 @@ opmode_negb_im = xBlock(struct('source', 'Constant', 'name', 'opmode_negb_im'), 
                                       'explicit_period', 'on'), ...
                                {}, ...
                                {opmode_negb_im_out1});
-
 
 
 end

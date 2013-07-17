@@ -20,7 +20,7 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function delay_general_init_xblock(delaytype, varargin)
+function delay_general_init_xblock(delaytype, blk, varargin)
 
 
 
@@ -34,7 +34,7 @@ switch delaytype
 		use_dsp48 = get_var('use_dsp48', 'defaults', defaults, varargin{:});
 		delay_bram_config.source=str2func('delay_bram_init_xblock');
 		delay_bram_config.name = 'delay_bram';
-		delay_bram_sub = xBlock(delay_bram_config,{DelayLen,bram_latency,use_dsp48});
+		delay_bram_sub = xBlock(delay_bram_config,{blk, DelayLen,bram_latency,use_dsp48});
 		delay_bram_sub.bindPort({In1},{Out1});
 	case 'delay_slr'
 		In1 = xInport('In1');
@@ -43,7 +43,7 @@ switch delaytype
 		DelayLen = get_var('DelayLen', 'defaults', defaults, varargin{:});
 		delay_slr_config.source=str2func('delay_slr_init_xblock');
 		delay_slr_config.name = 'delay_slr';
-		delay_slr_sub = xBlock(delay_slr_config,{DelayLen});
+		delay_slr_sub = xBlock(delay_slr_config,{blk, DelayLen});
 		delay_slr_sub.bindPort({In1},{Out1});
 	case 'sync_delay'
 		In1 = xInport('In');
@@ -52,7 +52,7 @@ switch delaytype
 		DelayLen = get_var('DelayLen', 'defaults', defaults, varargin{:});
 		sync_delay_config.source=str2func('sync_delay_init_xblock');
 		sync_delay_config.name = 'sync_delay';
-		sync_delay_sub = xBlock(sync_delay_config,{DelayLen});
+		sync_delay_sub = xBlock(sync_delay_config,{blk, DelayLen});
 		sync_delay_sub.bindPort({In1},{Out1});
 	case 'sync_delay_en'
         In1 = xInport('In');
@@ -63,7 +63,7 @@ switch delaytype
 		DelayLen = get_var('DelayLen', 'defaults', defaults, varargin{:});
 		sync_delay_en_config.source=str2func('sync_delay_en_init_xblock');
 		sync_delay_en_config.name = 'sync_delay_en';
-		sync_delay_en_sub = xBlock(sync_delay_en_config,{DelayLen});
+		sync_delay_en_sub = xBlock(sync_delay_en_config,{blk, DelayLen});
 		%names = sync_delay_en_sub.getInportNames
 		sync_delay_en_sub.bindPort({In1,In2},{Out});
 	case 'sync_delay_prog'
@@ -74,7 +74,7 @@ switch delaytype
 		MaxDelay = get_var('MaxDelay', 'defaults', defaults, varargin{:});
 		sync_delay_prog_config.source=str2func('sync_delay_prog_init_xblock');
 		sync_delay_prog_config.name = 'sync_delay_prog';
-		sync_delay_prog_sub = xBlock(sync_delay_prog_config,{MaxDelay});
+		sync_delay_prog_sub = xBlock(sync_delay_prog_config,{blk, MaxDelay});
 		sync_delay_prog_sub.bindPort({In1,In2},{Out});
 	case 'window_delay'
 		In1 = xInport('In');
@@ -83,7 +83,7 @@ switch delaytype
 		DelayLen = get_var('DelayLen', 'defaults', defaults, varargin{:});
 		window_delay_config.source=str2func('window_delay_init_xblock');
 		window_delay_config.name = 'window_delay';
-		window_delay_sub = xBlock(window_delay_config,{DelayLen});
+		window_delay_sub = xBlock(window_delay_config,{blk, DelayLen});
 		window_delay_sub.bindPort({In1},{Out1});
 	case 'pipeline'
 		In1 = xInport('d');
@@ -92,7 +92,7 @@ switch delaytype
 		DelayLen = get_var('DelayLen', 'defaults', defaults, varargin{:});
 		pipeline_config.source=str2func('pipeline_init_xblock');
 		pipeline_config.name = 'pipeline';
-		pipeline_sub = xBlock(pipeline_config,{DelayLen});
+		pipeline_sub = xBlock(pipeline_config,{blk, DelayLen});
 		pipeline_sub.bindPort({In1},{Out1});
 	otherwise
 		disp('error! such delay block is not supported!');

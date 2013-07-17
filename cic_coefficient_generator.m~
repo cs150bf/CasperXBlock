@@ -1,0 +1,28 @@
+function coefficients = cic_coefficient_generator(m, dec_rate)
+if ~isprime(dec_rate)
+    disp('Only supports decimation rate that''s a prime number');
+    return;
+end
+
+% H(z) = (1 + z^-1 + z^-2 + ... + z^-(dec_rate-1))^m
+% the result would be consist of terms from z^0 to z^-(dec_rate-1)*m
+
+coeffs = zeros(1, (dec_rate-1)*m+1);
+coeffs(1) = 1;
+
+% solve for equation x1 + x2 + .. + x_dr = i
+for i = 1:(dec_rate-1)
+    coeffs(i+1) = factorial(i+dec_rate-1)./(factorial(dec_rate -1) * factorial(i));
+end
+
+for i =dec_rate: (dec_rate-1)*m
+    coeffs(i+1) = dumb_count(i,dec_rate, dec_rate-1);
+end
+
+    function dumb_count(sum, n_inputs, limit)
+        x_i = zeros(1,n_inputs);
+        total_comb = (limit+1)
+        
+    end
+
+end

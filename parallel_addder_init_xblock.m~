@@ -1,0 +1,70 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                                                             %
+%   Center for Astronomy Signal Processing and Electronics Research           %
+%   http://casper.berkeley.edu                                                %      
+%   Copyright (C) 2011    Hong Chen                                           %
+%                                                                             %
+%   This program is free software; you can redistribute it and/or modify      %
+%   it under the terms of the GNU General Public License as published by      %
+%   the Free Software Foundation; either version 2 of the License, or         %
+%   (at your option) any later version.                                       %
+%                                                                             %
+%   This program is distributed in the hope that it will be useful,           %
+%   but WITHOUT ANY WARRANTY; without even the implied warranty of            %
+%   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             %
+%   GNU General Public License for more details.                              %
+%                                                                             %
+%   You should have received a copy of the GNU General Public License along   %
+%   with this program; if not, write to the Free Software Foundation, Inc.,   %
+%   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
+%                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function parallel_addder_init_xblock(n_inputs,R,add_latency)
+
+inports = cell(1,n_inputs);
+outports = cell(1,n_inputs);
+adder_tree_blks = cell(1,n_inputs);
+adder_tree_inports = cell(R,n_inputs);
+for i =1:n_inputs
+    inports{i} = xInport(['in',num2str(i)]);
+    outports{i} = xOutport(['out',num2str(i)]);
+end
+
+if n_inputs*2 > R
+    if R > n_inputs
+        delay_blks = cell(1,n_inputs);
+        delay_outs = cell(1,n_inputs);
+        for i = 1:n_inputs
+            delay_outs{i} = xSignal(['d',num2str(i)]);
+            delay_blks{i} = xBlock(struct('source','Delay','name', ['delay',num2str(i)]), ...
+                              struct('latency', 1), ...   
+                              {inports{i}}, ...
+                              {delay_outs{i}});
+        end
+    else
+        delay_blks = cell(1,R-1);
+        delay_outs = cell(1,R-1);
+        for i =1:R-1
+            delay_outs{i} = xSignal(['d',num2str(i)]);
+            delay_blks{i} = xBlock(struct('source','Delay','name', ['delay',num2str(n_inputs-i+1)]), ...
+                              struct('latency', 1), ...   
+                              {inports{n_inputs-i+1}}, ...
+                              {delay_outs{i}});
+        end
+    end
+else
+    disp('not supported yet');
+end
+
+for i =1:n_inputs
+    adder_tree_inports{i,1} = inports{i};
+    for j = 2:R
+        if i-1> 0
+        else
+         adder_tree_inports{i,j} = 
+        end
+    end
+end
+
+
+end

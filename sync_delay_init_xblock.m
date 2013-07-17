@@ -2,7 +2,7 @@
 %                                                                             %
 %   Center for Astronomy Signal Processing and Electronics Research           %
 %   http://casper.berkeley.edu                                                %      
-%   Copyright (C) 2011                Hong Chen                               %
+%   Copyright (C) 2011   Hong Chen                                            %
 %                                                                             %
 %   This program is free software; you can redistribute it and/or modify      %
 %   it under the terms of the GNU General Public License as published by      %
@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function sync_delay_init_xblock(DelayLen)
+function sync_delay_init_xblock(blk, DelayLen)
 
 
 % Mask Initialization code
@@ -135,7 +135,9 @@ xlsub2_warn_period_Relational10 = xBlock(struct('source', 'xbsReplacements_r4/Wa
                                          {}, ...
                                          {});
 
-
+if ~isempty(blk) && ~strcmp(blk(1), '/')
+    clean_blocks(blk);
+end
 
 end
 

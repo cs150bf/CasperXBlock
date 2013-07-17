@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function fft_twiddle_init_xblock(varargin)
+function fft_twiddle_init_xblock(blk, varargin)
 %% inports
 a = xInport('a');
 b = xInport('b');
@@ -33,7 +33,9 @@ bw_im_out = xOutport('bw_im');
 sync_out = xOutport('sync_out');
 
 %% Get varargin parameters
-defaults = {'Coeffs', [0 1], ...
+defaults = {'FFTSize', 2, ...
+    'Coeffs', [0 1], ...
+    'ActualCoeffs', [1, -1], ...
     'StepPeriod', 0, ...
     'input_bit_width', 18, ...
     'coeff_bit_width', 18,...
@@ -51,6 +53,7 @@ defaults = {'Coeffs', [0 1], ...
     'quantization', 'Round  (unbiased: +/- Inf)', ...
     'overflow', 'Wrap', ...
     'use_dsp48_mults', 0, ...
+    'biplex','off'...
 };
 
 FFTSize = get_var('FFTSize', 'defaults', defaults, varargin{:});
@@ -79,6 +82,7 @@ use_dsp48_mults = get_var('use_dsp48_mults', 'defaults', defaults, varargin{:});
 biplex = get_var('biplex', 'defaults', defaults, varargin{:});
 
 use_embedded = strcmp('on', use_embedded);
+
 twiddle_type = get_twiddle_type(Coeffs, biplex, opt_target, use_embedded,StepPeriod,FFTSize);
 
 
@@ -88,13 +92,13 @@ twiddle_type = get_twiddle_type(Coeffs, biplex, opt_target, use_embedded,StepPer
 a_re = xSignal;
 a_im = xSignal;
 c_to_ri_a = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_a'), ...
-    {input_bit_width, input_bit_width-1}, {a}, {a_re, a_im});
+    {strcat(blk, '/c_to_ri_a'),input_bit_width, input_bit_width-1}, {a}, {a_re, a_im});
 
 % convert 'b' input to real/imag
 b_re = xSignal;
 b_im = xSignal;
 c_to_ri_b = xBlock(struct('source', str2func('c_to_ri_init_xblock'), 'name', 'c_to_ri_b'), ...
-    {input_bit_width, input_bit_width-1}, {b}, {b_re, b_im});
+    {strcat(blk, '/c_to_ri_b'),input_bit_width, input_bit_width-1}, {b}, {b_re, b_im});
 
 if strcmp(twiddle_type, 'twiddle_pass_through') || strcmp(twiddle_type, 'twiddle_stage_2')...
         || strcmp(twiddle_type,'twiddle_general_dsp48e') || strcmp(twiddle_type, 'twiddle_coeff_0')
@@ -105,15 +109,15 @@ if strcmp(twiddle_type, 'twiddle_pass_through') || strcmp(twiddle_type, 'twiddle
     b_im_del = xSignal;
     sync_del = xSignal;
     pipe_a_re = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_a_re'), ...
-        {input_latency}, {a_re}, {a_re_del});
+        {[blk,'/pipe_a_re'],input_latency}, {a_re}, {a_re_del});
     pipe_a_im = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_a_im'), ...
-        {input_latency}, {a_im}, {a_im_del});
+        {[blk,'/pipe_a_im'],input_latency}, {a_im}, {a_im_del});
     pipe_b_re = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_b_re'), ...
-        {input_latency}, {b_re}, {b_re_del});
+        {[blk,'/pipe_b_re'],input_latency}, {b_re}, {b_re_del});
     pipe_b_im = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_b_im'), ...
-        {input_latency}, {b_im}, {b_im_del});
+        {[blk,'/pipe_b_im'],input_latency}, {b_im}, {b_im_del});
     pipe_sync = xBlock( struct('source', str2func('pipeline_init_xblock'), 'name', 'pipe_sync'), ...
-        {input_latency}, {sync}, {sync_del});
+        {[blk,'/pipe_sync'],input_latency}, {sync}, {sync_del});
 end
 
 switch twiddle_type
@@ -179,6 +183,40 @@ switch twiddle_type
         disp('Error! This twiddle type is not supported');
 end
 
+if ~isempty(blk) && ~strcmp(blk(1),'/')
+    % Delete all unconnected blocks.
+    clean_blocks(blk);
 
+    %%%%%%%%%%%%%%%%%%%
+    % Finish drawing! %
+    %%%%%%%%%%%%%%%%%%%
+
+    % Set attribute format string (block annotation).
+    switch twiddle_type
+        case 'twiddle_general_4mult'
+            fmtstr = sprintf('data=(%d,%d)\ncoeffs=(%d,%d)\n%s\n(%s,%s)', ...
+                input_bit_width, input_bit_width-1, ...
+                coeff_bit_width, coeff_bit_width-2, ...
+                arch, quantization, overflow);
+          
+        case 'twiddle_general_dsp48e'
+            fmtstr = sprintf('data=(%d,%d)\ncoeffs=(%d,%d)\n%s\n(%s,%s)', ...
+                input_bit_width, input_bit_width-1, ...
+                coeff_bit_width, coeff_bit_width-2, ...
+                arch, quantization, overflow);
+            
+        case 'twiddle_general_3mult'
+            fmtstr = sprintf('data=(%d,%d)\ncoeffs=(%d,%d)\n%s\n(%s,%s)', ...
+                      input_bit_width, input_bit_width-1, ...
+                      coeff_bit_width-1, coeff_bit_width-3, ...
+                      arch, quantization, overflow);
+                  
+        otherwise
+            fmtstr = '';
+    end
+    
+    fmtstr = strcat(fmtstr,sprintf('\n%s',twiddle_type));
+    set_param(blk, 'AttributesFormatString', fmtstr);
+end
 end
 

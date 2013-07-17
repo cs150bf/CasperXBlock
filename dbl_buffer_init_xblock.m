@@ -19,7 +19,7 @@
 %   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.               %
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function dbl_buffer_init_xblock(depth, latency)
+function dbl_buffer_init_xblock(blk, depth, latency)
 
 
 
@@ -138,7 +138,9 @@ xlsub2_delay2 = xBlock(struct('source', 'Delay', 'name', 'delay2'), ...
                        {xlsub2_din1}, ...
                        {xlsub2_delay2_out1});
 
-
+if ~isempty(blk) && strcmp(blk(1),'/')
+    clean_blocks(blk);
+end
 
 end
 
